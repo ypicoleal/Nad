@@ -1,19 +1,20 @@
 package com.dranilsaarias.nad
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.CardView
 import android.util.Log
-
-import kotlinx.android.synthetic.main.activity_register.*
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.content_register.*
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        setSupportActionBar(toolbar)
         setSpinners()
+        see_tos_btn.setOnClickListener { vetTos() }
     }
 
 
@@ -57,10 +58,25 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    private fun vetTos() {
 
-    private inner class Documento internal constructor(internal var mLabel: String) : Listable {
-        override fun getLabel(): String {
-            return mLabel
+        val inflater = this.layoutInflater
+        val v = inflater.inflate(R.layout.tos, null)
+
+        val alert = AlertDialog
+                .Builder(this)
+                .setView(v)
+                .create()
+
+        alert.show()
+        val btn = v.findViewById<CardView>(R.id.accept_tos)
+        btn.setOnClickListener {
+            alert.dismiss()
+            accept_tos_cbr.isChecked = true
         }
+    }
+
+    private inner class Documento internal constructor(override val label: String) : Listable {
+
     }
 }

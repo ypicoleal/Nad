@@ -5,10 +5,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.support.v7.widget.AppCompatEditText
 import android.util.AttributeSet
-
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 class ClickToDateEditText : AppCompatEditText {
     internal var date: Calendar? = null
@@ -35,7 +33,7 @@ class ClickToDateEditText : AppCompatEditText {
         setOnClickListener {
             val datePickerDialog = DatePickerDialog(
                     context,
-                    DatePickerDialog.OnDateSetListener { datePicker, year, monthOfYear, dayOfMonth ->
+                    DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                         date!!.set(year, monthOfYear, dayOfMonth)
                         val format = SimpleDateFormat("dd/MM/yyyy", Locale.US)
                         setText(format.format(date!!.time))

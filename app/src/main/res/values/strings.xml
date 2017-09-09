@@ -115,6 +115,7 @@
     <string name="olvid_su_contrase_a">¿Olvidó su contraseña?</string>
     <string name="crear_cuenta">Crear cuenta</string>
     <string name="registrarme">Registrarme</string>
+    <string name="register_title_form">Completar el formulario de Registro</string>
     <string-array name="document_array">
         <item>Cedula de ciudadania</item>
         <item>Cedula de extrangeria</item>
