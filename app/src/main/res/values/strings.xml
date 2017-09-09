@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Nad</string>
+    <string name="app_name">Nat</string>
     <string name="action_settings">Settings</string>
+
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="tos"><u>Acepto los Términos y condiciones</u></string>

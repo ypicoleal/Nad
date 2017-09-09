@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.github.ypicoleal.nad.RegisterActivity"
+    tools:context="com.dranilsaarias.nad.com.dranilsaarias.nad.RegisterActivity"
     tools:showIn="@layout/activity_register">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp">
 
-            <com.github.ypicoleal.nad.ClickToDateEditText
+            <com.dranilsaarias.nad.ClickToDateEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/fecha_de_nacimiento"
@@ -55,7 +54,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp">
 
-            <com.github.ypicoleal.nad.ClickToSelectEditText
+            <com.dranilsaarias.nad.ClickToSelectEditText
                 android:id="@+id/document"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +87,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp">
 
-            <com.github.ypicoleal.nad.ClickToSelectEditText
+            <com.dranilsaarias.nad.ClickToSelectEditText
                 android:id="@+id/civil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -120,7 +119,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp">
 
-            <com.github.ypicoleal.nad.ClickToSelectEditText
+            <com.dranilsaarias.nad.ClickToSelectEditText
                 android:id="@+id/entidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,8 +238,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="verTos"
                 android:text="@string/tos"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
@@ -255,6 +254,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:clickable="true"
+            android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/colorAccent"
             app:cardCornerRadius="18dp">
