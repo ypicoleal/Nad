@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.dranilsaarias.nad.com.dranilsaarias.nad.LoginActivity"
+    tools:context=".LoginActivity"
     tools:showIn="@layout/activity_login">
 
     <LinearLayout
@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/login_logo"
-            android:contentDescription="@null"/>
+            android:contentDescription="@null"
+            android:src="@drawable/login_logo" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/username_container"
@@ -57,8 +57,8 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:fontFamily="@font/general_fontstyle"/>
+                android:fontFamily="@font/general_fontstyle"
+                android:hint="@string/password" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
@@ -69,20 +69,20 @@
             android:layout_marginRight="16dp">
 
             <CheckBox
+                android:id="@+id/accept_tos_cb"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true" />
+                android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/tos_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
+                android:fontFamily="@font/general_fontstyle"
                 android:foreground="?attr/selectableItemBackground"
-                android:onClick="vetTos"
                 android:text="@string/tos"
-                android:textColor="@color/colorAccent"
-                android:fontFamily="@font/general_fontstyle"/>
+                android:textColor="@color/colorAccent" />
         </LinearLayout>
 
         <android.support.v7.widget.CardView
@@ -104,8 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/ingresar"
-                android:fontFamily="@font/general_fontstyle"/>
+                android:fontFamily="@font/general_fontstyle"
+                android:text="@string/ingresar" />
         </android.support.v7.widget.CardView>
 
         <TextView
@@ -119,11 +119,11 @@
             android:layout_marginTop="16dp"
             android:clickable="true"
             android:focusable="true"
+            android:fontFamily="@font/general_fontstyle"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:text="@string/olvid_su_contrase_a"
-            android:textColor="@color/colorAccent"
-            android:fontFamily="@font/general_fontstyle"/>
+            android:textColor="@color/colorAccent" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -139,6 +139,7 @@
 
 
         <android.support.v7.widget.CardView
+            android:id="@+id/register_btn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="30dp"
@@ -150,7 +151,6 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
-            android:onClick="registrar"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="24dp">
 
@@ -159,8 +159,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/crear_cuenta"
-                android:fontFamily="@font/general_fontstyle"/>
+                android:fontFamily="@font/general_fontstyle"
+                android:text="@string/crear_cuenta" />
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
