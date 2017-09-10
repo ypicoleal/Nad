@@ -2,6 +2,7 @@ package com.dranilsaarias.nad
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -55,40 +56,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_tos -> {
-                val fragment = TosFragment()
-                supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.main_fragment, fragment)
-                        .commit()
-                toolbar.title = getString(R.string.tos_title)
+                //TODO cambiar el texto por el texto de correspondiente
+                val fragment = TosFragment.newInstance(getString(R.string.ipsum))
+                replaceFragment(fragment, getString(R.string.tos_title))
             }
 
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_privacidad -> {
+                //TODO cambiar el texto por el texto de correspondiente
+                val fragment = TosFragment.newInstance(getString(R.string.ipsum))
+                replaceFragment(fragment, getString(R.string.politicas_de_privacidad))
             }
-            R.id.nav_gallery -> {
 
+            R.id.nav_comentarios -> {
+                replaceFragment(CommentsFragment(), getString(R.string.comentarios))
             }
-            R.id.nav_slideshow -> {
 
+            R.id.nav_conexion -> {
+                //TODO cambiar el texto por el texto de correspondiente
+                val fragment = TosFragment.newInstance(getString(R.string.ipsum))
+                replaceFragment(fragment, getString(R.string.condiciones_de_conexion))
             }
+
             R.id.nav_map -> {
-                val fragment = MapsFragment()
-                supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.main_fragment, fragment)
-                        .commit()
-                toolbar.title = getString(R.string.ubicacion_en_mapa)
+                replaceFragment(MapsFragment(), getString(R.string.ubicacion_en_mapa))
             }
-            R.id.nav_share -> {
 
-            }
-            R.id.nav_send -> {
-
-            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun replaceFragment(fragment: Fragment, title: String) {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_fragment, fragment)
+                .commit()
+        toolbar.title = title
     }
 }

@@ -26,17 +26,17 @@
                     android:icon="@drawable/menu_terminos"
                     android:title="@string/tos_title" />
                 <item
-                    android:id="@+id/nav_camera"
+                    android:id="@+id/nav_privacidad"
                     android:checkable="true"
                     android:icon="@drawable/menu_politicas"
                     android:title="@string/politicas_de_privacidad" />
                 <item
                     android:id="@+id/nav_web"
-                    android:checkable="true"
+                    android:checkable="false"
                     android:icon="@drawable/mapa_web"
                     android:title="@string/ver_pagina_web" />
                 <item
-                    android:id="@+id/nav_gallery"
+                    android:id="@+id/nav_share"
                     android:checkable="true"
                     android:icon="@drawable/menu_whatsapp"
                     android:title="@string/compartir" />
@@ -46,8 +46,8 @@
                     android:icon="@drawable/menu_comentarios"
                     android:title="@string/comentarios" />
                 <item
-                    android:id="@+id/nav_slideshow"
-                    android:checkable="true"
+                    android:id="@+id/nav_conexion"
+                    android:checkable="false"
                     android:icon="@drawable/menu_conexion"
                     android:title="@string/condiciones_de_conexion" />
                 <item
@@ -61,12 +61,12 @@
         <item android:title="@string/group_configuracion">
             <menu>
                 <item
-                    android:id="@+id/nav_share"
+                    android:id="@+id/nav_cuenta"
                     android:checkable="true"
                     android:icon="@drawable/menu_cuenta"
                     android:title="@string/mi_cuenta" />
                 <item
-                    android:id="@+id/nav_send"
+                    android:id="@+id/nav_salir"
                     android:checkable="false"
                     android:icon="@drawable/menu_cerrar"
                     android:title="@string/salir" />
