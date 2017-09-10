@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/mapa_mensaje"
+        android:title="@string/mensaje" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/mapa_telefono"
+        android:title="@string/llamar" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/mapa_web"
+        android:title="@string/web" />
+
+</menu>

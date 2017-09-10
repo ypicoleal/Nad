@@ -51,7 +51,7 @@
                     android:icon="@drawable/menu_conexion"
                     android:title="@string/condiciones_de_conexion" />
                 <item
-                    android:id="@+id/nav_manage"
+                    android:id="@+id/nav_map"
                     android:checkable="true"
                     android:icon="@drawable/menu_ubicacion"
                     android:title="@string/ubicacion_en_mapa" />

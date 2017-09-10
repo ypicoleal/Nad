@@ -139,4 +139,9 @@
     <string name="group_configuracion">CONFIGURACION</string>
     <string name="mi_cuenta">Mi cuenta</string>
     <string name="salir">Salir</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="mensaje">Mensaje</string>
+    <string name="llamar">Llamar</string>
+    <string name="web">Web</string>
 </resources>
