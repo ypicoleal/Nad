@@ -107,6 +107,7 @@
         </android.support.v7.widget.CardView>
 
         <TextView
+            android:id="@+id/forgot_password"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="36dp"

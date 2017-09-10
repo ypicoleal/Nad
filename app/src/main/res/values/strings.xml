@@ -150,4 +150,5 @@
     <string name="email">Correo electrónico</string>
     <string name="comment">Agregar comentario</string>
     <string name="send">Enviar</string>
+    <string name="forgot_password_description">Por favor ingrese su correo electronico para recuperar contraseña.</string>
 </resources>

@@ -29,9 +29,13 @@ class LoginActivity : AppCompatActivity() {
         login_btn.setOnClickListener {
             login()
         }
+
+        forgot_password.setOnClickListener {
+            forgotPassword()
+        }
     }
 
-    fun vetTos() {
+    private fun vetTos() {
 
         val inflater = this.layoutInflater
         val v = inflater.inflate(R.layout.tos, null)
@@ -49,11 +53,25 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun registrar() {
+    private fun forgotPassword() {
+        val inflater = this.layoutInflater
+        val v = inflater.inflate(R.layout.forgot_password, null)
+
+        AlertDialog
+                .Builder(this)
+                .setView(v)
+                .setPositiveButton("Recuperar contraseña", { dialog, _ ->
+                    dialog.dismiss()
+                })
+                .create()
+                .show()
+    }
+
+    private fun registrar() {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 
-    fun login() {
+    private fun login() {
         startActivity(Intent(this, MainActivity::class.java))
     }
 }
