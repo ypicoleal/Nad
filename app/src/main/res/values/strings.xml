@@ -145,10 +145,11 @@
     <string name="llamar">Llamar</string>
     <string name="web">Web</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Correo electrónico</string>
     <string name="comment">Agregar comentario</string>
     <string name="send">Enviar</string>
     <string name="forgot_password_description">Por favor ingrese su correo electronico para recuperar contraseña.</string>
+
+    <string name="playstore_url">https://play.google.com/store/apps/details?id=Orion.Soft</string>
+    <string name="appstore_url">https://itunes.apple.com/co/app/colm%C3%A9dica/id570286287?mt=8</string>
 </resources>

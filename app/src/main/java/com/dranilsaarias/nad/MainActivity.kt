@@ -1,5 +1,6 @@
 package com.dranilsaarias.nad
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -65,6 +66,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 //TODO cambiar el texto por el texto de correspondiente
                 val fragment = TosFragment.newInstance(getString(R.string.ipsum))
                 replaceFragment(fragment, getString(R.string.politicas_de_privacidad))
+            }
+
+            R.id.nav_share -> {
+                try {
+                    val i = Intent(Intent.ACTION_SEND)
+                    i.type = "text/plain"
+                    i.putExtra(Intent.EXTRA_SUBJECT, "Doctor Online")
+                    var sAux = "\nPrueba esta aplicación\n\n"
+                    sAux += getString(R.string.playstore_url) + "\n\n"
+
+                    sAux += getString(R.string.appstore_url) + "\n\n"
+                    i.putExtra(Intent.EXTRA_TEXT, sAux)
+                    startActivity(Intent.createChooser(i, "Escoja"))
+                } catch (e: Exception) {
+
+                }
             }
 
             R.id.nav_comentarios -> {
