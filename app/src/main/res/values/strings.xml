@@ -122,4 +122,21 @@
         <item>Pasaporte</item>
         <item>Tarjeta de identidad</item>
     </string-array>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="group_citas">CITAS</string>
+    <string name="agendar_cita">Agendar cita</string>
+    <string name="mis_citas">Mis Citas</string>
+    <string name="group_conocenos_mas">CONÓCENOS MAS</string>
+    <string name="politicas_de_privacidad">Políticas de privacidad</string>
+    <string name="ver_pagina_web">Ver página web</string>
+    <string name="compartir">Compartir</string>
+    <string name="condiciones_de_conexion">Condiciones de Conexión</string>
+    <string name="ubicacion_en_mapa">Ubicación en mapa</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="group_configuracion">CONFIGURACION</string>
+    <string name="mi_cuenta">Mi cuenta</string>
+    <string name="salir">Salir</string>
 </resources>

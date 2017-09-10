@@ -25,6 +25,10 @@ class LoginActivity : AppCompatActivity() {
         register_btn.setOnClickListener {
             registrar()
         }
+
+        login_btn.setOnClickListener {
+            login()
+        }
     }
 
     fun vetTos() {
@@ -47,5 +51,9 @@ class LoginActivity : AppCompatActivity() {
 
     fun registrar() {
         startActivity(Intent(this, RegisterActivity::class.java))
+    }
+
+    fun login() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }
