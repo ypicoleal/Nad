@@ -1,6 +1,7 @@
 package com.dranilsaarias.nad
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -66,6 +67,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 //TODO cambiar el texto por el texto de correspondiente
                 val fragment = TosFragment.newInstance(getString(R.string.ipsum))
                 replaceFragment(fragment, getString(R.string.politicas_de_privacidad))
+            }
+
+            R.id.nav_web -> {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.web_url)))
+                startActivity(browserIntent)
             }
 
             R.id.nav_share -> {
