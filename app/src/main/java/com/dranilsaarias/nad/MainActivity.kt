@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+            R.id.nav_agendar -> {
+                replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
+            }
+
             R.id.nav_tos -> {
                 //TODO cambiar el texto por el texto de correspondiente
                 val fragment = TosFragment.newInstance(getString(R.string.ipsum))
