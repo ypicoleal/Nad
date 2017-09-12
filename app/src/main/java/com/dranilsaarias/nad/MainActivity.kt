@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
     }
 
     override fun onBackPressed() {

@@ -33,7 +33,7 @@
                 <item
                     android:id="@+id/nav_web"
                     android:checkable="false"
-                    android:icon="@drawable/mapa_web"
+                    android:icon="@drawable/menu_web"
                     android:title="@string/ver_pagina_web" />
                 <item
                     android:id="@+id/nav_share"
