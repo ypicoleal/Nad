@@ -27,7 +27,54 @@
             app:tabMaxWidth="12dp" />
     </FrameLayout>
 
-    <CalendarView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/calendar_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/calendario_flecha_izq" />
+
+        <TextView
+            android:id="@+id/calendar_indicator"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/general_fontstyle"
+            android:gravity="center"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/calendar_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/calendario_flecha_der" />
+    </LinearLayout>
+
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/compactcalendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:compactCalendarCurrentDayBackgroundColor="#b3b3b3"
+        app:compactCalendarCurrentDayTextColor="@android:color/white"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/colorPrimary"
+        app:compactCalendarCurrentSelectedDayTextColor="@android:color/white"
+        app:compactCalendarMultiEventIndicatorColor="@color/colorAccent"
+        app:compactCalendarShouldSelectFirstDayOfMonthOnScroll="false"
+        app:compactCalendarTargetHeight="270dp"
+        app:compactCalendarTextSize="12sp" />
 </LinearLayout>
