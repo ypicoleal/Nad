@@ -94,6 +94,10 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="tos_content">
+        "1. Definiciones:.\n\n"
+        "- Empresa: Se entiende por Empresa a la Dra NILSA ARIAS DELGADO (En adelante “LA EMPRESA”) .\n\n"
+    </string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="dialog_close_button">cerrar</string>
     <string name="nombre_completo">Nombre completo</string>
@@ -121,6 +125,12 @@
         <item>Cedula de extrangeria</item>
         <item>Pasaporte</item>
         <item>Tarjeta de identidad</item>
+    </string-array>
+
+    <string-array name="entidad_array">
+        <item>COLSANITAS</item>
+        <item>MEDISANITAS</item>
+        <item>PARTICULAR</item>
     </string-array>
     <string name="title_activity_main">MainActivity</string>
 
@@ -155,4 +165,5 @@
     <string name="web_url">http://www.google.com</string>
 
     <string name="dummie_img_url">https://lh3.ggpht.com/yC03Lwnb_msj7XgCe92AXzliDQxFgj-JKZgZfVYiT2qwerPvfGBxc7b4wOkGlpfkMxBd=h900</string>
+    <string name="choose_entidad">Selecciones su entidad para el servicio</string>
 </resources>

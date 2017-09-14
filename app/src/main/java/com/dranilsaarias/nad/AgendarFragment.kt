@@ -1,7 +1,9 @@
 package com.dranilsaarias.nad
 
 
+import android.app.AlertDialog
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -71,8 +73,7 @@ class AgendarFragment : Fragment() {
 
         calendarView.setListener(object : CompactCalendarView.CompactCalendarViewListener {
             override fun onDayClick(dateClicked: Date) {
-                val events = calendarView.getEvents(dateClicked)
-                Log.d(TAG, "Day was clicked: $dateClicked with events $events")
+                agendar(dateClicked)
             }
 
             override fun onMonthScroll(firstDayOfNewMonth: Date) {
@@ -88,6 +89,21 @@ class AgendarFragment : Fragment() {
         next.setOnClickListener {
             calendarView.showNextMonth()
         }
+    }
+
+    private fun agendar(date: Date) {
+        AlertDialog.Builder(activity)
+                .setTitle(getString(R.string.choose_entidad))
+                .setItems(R.array.entidad_array, { _, _ ->
+                    val intent = Intent(context, AgendarActivity::class.java)
+                    intent.putExtra("date", date)
+                    startActivity(intent)
+                })
+                .setNegativeButton("Cancelar", { _, _ ->
+
+                })
+                .create()
+                .show()
     }
 
 }// Required empty public constructor
