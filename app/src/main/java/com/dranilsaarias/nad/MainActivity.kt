@@ -64,8 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_tos -> {
-                //TODO cambiar el texto por el texto de correspondiente
-                val fragment = TosFragment.newInstance(getString(R.string.ipsum))
+                val fragment = TosFragment.newInstance(getString(R.string.tos_content))
                 replaceFragment(fragment, getString(R.string.tos_title))
             }
 

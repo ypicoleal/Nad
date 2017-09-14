@@ -1,14 +1,19 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dranilsaarias.nad.TosFragment">
 
-    <TextView
+    <com.bluejamesbond.text.DocumentView
         android:id="@+id/tos_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/ipsum" />
+        app:documentView_antialias="true"
+        app:documentView_textAlignment="justified"
+        app:documentView_textColor="@android:color/secondary_text_light"
+        app:documentView_textFormat="plain"
+        app:documentView_textTypefacePath="font/futurabt_book.otf" />
 
 </android.support.v4.widget.NestedScrollView>

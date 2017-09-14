@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import com.bluejamesbond.text.DocumentView
 
 
 /**
@@ -28,8 +28,8 @@ class TosFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_tos, container, false)
 
-        val tos_text = view.findViewById<TextView>(R.id.tos_text)
-        tos_text.setText(mContent)
+        val tos_text = view.findViewById<DocumentView>(R.id.tos_text)
+        tos_text.text = mContent
 
         return view
     }
