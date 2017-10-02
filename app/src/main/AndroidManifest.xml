@@ -58,6 +58,7 @@
         <activity
             android:name=".AgendarActivity"
             android:label="@string/agendar_cita"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
