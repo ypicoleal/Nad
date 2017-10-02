@@ -22,11 +22,16 @@
         android:paddingStart="16dp"
         android:paddingTop="8dp">
 
-        <TextView
+        <com.bluejamesbond.text.DocumentView
+            android:id="@+id/tos_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="fill_horizontal"
-            android:text="@string/ipsum" />
+            app:documentView_antialias="true"
+            app:documentView_text="@string/tos_content"
+            app:documentView_textAlignment="justified"
+            app:documentView_textColor="@android:color/secondary_text_light"
+            app:documentView_textFormat="plain"
+            app:documentView_textTypefacePath="font/futurabt_book.otf" />
     </android.support.v4.widget.NestedScrollView>
 
     <android.support.v7.widget.CardView
