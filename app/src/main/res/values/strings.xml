@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nat</string>
+    <string name="app_name">NAD DoctorOnline</string>
     <string name="action_settings">Settings</string>
 
     <string name="username">Usuario</string>
@@ -95,87 +95,52 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="tos_content">
-        "1. Definiciones:.\n\n"
-        "- Empresa: Se entiende por Empresa a la Dra NILSA ARIAS DELGADO (En adelante “LA EMPRESA”) .\n\n"
+        "1. Definiciones:\n\n"
+        "- Empresa: Se entiende por Empresa a la <b>Medica Dermatóloga</b> NILSA ARIAS DELGADO (En adelante “LA EMPRESA”).\n\n"
 
-        "- Usuario: Se entiende por Usuario al paciente de la Dra NILSA ARIAS DELGADO que se haya"
-        "registrado en la página web www.dranilsaarias.com ó la App NAD - DoctorOnline y utiliza el"
-        "servicio de consulta médica dermatológica por video llamada desde la App NAD - DoctorOnline (En adelante el “Usuario”).\n\n"
+        "- Usuario: Se entiende por Usuario al <b>paciente</b> de la Dra NILSA ARIAS DELGADO que se ha registrado en la página web www.dranilsaarias.com ó la App NAD - DoctorOnline y utiliza el servicio de consulta médica dermatológica por video llamada desde la App NAD - DoctorOnline (En adelante el “Usuario”).\n\n"
 
-        "- Servicio: Se entiende por Servicio al sistema de Agendamiento de cita, pago por transferencia PSE"
-        "y acceso a una cita con un profesional Médico Dermatólogo mediante video llamada brindado por"
-        "LA EMPRESA, y que se encuentra disponible en la App NAD - DoctorOnline el cual se denomina"
-        "“Servicio”.\n\n"
+        "- Servicio: Se entiende por Servicio al sistema de Agendamiento de cita, al pago por transferencia (<b>PayU</b>) y al acceso a una cita con un profesional Médico Dermatólogo mediante video llamada brindada desde la APP NAD DoctorOnline entre el USUARIO y la EMPRESA, y que se encuentra disponible únicamente en la App NAD - DoctorOnline el cual se denomina “Servicio”.\n\n"
 
-        "2. Generalidades: Las presentes condiciones generales (en adelante denominadas “Condiciones"
-        "Generales”) regulan los términos y condiciones de acceso y uso del servicio “NAD - DoctorOnline”,"
-        "que pone a disposición LA EMPRESA con el alcance y hasta los límites que se definen en estas"
-        "Condiciones Generales, las cuales el Usuario deberá leer, entender y aceptar para hacer uso del"
-        "Servicio y obtener el asesoramiento que se brinda a través del mismo. El sólo acceso y/o"
-        "utilización del Servicio, de todos o parte de sus contenidos, implica la plena aceptación de las"
-        "presentes Condiciones Generales. El Servicio que se brinda a través de NAD - DoctorOnline"
-        "consiste en la posibilidad de que el Usuario realice una consulta no presencial, de carácter virtual,"
-        "a un profesional médico en la especialidad de Médico Dermatológico. La consulta tendrá una"
-        "duración máxima de 20´ (veinte minutos) y podrá ser realizada en días hábiles de lunes a viernes,"
-        "en el horario de 08 a 18 hs., mediante una video llamada que se encuentra disponible en la App"
-        "NAD - DoctorOnline respetando las condiciones particulares y específicas que delimitan el alcance"
-        "del mismo. En caso que el profesional elegido para realizar la consulta no se encontrare"
-        "disponible, el Usuario tendrá la opción de obtener un nuevo agendamiento online el cual tendrá"
-        "lugar dentro de los 15 (quince) días subsiguientes. En caso que el Usuario no ingrese al Servicio en"
-        "su turno asignado, para lo cual se dispondrá de una tolerancia de 5’ (cinco minutos), el turno se"
-        "perderá y podrá como única vez tener la opción de obtener un nuevo agendamiento online el cual"
-        "tendrá lugar dentro de los 15 (quince) días subsiguientes. LA EMPRESA podrá modificar las"
-        "Condiciones Generales en cualquier momento, previa notificación a los usuarios.\n\n"
+        "2. Generalidades: Las presentes condiciones generales (en adelante denominadas “Condiciones Generales”) regulan los términos y condiciones de acceso y uso del servicio “NAD - DoctorOnline”, que pone a disposición LA EMPRESA con el alcance y hasta los límites que se definen en estas Condiciones Generales, las cuales el Usuario deberá leer, entender y aceptar para hacer uso del Servicio y obtener el asesoramiento que se brinda a través del mismo. El sólo acceso y/o utilización del Servicio, de todos o parte de sus contenidos, implica la plena aceptación de las presentes Condiciones Generales. El Servicio que se brinda a través de NAD - DoctorOnline consiste en la posibilidad de que el Usuario realice una consulta no presencial, de carácter virtual, a un profesional médico en la especialidad de Médico Dermatológico. La consulta tendrá una duración máxima de 20´ (veinte minutos) y podrá ser realizada en días hábiles de lunes a viernes, en el horario de 08 a 18 hs., mediante una video llamada que se encuentra disponible en la App NAD - DoctorOnline respetando las condiciones particulares y específicas que delimitan el alcance del mismo. En caso que el profesional elegido para realizar la consulta no se encontrare disponible, el Usuario tendrá la opción de obtener un nuevo agendamiento online el cual tendrá lugar dentro de los 15 (quince) días subsiguientes. En caso que el Usuario no ingrese al Servicio en su turno asignado, para lo cual se dispondrá de una tolerancia de 5’ (cinco minutos), el turno se perderá y podrá como única vez tener  la opción de obtener un nuevo agendamiento online el cual tendrá lugar dentro de los 15 (quince) días subsiguientes. LA EMPRESA podrá modificar las Condiciones Generales en cualquier momento, previa notificación a los usuarios.\n\n"
 
         "3. Condiciones Particulares de uso del Servicio:\n\n"
 
         "i. La consulta médica mediante este Servicio, no reemplaza ni sustituye la consulta médica presencial.\n\n"
 
-        "ii. La consulta médica mediante este Servicio, no reemplaza ni sustituye la consulta médica de"
-        "guardia en instituciones medico asistenciales.\n\n"
+        "ii. La consulta médica mediante este Servicio, no reemplaza ni sustituye la consulta médica en instituciones medico asistenciales.\n\n"
 
         "iii. El Servicio se encuentra disponible para los Usuarios que haya alcanzado la mayoría de edad (18 años).\n\n"
 
         "iv. Los profesionales médicos que brindan el Servicio lo hacen en la especialidad de Medicina dermatológica.\n\n"
 
-        "v. El Servicio se encuentra disponible para Usuarios de la Dra NILSA ARIAS DELGADO que hayan"
-        "cumplido con el registro en la página web www.dranilsaarias.com ó la App NAD - DoctorOnline"
-        "mediante “nombre de usuario” y “contraseña”.\n\n"
+        "v. El Servicio se encuentra disponible para Usuarios de la Dra NILSA ARIAS DELGADO que hayan cumplido con el registro en la página web www.dranilsaarias.com o la App NAD - DoctorOnline mediante “nombre de usuario” y “contraseña”.\n\n"
 
-        "vi. La cantidad de consultas médicas que podrá realizar el Usuario se encuentra limitada conforme"
-        "lo establezca el plan médico contratado, ó conforme a la disponibilidad de agenda en el calendario"
-        "disponible y se indique a través de la página web ó la App NAD - DoctorOnline. Una vez agotada la"
-        "cantidad de consultas disponibles y en caso que LA EMPRESA le habilite nuevas consultas, el"
-        "Usuario deberá aceptar nuevamente las presentes Condiciones Generales para volver a hacer uso"
-        "del Servicio.\n\n"
+        "vi. La cantidad de consultas médicas que podrá realizar el Usuario se encuentra limitada conforme lo establezca el plan médico contratado, ó conforme a la disponibilidad de agenda en el calendario disponible y se indique a través de la página web www.dranilsaarias.com o la App NAD - DoctorOnline. Una vez agotada la cantidad de consultas disponibles y en caso que LA EMPRESA le habilite nuevas consultas, el Usuario deberá aceptar nuevamente las presentes Condiciones Generales para volver a hacer uso del Servicio.\n\n"
 
         "vii. El Servicio únicamente se encuentra disponible para ser utilizado a través de la App NAD - DoctorOnline mediante el sistema de video llamada, no estando autorizado ni disponible a través de otro sistema diferente.\n\n"
 
-        "viii. El Servicio tiene un costo económico establecido en la página web ó la App NAD – DoctorOnline que será cancelado a través de transferencia bancaria por payU.\n\n"
+        "viii. El Servicio tiene un costo económico establecido en la página web www.dranilsaarias.com ó la App NAD – DoctorOnline que será cancelado a través de transferencia bancaria por PSE.\n\n"
 
         "ix. LA EMPRESA se reserva el derecho de finalizar el Servicio sin que esto genere un “derecho adquirido” para el Usuario.\n\n"
 
         "x. El Servicio no incluye las especialidades o servicios detallados en el apartado 6 de las presentes Condiciones Generales.\n\n"
 
-        "xiv. El Servicio no podrá ser transferido, por tal razón será utilizado por el usuario registrado en la página web ó la App NAD – DoctorOnline\n\n"
+        "xiv. El Servicio NO podrá ser transferido, por tal razón será utilizado por el usuario registrado en  la página web www.dranilsaarias.com ó la App NAD – DoctorOnline.\n\n"
 
-        "xi. El Servicio se encuentra sujeto a disponibilidad técnica del acceso a internet o servicio de conectividad que posea el Usuario. Para una correcta y eficaz utilización del Servicio, se sugiere, como mínimo, con los siguientes servicios:\n\n"
-
-        "Para dispositivos ANDROID (Telefonos celulares y tablets): Versión 4.1 y posteriores (Versiones inferiores no soportadas), Cámara frontal en el dispositivo, Conexión a WiFi (Conexión con plan de datos puede generar intermitencias en la llamada).\n\n"
-
-        "Para Dispositivos iOS (iPhone y iPad): Versión 8.3 y posteriores (Versiones inferiores no soportadas). Cámara frontal en el dispositivo, Conexión a WiFi (Conexión con plan de datos puede generar intermitencias en la llamada).\n\n"
+        "xi. El Servicio se encuentra sujeto a disponibilidad técnica del acceso a internet o servicio de conectividad que posea el Usuario. Para una correcta y eficaz utilización del Servicio, se sugiere, como mínimo, con los siguientes servicios: Requisitos Mínimos: Navegadores: Google Chrome (Última Versión), o Mozilla Firefox (Última versión), o Internet Explorer 10 - 11 - Requiere plug-in. Sistema operativo: Windows 10 32 bit, Windows 8.1 32 Bit, Windows 8 32 Bit, Windows 7 32 Bit, Procesador: Intel Celeron dual Core / Intel Core 2 Dual-Core @ 2.40GHz / AMD Athlon @ 2.5GHz, Memoria RAM: 2GB, Velocidad Internet: 3Mb de bajada / 512Kb de subida, Micrófono y Cámara web (640x480) Requisitos recomendados: Sistema operativo: Windows 10 64 Bit, Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit, Procesador: Intel Core i3 3.2GHZ / AMD Phenom II @ 3.30GHZ, Memoria RAM: 4GB, Velocidad Internet: 6Mb de bajada / 1Mb de subida, Micrófono y Cámara web (1280x720).\n\n"
 
         "4. Obligaciones del Usuario: El Usuario deberá respetar en todo momento los términos y condiciones establecidos en las presentes Condiciones Generales. De forma expresa, el Usuario manifiesta que utilizará el Servicio de forma responsable, diligente y asumiendo cualquier responsabilidad que pudiera derivarse del incumplimiento de las presentes Condiciones Generales. El Usuario declara aceptar que efectuará consultas a través del Servicio referidas a su propia salud y no respecto de terceros.\n\n"
 
-        "5. Responsabilidad de LA EMPRESA: La EMPRESA no ofrece garantía de resultado alguno en relación al consejo médico, indicación o diagnóstico que le brinde el profesional consultado al Usuario a través del Servicio. LA EMPRESA no será responsable de las consecuencias que pudieren surgir de la consulta a los profesionales a través del Servicio. El Usuario reconoce y acepta que ni LA EMPRESA ni el profesional consultado otorgan ninguna garantía de cualquier naturaleza, ya sea expresa o implícita, sobre la información, consejo médico, asesoramiento, contenidos, información y servicios que ofrece LA EMPRESA a través del Servicio toda vez que no asume una obligación de resultado. LA EMPRESA no será responsable por agravamientos de los eventuales cuadros clínicos, en caso que el Usuario no pudiera realizar posteriormente un efectivo contacto con el médico consultado o con el especialista al cual fue derivado, o no se realizare los estudios sugeridos por el profesional. Exceptuando los casos que la legislación vigente imponga expresamente lo contrario, y exclusivamente con la medida y extensión en que lo imponga, LA EMPRESA no garantiza ni asume responsabilidad alguna respecto a los posibles daños y perjuicios causados por el uso del Servicio.\n\n"
+        "5. Responsabilidad de LA EMPRESA: La EMPRESA NO ofrece garantía de resultado alguno en relación al consejo médico, indicación o diagnóstico que le brinde el profesional consultado al Usuario a través del Servicio. LA EMPRESA no será responsable de las consecuencias que pudieren surgir de la consulta a los profesionales a través del Servicio. El Usuario reconoce y acepta que ni LA EMPRESA ni el profesional consultado otorgan ninguna garantía de cualquier naturaleza, ya sea expresa o implícita, sobre la información, consejo médico, asesoramiento, contenidos, información y servicios que ofrece LA EMPRESA a través del Servicio toda vez que no asume una obligación de resultado. LA EMPRESA no será responsable por agravamientos de los eventuales cuadros clínicos, en caso que el Usuario no pudiera realizar posteriormente un efectivo contacto con el médico consultado o con el especialista al cual fue derivado, o no se realizare los estudios sugeridos por el profesional. Exceptuando los casos que la legislación vigente imponga expresamente lo contrario, y exclusivamente con la medida y extensión en que lo imponga, LA EMPRESA no garantiza ni asume responsabilidad alguna respecto a los posibles daños y perjuicios causados por el uso del Servicio.\n\n"
 
-        "6. Exclusiones: Se deja expresamente establecido y así lo acepta el Usuario que quedan excluidas del Servicio todas las especialidades y/o prestaciones: - PEDIATRIA - SALUD MENTAL - URGENCIAS - RECETAS para MEDICACION CRONICA - CERTIFICADOS MEDICOS - APTOS FISICOS - Cualquier otra que por su naturaleza y/o complejidad no pueda brindarse a través del Servicio.\n\n"
+        "6. Exclusiones: Se deja expresamente establecido y así lo acepta el Usuario que quedan excluidas del Servicio todas las especialidades y/o prestaciones diferentes a Dermatología, como por ejemplo: PEDIATRIA - SALUD MENTAL - URGENCIAS - RECETAS para MEDICACION CRONICA - CERTIFICADOS MEDICOS - APTOS FISICOS - Cualquier otra que por su naturaleza y/o complejidad no pueda brindarse a través del Servicio.\n\n"
 
-        "7. Propiedad intelectual e industrial Todos los contenidos: las marcas, dominios, logos, dibujos, documentación, programas informáticos o cualquier otro elemento susceptible de protección por la legislación de propiedad intelectual o industrial, que sean accesibles en la web corresponden exclusivamente a LA EMPRESA o a sus legítimos titulares y quedan expresamente reservados todos los derechos sobre los mismos, o bien LA EMPRESA posee las licencias necesarias para su uso. Queda expresamente prohibida la creación de enlaces de hipertexto (links) a cualquier elemento integrante de la página web sin la autorización de LA EMPRESA.\n\n"
+        "7. Propiedad intelectual e industrial Todos los contenidos: las marcas, dominios, logos, dibujos, documentación, programas informáticos o cualquier otro elemento susceptible de protección por la legislación de propiedad intelectual o industrial, que sean accesibles en la página web corresponden exclusivamente a LA EMPRESA o a sus legítimos titulares y quedan expresamente reservados todos los derechos sobre los mismos, o bien LA EMPRESA posee las licencias necesarias para su uso. Queda expresamente prohibida la creación de enlaces de hipertexto (links) a cualquier elemento integrante de la página web sin la autorización de LA EMPRESA.\n\n"
 
-        "8. Confidencialidad: Se deja expresa constancia que las consultas que el Usuario realice a través del Servicio, serán consignadas en  la historia clínica del paciente, con el fin de garantizar la confidencialidad y legalidad de la información, y de resguardar y preservar el secreto médico, conforme lo exigen las normas que rigen la materia. Así mismo sea autoriza  si se requiere a guardar fotos inherentes  a la consulta para anexar a  la historia clínica.\n\n"
+        "8. Confidencialidad: Se deja expresa constancia que las consultas que el Usuario realice a través del Servicio, serán consignadas en  la historia clínica del paciente, con el fin de garantizar la confidencialidad y legalidad de la información, y de resguardar y preservar el secreto médico, conforme lo exigen las normas que rigen la materia. Así mismo sea autoriza   a guardar fotos inherentes  a la consulta para anexar a  la historia clínica.\n\n"
 
-        "9. Legislación aplicable, jurisdicción competente y notificaciones: Las presentes Condiciones Generales se rigen y se interpretan de acuerdo con las Leyes de la Republica de Colombia. Para cualquier reclamo relacionado con el Servicio serán competentes los Tribunales Ordinarios de la Capital. Todas las notificaciones, requerimientos, peticiones y otras comunicaciones que el Usuario desee efectuar a LA EMPRESA deberán realizarse por escrito y a firma del Usuario, del use entenderá que han sido correctamente realizadas cuando hayan sido recibidas en la siguiente dirección: Cl. 116 #9-72 (cons 214) (Santa Barbara).\n\n"
+        "9. Legislación aplicable, jurisdicción competente y notificaciones: Las presentes Condiciones Generales se rigen y se interpretan de acuerdo con las Leyes de la Republica de Colombia. Para cualquier reclamo relacionado con el Servicio serán competentes los Tribunales Ordinarios de la Capital. Todas las notificaciones, requerimientos, peticiones y otras comunicaciones que el Usuario desee efectuar a LA EMPRESA deberán realizarse por escrito y a firma del Usuario, del use entenderá que han sido correctamente realizadas cuando hayan sido recibidas en la siguiente dirección: Cl. 116 #9-72 (consultorio 214) (Santa Bárbara).\n\n"
     </string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="dialog_close_button">cerrar</string>
@@ -224,7 +189,7 @@
     <string name="compartir">Compartir</string>
     <string name="condiciones_de_conexion">Condiciones de Conexión</string>
     <string name="ubicacion_en_mapa">Ubicación en mapa</string>
-    <string name="comentarios">Comentarios</string>
+    <string name="comentarios">Comentarios y / o Sugerencias</string>
     <string name="group_configuracion">CONFIGURACION</string>
     <string name="mi_cuenta">Mi cuenta</string>
     <string name="salir">Salir</string>
