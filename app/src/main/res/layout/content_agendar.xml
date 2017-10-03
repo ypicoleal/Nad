@@ -1,75 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AgendarActivity"
     tools:showIn="@layout/activity_agendar">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/calendar_prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@null"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:src="@drawable/calendario_flecha_izq"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/calendar_indicator"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/general_fontstyle"
-            android:gravity="center"
-            android:text="Octubre 2 / 2017"
-            android:textColor="@android:color/white" />
-
-        <ImageView
-            android:id="@+id/calendar_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:contentDescription="@null"
-            android:focusable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:src="@drawable/calendario_flecha_der"
-            android:visibility="invisible" />
-    </LinearLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingTop="8dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/calendar_prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="@null"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:src="@drawable/calendario_flecha_izq"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/calendar_indicator"
+                style="@style/Base.TextAppearance.AppCompat.Subhead"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/general_fontstyle"
+                android:gravity="center"
+                android:text="Octubre 2 / 2017"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/calendar_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:contentDescription="@null"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:src="@drawable/calendario_flecha_der"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingTop="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/horario" />
+
+                <include layout="@layout/horario" />
+
+                <include layout="@layout/horario" />
+
+                <include layout="@layout/horario" />
+
+                <include layout="@layout/horario" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#29783083"
+            android:fontFamily="@font/general_fontstyle"
+            android:lineSpacingExtra="6dp"
+            android:padding="16dp"
+            android:text="@string/date_description"
+            android:textColor="@color/colorAccent" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textColorHint="@android:color/secondary_text_dark">
+
+                <com.dranilsaarias.nad.ClickToSelectEditText
+                    android:id="@+id/motivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Motivo por el cual asiste"
+                    android:inputType="text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="16dp"
+                android:contentDescription="@null"
+                android:src="@drawable/registro_flecha" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/date_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="19dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="19dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
-            <include layout="@layout/horario" />
+            <TextView
+                style="@style/TextAppearance.AppCompat.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/date_type_hint"
+                android:textColor="@android:color/secondary_text_dark" />
 
-            <include layout="@layout/horario" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <include layout="@layout/horario" />
+                <CheckBox
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/general_fontstyle"
+                    android:text="@string/atenci_n_consultorio" />
 
-            <include layout="@layout/horario" />
-
-            <include layout="@layout/horario" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:fontFamily="@font/general_fontstyle"
+                    android:text="@string/atenci_n_online" />
+            </RadioGroup>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/next"
+                android:textColor="@android:color/white" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</FrameLayout>

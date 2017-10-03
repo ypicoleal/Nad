@@ -210,4 +210,9 @@
 
     <string name="dummie_img_url">https://lh3.ggpht.com/yC03Lwnb_msj7XgCe92AXzliDQxFgj-JKZgZfVYiT2qwerPvfGBxc7b4wOkGlpfkMxBd=h900</string>
     <string name="choose_entidad">Selecciones su entidad para el servicio</string>
+    <string name="date_description">"Día:\t\t\t04/10/2017\nHora:\t10:00 a.m - 11:00 a.m\nMédico:\tNilsa Arias"</string>
+    <string name="date_type_hint">Tipo de cita</string>
+    <string name="atenci_n_consultorio">Atención Consultorio</string>
+    <string name="atenci_n_online">Atención Online</string>
+    <string name="next">Siguiente</string>
 </resources>
