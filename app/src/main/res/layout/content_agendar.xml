@@ -10,10 +10,11 @@
     tools:showIn="@layout/activity_agendar">
 
     <LinearLayout
+        android:id="@+id/hours_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,7 +67,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/horario" />
+                <include
+                    android:id="@+id/first"
+                    layout="@layout/horario" />
 
                 <include layout="@layout/horario" />
 
@@ -80,9 +83,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/date_programming_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
