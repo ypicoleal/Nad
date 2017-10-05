@@ -144,7 +144,7 @@
     </string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="dialog_close_button">cerrar</string>
-    <string name="nombre_completo">Nombre completo</string>
+    <string name="nombre_completo">Nombres</string>
     <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
     <string name="documento_de_identidad">Documento de identidad</string>
     <string name="n_mero_de_documento">Número de documento</string>
@@ -215,4 +215,7 @@
     <string name="atenci_n_consultorio">Atención Consultorio</string>
     <string name="atenci_n_online">Atención Online</string>
     <string name="next">Siguiente</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="nombre_completo_del_acudiente">Nombre completo del acudiente</string>
+    <string name="cedula_del_acudiente">Cedula del acudiente</string>
 </resources>
