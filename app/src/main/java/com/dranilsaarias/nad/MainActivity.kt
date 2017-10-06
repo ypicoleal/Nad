@@ -57,7 +57,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
-            R.id.action_settings -> return true
+            R.id.action_exit -> {
+                logout(true)
+                return true
+            }
             else -> return super.onOptionsItemSelected(item)
         }
     }
@@ -111,7 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_salir -> {
-                logout()
+                logout(false)
             }
 
         }
@@ -128,7 +131,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toolbar.title = title
     }
 
-    private fun logout() {
+    private fun logout(openLogin: Boolean) {
         val serviceUrl = getString(R.string.logout)
         val url = getString(R.string.host, serviceUrl)
 
@@ -136,6 +139,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Response.Listener<String> { response ->
                     Log.e("tales", response)
                     finish()
+                    if (openLogin) {
+                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
                 },
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
