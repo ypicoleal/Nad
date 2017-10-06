@@ -4,4 +4,5 @@
     <string name="register_form">/usuarios/paciente/form/</string>
     <string name="login">/usuarios/login/</string>
     <string name="publicidad">/publicidad/movil/</string>
+    <string name="logout">/usuarios/logout/</string>
 </resources>

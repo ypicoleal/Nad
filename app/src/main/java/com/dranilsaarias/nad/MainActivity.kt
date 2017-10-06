@@ -4,12 +4,18 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -109,6 +115,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 replaceFragment(MapsFragment(), getString(R.string.ubicacion_en_mapa))
             }
 
+            R.id.nav_salir -> {
+                logout()
+            }
+
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
@@ -121,5 +131,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .replace(R.id.main_fragment, fragment)
                 .commit()
         toolbar.title = title
+    }
+
+    private fun logout() {
+        val serviceUrl = getString(R.string.logout)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = StringRequest(Request.Method.GET, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                    finish()
+                },
+                Response.ErrorListener { error ->
+                    loading.visibility = View.GONE
+                    if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
+                        Log.e("error", String(error.networkResponse.data))
+                        Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
+                    } else {
+                        Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
+                    }
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
+        loading.visibility = View.VISIBLE
     }
 }

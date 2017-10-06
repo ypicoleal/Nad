@@ -139,9 +139,14 @@ class LoginActivity : AppCompatActivity() {
                     loading.visibility = View.GONE
                     if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
                         Log.e("error", String(error.networkResponse.data))
-                        Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
+                        form.visibility = View.VISIBLE
                     } else {
-                        Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
+                        Snackbar
+                                .make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG)
+                                .setAction("Reintentar", {
+                                    checkSession()
+                                })
+                                .show()
                     }
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, this)
