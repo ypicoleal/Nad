@@ -143,6 +143,8 @@ class RegisterActivity : AppCompatActivity() {
                 params.put("estado_civil", civil.text.toString())
                 params.put("profesion", profesion.text.toString())
                 params.put("telefono", celular.text.toString())
+                params.put("nombre_a", nombre_acudiente.text.toString())
+                params.put("cedula_a", cedula_acudiente.text.toString())
                 return params
             }
         }
@@ -198,6 +200,16 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validateForm(): Boolean {
         var clean = true
+        if (nombre_acudiente.text.toString().equals("") && nombre_acudiente_container.visibility == View.VISIBLE) {
+            nombre_acudiente_container.isErrorEnabled = true
+            nombre_acudiente_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (cedula_acudiente.text.toString().equals("") && cedula_acudiente_container.visibility == View.VISIBLE) {
+            cedula_acudiente_container.isErrorEnabled = true
+            cedula_acudiente_container.error = getString(R.string.required_field)
+            clean = false
+        }
         if (numero_documento.text.toString().equals("")) {
             numero_documento_container.isErrorEnabled = true
             numero_documento_container.error = getString(R.string.required_field)
