@@ -296,7 +296,7 @@ class RegisterActivity : AppCompatActivity() {
                 .Builder(this)
                 .setCancelable(false)
                 .setView(v)
-                .setPositiveButton("Aceptar", { dialog, id ->
+                .setPositiveButton("Aceptar", { dialog, _ ->
                     dialog.dismiss()
                     finish()
                 })

@@ -5,9 +5,7 @@ import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
-import java.net.CookieHandler
-import java.net.CookieManager
-import java.net.URI
+import java.net.*
 
 
 class VolleySingleton {
@@ -17,7 +15,8 @@ class VolleySingleton {
 
     private fun getRequestQueue(context: Context): RequestQueue? {
         if (mRequestQueue == null) {
-            cookieManager = CookieManager()
+            val siCookieStore = SiCookieStore2(context)
+            val cookieManager = CookieManager(siCookieStore as CookieStore, CookiePolicy.ACCEPT_ALL)
             CookieHandler.setDefault(cookieManager)
 
             mRequestQueue = Volley.newRequestQueue(context.applicationContext)

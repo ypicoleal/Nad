@@ -2,4 +2,5 @@
 <resources>
     <string name="host">http://app.dranilsaarias.com%1$s</string>
     <string name="register_form">/usuarios/paciente/form/</string>
+    <string name="login">/usuarios/login/</string>
 </resources>
