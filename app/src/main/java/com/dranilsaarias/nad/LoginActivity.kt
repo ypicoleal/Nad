@@ -27,6 +27,8 @@ class LoginActivity : AppCompatActivity() {
 
         password.transformationMethod = PasswordTransformationMethod()
 
+        checkSession()
+
         tos_btn.setOnClickListener {
             vetTos()
         }
@@ -96,12 +98,12 @@ class LoginActivity : AppCompatActivity() {
         val request = object : StringRequest(Request.Method.POST, url,
                 Response.Listener<String> { response ->
                     Log.e("tales", response)
-                    loading.visibility = View.GONE
-                    finish()
                     startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                 },
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
+                    form.visibility = View.VISIBLE
                     if (error.networkResponse != null && error.networkResponse.statusCode == 404) {
                         Log.e("error", String(error.networkResponse.data))
                         Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
@@ -120,5 +122,30 @@ class LoginActivity : AppCompatActivity() {
         }
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
+        form.visibility = View.GONE
+    }
+
+    private fun checkSession() {
+        val serviceUrl = getString(R.string.publicidad)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = StringRequest(Request.Method.GET, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                },
+                Response.ErrorListener { error ->
+                    loading.visibility = View.GONE
+                    if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
+                        Log.e("error", String(error.networkResponse.data))
+                        Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
+                    } else {
+                        Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
+                    }
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
+        loading.visibility = View.VISIBLE
+        form.visibility = View.GONE
     }
 }

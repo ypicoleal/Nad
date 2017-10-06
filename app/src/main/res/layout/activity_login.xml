@@ -5,20 +5,30 @@
     android:layout_height="match_parent"
     tools:context="com.dranilsaarias.nad.LoginActivity">
 
-    <include layout="@layout/content_login" />
+    <include
+        android:id="@+id/form"
+        layout="@layout/content_login" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#a1ffffff"
+        android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/login_logo" />
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
-    </FrameLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
