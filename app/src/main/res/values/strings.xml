@@ -220,4 +220,8 @@
     <string name="cedula_del_acudiente">Cedula del acudiente</string>
     <string name="required_field">Este campo es requerido</string>
     <string name="check_email">Hemos enviado el link de confirmacion a su correo electronico, esto haira que cambiarlo</string>
+    <string name="doctor_name">Dra. Nilsa Arias Delgado</string>
+    <string name="proffession">Dermatóloga</string>
+    <string name="address">Calle 116 # 9–72 Consultorio 214,</string>
+    <string name="building">Edificio Global Medical Center</string>
 </resources>

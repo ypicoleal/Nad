@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -41,8 +42,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val sydney = LatLng(4.6949137, -74.0363918)
+        val adapter = CustomInfoWindowAdapter(this.activity)
+        mMap.setInfoWindowAdapter(adapter)
+        mMap.addMarker(MarkerOptions()
+                .position(sydney)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin)))
+                .showInfoWindow()
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17f))
+
     }
 }
