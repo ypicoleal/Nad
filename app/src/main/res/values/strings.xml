@@ -218,4 +218,6 @@
     <string name="apellidos">Apellidos</string>
     <string name="nombre_completo_del_acudiente">Nombre completo del acudiente</string>
     <string name="cedula_del_acudiente">Cedula del acudiente</string>
+    <string name="required_field">Este campo es requerido</string>
+    <string name="check_email">Hemos enviado el link de confirmacion a su correo electronico, esto haira que cambiarlo</string>
 </resources>

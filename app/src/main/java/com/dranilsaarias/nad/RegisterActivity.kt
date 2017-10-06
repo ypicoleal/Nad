@@ -97,7 +97,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun register() {
-
+        clearErrors()
+        if (!validateForm()) {
+            return
+        }
         if (!accept_tos_cbr.isChecked) {
             Snackbar.make(loading, "Debe aceptar los Términos y condiciones para poder registrarse", Snackbar.LENGTH_LONG)
                     .setAction("Aceptar", {
@@ -115,6 +118,7 @@ class RegisterActivity : AppCompatActivity() {
                 Response.Listener<String> { response ->
                     Log.e("tales", response)
                     loading.visibility = View.GONE
+                    showSuccess()
                 },
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
@@ -143,7 +147,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
         VolleySingleton.getInstance().addToRequestQueue(request, this)
-        clearErrors()
         loading.visibility = View.VISIBLE
     }
 
@@ -193,7 +196,80 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun validateForm(): Boolean {
+        var clean = true
+        if (numero_documento.text.toString().equals("")) {
+            numero_documento_container.isErrorEnabled = true
+            numero_documento_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (password.text.toString().equals("")) {
+            password_container.isErrorEnabled = true
+            password_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (password_confirm.text.toString().equals("")) {
+            password_confirm_container.isErrorEnabled = true
+            password_confirm_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (nombre.text.toString().equals("")) {
+            nombre_container.isErrorEnabled = true
+            nombre_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (apellidos.text.toString().equals("")) {
+            apellidos_container.isErrorEnabled = true
+            apellidos_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (email.text.toString().equals("")) {
+            email_container.isErrorEnabled = true
+            email_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (tipoDocumento == 0) {
+            document_container.isErrorEnabled = true
+            document_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (numero_documento.text.toString().equals("")) {
+            numero_documento_container.isErrorEnabled = true
+            numero_documento_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (fecha_nacimiento.text.toString().equals("")) {
+            fecha_nacimiento_container.isErrorEnabled = true
+            fecha_nacimiento_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (civil.text.toString().equals("")) {
+            civil_container.isErrorEnabled = true
+            civil_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (profesion.text.toString().equals("")) {
+            profesion_container.isErrorEnabled = true
+            profesion_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        if (celular.text.toString().equals("")) {
+            celular_container.isErrorEnabled = true
+            celular_container.error = getString(R.string.required_field)
+            clean = false
+        }
+        return clean
+    }
+
     private fun clearErrors() {
+        nombre_container.isErrorEnabled = false
+        nombre_container.error = null
+        celular_container.isErrorEnabled = false
+        celular_container.error = null
+        apellidos_container.isErrorEnabled = false
+        apellidos_container.error = null
+        profesion_container.isErrorEnabled = false
+        profesion_container.error = null
         numero_documento_container.error = null
         numero_documento_container.isErrorEnabled = false
         password_container.error = null
@@ -206,8 +282,26 @@ class RegisterActivity : AppCompatActivity() {
         fecha_nacimiento_container.isErrorEnabled = false
         numero_documento_container.error = null
         numero_documento_container.isErrorEnabled = false
+        document_container.isErrorEnabled = false
+        document_container.error = null
         civil_container.error = null
         civil_container.isErrorEnabled = false
+    }
+
+    private fun showSuccess() {
+        val inflater = this.layoutInflater
+        val v = inflater.inflate(R.layout.check_email, null)
+
+        AlertDialog
+                .Builder(this)
+                .setCancelable(false)
+                .setView(v)
+                .setPositiveButton("Aceptar", { dialog, id ->
+                    dialog.dismiss()
+                    finish()
+                })
+                .create()
+                .show()
     }
 
     private inner class Documento internal constructor(override val label: String) : Listable
