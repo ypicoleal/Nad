@@ -75,8 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_privacidad -> {
-                //TODO cambiar el texto por el texto de correspondiente
-                val fragment = TosFragment.newInstance(getString(R.string.ipsum))
+                val fragment = TosFragment.newInstance(getString(R.string.tos_content))
                 replaceFragment(fragment, getString(R.string.politicas_de_privacidad))
             }
 
@@ -90,10 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val i = Intent(Intent.ACTION_SEND)
                     i.type = "text/plain"
                     i.putExtra(Intent.EXTRA_SUBJECT, "Doctor Online")
-                    var sAux = "\nPrueba esta aplicación\n\n"
-                    sAux += getString(R.string.playstore_url) + "\n\n"
-
-                    sAux += getString(R.string.appstore_url) + "\n\n"
+                    val sAux = "Prueba NAD DoctorOnline en tu smartphone. Descargalo hoy desde http://dranilsaarias.com/"
                     i.putExtra(Intent.EXTRA_TEXT, sAux)
                     startActivity(Intent.createChooser(i, "Escoja"))
                 } catch (e: Exception) {
@@ -106,8 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_conexion -> {
-                //TODO cambiar el texto por el texto de correspondiente
-                val fragment = TosFragment.newInstance(getString(R.string.ipsum))
+                val fragment = TosFragment.newInstance(getString(R.string.tos_content))
                 replaceFragment(fragment, getString(R.string.condiciones_de_conexion))
             }
 

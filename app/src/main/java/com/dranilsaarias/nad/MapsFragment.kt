@@ -1,8 +1,12 @@
 package com.dranilsaarias.nad
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -13,7 +17,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapsFragment : Fragment(), OnMapReadyCallback {
+class MapsFragment : Fragment(), OnMapReadyCallback, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mMap: GoogleMap
 
@@ -26,7 +30,36 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        val bottomNavigation = view.findViewById<BottomNavigationView>(R.id.navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener(this)
+
         return view
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_web -> {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.web_url)))
+                startActivity(browserIntent)
+            }
+
+            R.id.navigation_call -> {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.setData(Uri.parse("tel:" + getString(R.string.phone)))
+                startActivity(intent)
+            }
+
+            R.id.navigation_message -> {
+                val stringArray = arrayOfNulls<String>(1)
+                stringArray[0] = getString(R.string.doctor_email)
+
+                val intent = Intent(Intent.ACTION_SENDTO)
+                intent.setData(Uri.parse("mailto:"))
+                intent.putExtra(Intent.EXTRA_EMAIL, stringArray)
+                startActivity(Intent.createChooser(intent, "Envio de mensaje"))
+            }
+        }
+        return false
     }
 
     /**

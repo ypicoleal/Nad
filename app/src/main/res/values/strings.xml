@@ -224,4 +224,6 @@
     <string name="proffession">Dermatóloga</string>
     <string name="address">Calle 116 # 9–72 Consultorio 214,</string>
     <string name="building">Edificio Global Medical Center</string>
+    <string name="phone">3144933205</string>
+    <string name="doctor_email">info@dranilsaarias.com</string>
 </resources>
