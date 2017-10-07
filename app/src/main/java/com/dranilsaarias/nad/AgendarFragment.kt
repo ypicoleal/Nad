@@ -14,8 +14,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 import com.github.sundeepk.compactcalendarview.domain.Event
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,8 +36,8 @@ class AgendarFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_agendar, container, false)
 
         val imageSlider = view.findViewById<ViewPager>(R.id.img_slider)
-        val adapter = ImageFragmenPagerAdapter(childFragmentManager)
-        imageSlider.adapter = adapter
+
+        setupAdsPager(imageSlider)
 
         val indicator = view.findViewById<TabLayout>(R.id.img_slider_indicator)
         indicator.setupWithViewPager(imageSlider)
@@ -45,6 +49,24 @@ class AgendarFragment : Fragment() {
                 view.findViewById(R.id.calendar_next))
 
         return view
+    }
+
+    private fun setupAdsPager(adsPager: ViewPager) {
+
+        val serviceUrl = getString(R.string.publicidad)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener<JSONObject> { response ->
+                    Log.e("tales", response.toString())
+                    val adapter = ImageFragmenPagerAdapter(childFragmentManager)
+                    adapter.data = response.getJSONArray("object_list")
+                    adsPager.adapter = adapter
+                },
+                Response.ErrorListener { error ->
+
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, context)
     }
 
     private fun setupCalendarView(calendarView: CompactCalendarView, calendarIndicator: TextView, prev: View, next: View) {

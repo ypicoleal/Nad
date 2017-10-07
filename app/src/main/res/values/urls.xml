@@ -3,6 +3,7 @@
     <string name="host">http://app.dranilsaarias.com%1$s</string>
     <string name="register_form">/usuarios/paciente/form/</string>
     <string name="login">/usuarios/login/</string>
+    <string name="is_login">/usuarios/is/login/</string>
     <string name="publicidad">/publicidad/movil/</string>
     <string name="logout">/usuarios/logout/</string>
 </resources>
