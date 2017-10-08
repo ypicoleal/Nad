@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/general_fontstyle"
                 android:gravity="center"
-                android:text="Octubre 2 / 2017"
                 android:textColor="@android:color/white" />
 
             <ImageView
@@ -55,31 +54,20 @@
                 android:visibility="invisible" />
         </LinearLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:clipToPadding="false"
-            android:paddingTop="8dp">
+            android:layout_weight="1">
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/calendar_rv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingTop="8dp" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-                <include
-                    android:id="@+id/first"
-                    layout="@layout/horario" />
-
-                <include layout="@layout/horario" />
-
-                <include layout="@layout/horario" />
-
-                <include layout="@layout/horario" />
-
-                <include layout="@layout/horario" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 
     <LinearLayout
@@ -90,13 +78,13 @@
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/date_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#29783083"
             android:fontFamily="@font/general_fontstyle"
             android:lineSpacingExtra="6dp"
             android:padding="16dp"
-            android:text="@string/date_description"
             android:textColor="@color/colorAccent" />
 
         <FrameLayout
@@ -117,7 +105,7 @@
                     android:id="@+id/motivo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Motivo por el cual asiste"
+                    android:hint="@string/motivo_por_el_cual_asiste"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 

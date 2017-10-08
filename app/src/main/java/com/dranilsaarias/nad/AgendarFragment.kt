@@ -63,7 +63,7 @@ class AgendarFragment : Fragment() {
                     adapter.data = response.getJSONArray("object_list")
                     adsPager.adapter = adapter
                 },
-                Response.ErrorListener { error ->
+                Response.ErrorListener { _ ->
 
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, context)
@@ -74,9 +74,9 @@ class AgendarFragment : Fragment() {
         val date = calendarView.firstDayOfCurrentMonth
         val monthFormatter = SimpleDateFormat("MMMM / y", Locale.getDefault())
 
-        calendarIndicator.setText(monthFormatter.format(date).capitalize())
+        calendarIndicator.text = monthFormatter.format(date).capitalize()
 
-        val names = Array<String>(7, { _ -> "" })
+        val names = Array(7, { _ -> "" })
         names[0] = "Lun" // monday
         names[1] = "Mar" // tuesday
         names[2] = "Mie" // wednesday
@@ -99,7 +99,7 @@ class AgendarFragment : Fragment() {
             }
 
             override fun onMonthScroll(firstDayOfNewMonth: Date) {
-                calendarIndicator.setText(monthFormatter.format(firstDayOfNewMonth).capitalize())
+                calendarIndicator.text = monthFormatter.format(firstDayOfNewMonth).capitalize()
                 Log.d(TAG, "Month was scrolled to: " + firstDayOfNewMonth)
             }
         })
@@ -116,9 +116,10 @@ class AgendarFragment : Fragment() {
     private fun agendar(date: Date) {
         AlertDialog.Builder(activity)
                 .setTitle(getString(R.string.choose_entidad))
-                .setItems(R.array.entidad_array, { _, _ ->
+                .setItems(R.array.entidad_array, { _, index ->
                     val intent = Intent(context, AgendarActivity::class.java)
                     intent.putExtra("date", date)
+                    intent.putExtra("entidad", index + 1)
                     startActivity(intent)
                 })
                 .setNegativeButton("Cancelar", { _, _ ->

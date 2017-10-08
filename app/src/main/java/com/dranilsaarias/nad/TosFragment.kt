@@ -28,8 +28,8 @@ class TosFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_tos, container, false)
 
-        val tos_text = view.findViewById<DocumentView>(R.id.tos_text)
-        tos_text.text = mContent
+        val tosText = view.findViewById<DocumentView>(R.id.tos_text)
+        tosText.text = mContent
 
         return view
     }

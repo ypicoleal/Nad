@@ -6,4 +6,5 @@
     <string name="is_login">/usuarios/is/login/</string>
     <string name="publicidad">/publicidad/movil/</string>
     <string name="logout">/usuarios/logout/</string>
+    <string name="calendarios">/agenda/calendario/list/?inicio__year=%1$d&amp;inicio__month=%2$d&amp;inicio__day=%3$d</string>
 </resources>

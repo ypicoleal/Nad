@@ -9,10 +9,10 @@
     android:foreground="?selectableItemBackground">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="09:00 a.m - 10:00 a.m" />
+        android:layout_margin="8dp" />
 
     <ImageView
         android:layout_width="16dp"

@@ -172,9 +172,9 @@
     </string-array>
 
     <string-array name="entidad_array">
-        <item>COLSANITAS</item>
-        <item>MEDISANITAS</item>
         <item>PARTICULAR</item>
+        <item>MEDISANITAS</item>
+        <item>COLSANITAS</item>
     </string-array>
     <string name="title_activity_main">MainActivity</string>
 
@@ -210,7 +210,7 @@
 
     <string name="dummie_img_url">https://lh3.ggpht.com/yC03Lwnb_msj7XgCe92AXzliDQxFgj-JKZgZfVYiT2qwerPvfGBxc7b4wOkGlpfkMxBd=h900</string>
     <string name="choose_entidad">Selecciones su entidad para el servicio</string>
-    <string name="date_description">"Día:\t\t\t04/10/2017\nHora:\t10:00 a.m - 11:00 a.m\nMédico:\tNilsa Arias"</string>
+    <string name="date_description">"Día:\t\t\t%1$s\nHora:\t%2$s\nMédico:\tNilsa Arias"</string>
     <string name="date_type_hint">Tipo de cita</string>
     <string name="atenci_n_consultorio">Atención Consultorio</string>
     <string name="atenci_n_online">Atención Online</string>
@@ -226,4 +226,5 @@
     <string name="building">Edificio Global Medical Center</string>
     <string name="phone">3144933205</string>
     <string name="doctor_email">info@dranilsaarias.com</string>
+    <string name="motivo_por_el_cual_asiste">Motivo por el cual asiste</string>
 </resources>
