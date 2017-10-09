@@ -227,4 +227,5 @@
     <string name="phone">3144933205</string>
     <string name="doctor_email">info@dranilsaarias.com</string>
     <string name="motivo_por_el_cual_asiste">Motivo por el cual asiste</string>
+    <string name="agendar">Agendar</string>
 </resources>

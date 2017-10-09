@@ -87,38 +87,6 @@
             android:padding="16dp"
             android:textColor="@color/colorAccent" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:textColorHint="@android:color/secondary_text_dark">
-
-                <com.dranilsaarias.nad.ClickToSelectEditText
-                    android:id="@+id/motivo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/motivo_por_el_cual_asiste"
-                    android:inputType="text" />
-            </android.support.design.widget.TextInputLayout>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="16dp"
-                android:contentDescription="@null"
-                android:src="@drawable/registro_flecha" />
-        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/date_type"
@@ -147,6 +115,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:id="@+id/atencion_consultorio"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -154,6 +123,7 @@
                     android:text="@string/atenci_n_consultorio" />
 
                 <CheckBox
+                    android:id="@+id/atencion_online"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -162,7 +132,41 @@
             </RadioGroup>
         </LinearLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textColorHint="@android:color/secondary_text_dark">
+
+                <com.dranilsaarias.nad.ClickToSelectEditText
+                    android:id="@+id/motivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/motivo_por_el_cual_asiste"
+                    android:inputType="none" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="16dp"
+                android:contentDescription="@null"
+                android:src="@drawable/registro_flecha" />
+        </FrameLayout>
+
         <android.support.v7.widget.CardView
+            android:id="@+id/next_btn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="8dp"
@@ -178,6 +182,7 @@
             app:cardCornerRadius="24dp">
 
             <TextView
+                android:id="@+id/next_btn_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
