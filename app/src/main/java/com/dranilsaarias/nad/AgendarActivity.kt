@@ -14,6 +14,7 @@ import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_agendar.*
 import kotlinx.android.synthetic.main.content_agendar.*
 import org.json.JSONObject
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -53,9 +54,21 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             if (selectedType != null) {
                 if (atencion_consultorio.isChecked) {
                     agendarCita()
+                } else {
+                    pagarCita()
                 }
             }
         }
+    }
+
+    private fun pagarCita() {
+        price.text = getString(R.string.precion, NumberFormat.getNumberInstance(Locale.getDefault()).format(selectedType!!.price))
+        next_btn_tv.text = getString(R.string.pago_texto)
+
+        price.visibility = View.VISIBLE
+        price_label.visibility = View.VISIBLE
+        date_type.visibility = View.GONE
+        motivo_container.visibility = View.GONE
     }
 
     private fun agendarCita() {

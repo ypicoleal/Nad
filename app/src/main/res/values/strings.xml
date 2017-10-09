@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">NAD DoctorOnline</string>
     <string name="action_settings">Settings</string>
 
@@ -94,7 +94,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="tos_content">
+    <string name="tos_content" tools:ignore="Typos">
         "1. Definiciones:\n\n"
         "- Empresa: Se entiende por Empresa a la <b>Medica Dermatóloga</b> NILSA ARIAS DELGADO (En adelante “LA EMPRESA”).\n\n"
 
@@ -228,4 +228,7 @@
     <string name="doctor_email">info@dranilsaarias.com</string>
     <string name="motivo_por_el_cual_asiste">Motivo por el cual asiste</string>
     <string name="agendar">Agendar</string>
+    <string name="costo_de_la_cita">Costo de la cita</string>
+    <string name="pago_texto">Pago Consulta por PSE</string>
+    <string name="precion">$ %1$s</string>
 </resources>
