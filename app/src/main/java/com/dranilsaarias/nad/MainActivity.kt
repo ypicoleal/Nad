@@ -15,9 +15,12 @@ import android.view.MenuItem
 import android.view.View
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
+        setHeader()
     }
 
     override fun onBackPressed() {
@@ -92,7 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val i = Intent(Intent.ACTION_SEND)
                     i.type = "text/plain"
                     i.putExtra(Intent.EXTRA_SUBJECT, "Doctor Online")
-                    val sAux = "Prueba NAD DoctorOnline en tu smartphone. Descargalo hoy desde http://dranilsaarias.com/"
+                    val sAux = "Descarga la App NAD DoctorOnline en tu smartphone. Descargalo hoy desde http://dranilsaarias.com/"
                     i.putExtra(Intent.EXTRA_TEXT, sAux)
                     startActivity(Intent.createChooser(i, "Escoja"))
                 } catch (e: Exception) {
@@ -114,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_salir -> {
-                logout(false)
+                logout(true)
             }
 
         }
@@ -155,5 +159,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
+    }
+
+    private fun setHeader() {
+        val serviceUrl = getString(R.string.is_login)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener<JSONObject> { response ->
+                    user_full_name.text = (response.getString("first_name") + " " + response.getString("last_name"))
+                    user_email.text = response.getString("email")
+                },
+                Response.ErrorListener { error ->
+                    Log.e("error", error.message)
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 }

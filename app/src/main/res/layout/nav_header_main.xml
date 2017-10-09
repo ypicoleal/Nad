@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/menu_logo" />
 
     <TextView
+        android:id="@+id/user_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
@@ -31,7 +32,7 @@
         android:textColor="@color/colorAccent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/user_email"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

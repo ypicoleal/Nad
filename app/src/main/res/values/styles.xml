@@ -56,4 +56,8 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="navTheme" parent="ThemeOverlay.AppCompat.navTheme">
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>

@@ -2,7 +2,7 @@
     <string name="app_name">NAD DoctorOnline</string>
     <string name="action_settings">Settings</string>
 
-    <string name="username">Usuario</string>
+    <string name="username">Documento de identidad</string>
     <string name="password">Contraseña</string>
     <string name="tos"><u>Acepto los Términos y condiciones</u></string>
     <string name="ipsum">
