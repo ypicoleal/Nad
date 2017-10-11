@@ -1,8 +1,11 @@
 package com.dranilsaarias.nad
 
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +32,14 @@ class TosFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.fragment_tos, container, false)
 
         val tosText = view.findViewById<DocumentView>(R.id.tos_text)
-        tosText.text = mContent
+
+        Log.i("tales", mContent)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tosText.text = Html.fromHtml(mContent, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            tosText.text = Html.fromHtml(mContent)
+        }
 
         return view
     }

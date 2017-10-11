@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_privacidad -> {
-                val fragment = TosFragment.newInstance(getString(R.string.tos_content))
+                val fragment = TosFragment.newInstance(getString(R.string.privacy))
                 replaceFragment(fragment, getString(R.string.politicas_de_privacidad))
             }
 
@@ -167,7 +167,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
-                    user_full_name.text = (response.getString("first_name") + " " + response.getString("last_name"))
+                    Log.i("user", response.toString())
+                    user_full_name.text = (response.getString("nombre") + " " + response.getString("apellidos"))
                     user_email.text = response.getString("email")
                 },
                 Response.ErrorListener { error ->
