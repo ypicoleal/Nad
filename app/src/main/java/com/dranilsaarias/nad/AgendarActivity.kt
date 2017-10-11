@@ -2,10 +2,13 @@ package com.dranilsaarias.nad
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.widget.TextView
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -59,6 +62,17 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                 }
             }
         }
+
+        val entidad = intent.getIntExtra("entidad", -1)
+        if (entidad > 1) {
+            AlertDialog
+                    .Builder(this)
+                    .setTitle("Agendar cita")
+                    .setMessage("Recuerde que solo podrá agendar citas en Atención Consultorio")
+                    .setPositiveButton("Aceptar", null)
+                    .create()
+                    .show()
+        }
     }
 
     private fun pagarCita() {
@@ -79,14 +93,15 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
 
         val request = object : StringRequest(Request.Method.POST, url,
                 Response.Listener<String> { response ->
-
+                    loading.visibility = View.GONE
+                    finalizarAgendar()
                 },
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
                     if (error.networkResponse != null && error.networkResponse.statusCode == 404) {
-                        Log.e("error", String(error.networkResponse.data))
                         Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
                     } else {
+                        Log.e("error", String(error.networkResponse.data))
                         Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
                     }
                 }) {
@@ -101,6 +116,20 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         }
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
+    }
+
+    private fun finalizarAgendar() {
+        val dialog = AlertDialog
+                .Builder(this)
+                .setTitle("Agendar cita")
+                .setMessage("Su cita se reservó satisfactoriamente")
+                .setPositiveButton("Aceptar", null)
+                .setOnDismissListener {
+                    finish()
+                }
+                .create()
+        dialog.show()
+        dialog.findViewById<TextView>(android.R.id.message)!!.gravity = Gravity.CENTER
     }
 
     override fun onBackPressed() {
@@ -134,6 +163,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
+                    //todo mostrar aviso cuando no halla nada en la lista
                     Log.e("tales", response.toString())
                     adapter.setCalendarios(response.getJSONArray("object_list"))
                     swipe.isRefreshing = false
@@ -166,8 +196,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                     for (i in 0 until list.length()) {
                         val item = list.getJSONObject(i)
                         val t = Type(item.getString("nombre"))
-                        //todo decomentar esta linea
-                        //t.id = item.getInt("id")
+                        t.id = item.getInt("id")
                         t.price = item.getInt("precio")
                         if (item.getInt("modalidad") == Type.IN_PERSON) {
                             inPersonTypes.add(t)

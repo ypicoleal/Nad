@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,7 +17,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
-import com.github.sundeepk.compactcalendarview.domain.Event
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,6 +39,8 @@ class AgendarFragment : Fragment() {
 
         val indicator = view.findViewById<TabLayout>(R.id.img_slider_indicator)
         indicator.setupWithViewPager(imageSlider)
+
+        //todo validar no escojer un dia menor al dia de mañana
 
         setupCalendarView(
                 view.findViewById(R.id.compactcalendar_view),
@@ -85,13 +85,6 @@ class AgendarFragment : Fragment() {
         names[5] = "Sab" // saturday
         names[6] = "Dom" // sunday
         calendarView.setDayColumnNames(names)
-
-        val ev1 = Event(ContextCompat.getColor(context, R.color.colorAccent), 1505339010000L, "Some extra data that I want to store.")
-        calendarView.addEvent(ev1, false)
-
-        // Added event 2 GMT: Sun, 07 Jun 2015 19:10:51 GMT
-        val ev2 = Event(ContextCompat.getColor(context, R.color.colorAccent), 1505339010000L)
-        calendarView.addEvent(ev2, false)
 
         calendarView.setListener(object : CompactCalendarView.CompactCalendarViewListener {
             override fun onDayClick(dateClicked: Date) {
