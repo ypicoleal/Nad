@@ -36,11 +36,20 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         setContentView(R.layout.activity_agendar)
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
-            if (hours_container.visibility == View.GONE) {
-                closeProgramingAnimation()
-                selectedCalendar = null
-            } else {
-                finish()
+            when {
+                price.visibility == View.VISIBLE -> {
+                    next_btn_tv.text = getString(R.string.next)
+
+                    price.visibility = View.GONE
+                    price_label.visibility = View.GONE
+                    date_type.visibility = View.VISIBLE
+                    motivo_container.visibility = View.VISIBLE
+                }
+                hours_container.visibility == View.GONE -> {
+                    closeProgramingAnimation()
+                    selectedCalendar = null
+                }
+                else -> finish()
             }
         }
 
@@ -92,7 +101,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         val url = getString(R.string.host, serviceUrl)
 
         val request = object : StringRequest(Request.Method.POST, url,
-                Response.Listener<String> { response ->
+                Response.Listener<String> { _ ->
                     loading.visibility = View.GONE
                     finalizarAgendar()
                 },
@@ -133,11 +142,20 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
     }
 
     override fun onBackPressed() {
-        if (hours_container.visibility == View.GONE) {
-            closeProgramingAnimation()
-            selectedCalendar = null
-        } else {
-            super.onBackPressed()
+        when {
+            price.visibility == View.VISIBLE -> {
+                next_btn_tv.text = getString(R.string.next)
+
+                price.visibility = View.GONE
+                price_label.visibility = View.GONE
+                date_type.visibility = View.VISIBLE
+                motivo_container.visibility = View.VISIBLE
+            }
+            hours_container.visibility == View.GONE -> {
+                closeProgramingAnimation()
+                selectedCalendar = null
+            }
+            else -> super.onBackPressed()
         }
     }
 
@@ -163,8 +181,10 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
-                    //todo mostrar aviso cuando no halla nada en la lista
-                    Log.e("tales", response.toString())
+                    if (response.getJSONArray("object_list").length() == 0) {
+                        empty_list.visibility = View.VISIBLE
+                        swipe.visibility = View.GONE
+                    }
                     adapter.setCalendarios(response.getJSONArray("object_list"))
                     swipe.isRefreshing = false
                 },
@@ -222,7 +242,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             atencion_online.isEnabled = false
             next_btn_tv.text = getString(R.string.agendar)
         }
-        atencion_consultorio.setOnCheckedChangeListener { button, checked ->
+        atencion_consultorio.setOnCheckedChangeListener { _, checked ->
             if (checked) {
                 selectedType = null
                 atencion_online.isChecked = false
@@ -283,7 +303,6 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
 
         companion object {
             val IN_PERSON: Int = 1
-            val VIRTUAL: Int = 2
         }
     }
 }

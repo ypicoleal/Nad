@@ -68,6 +68,14 @@
                 android:paddingTop="8dp" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
+        <TextView
+            android:id="@+id/empty_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/fecha_no_disponible_para_agendamiento"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
