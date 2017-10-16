@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -26,6 +27,11 @@ import java.util.*
  * A simple [Fragment] subclass.
  */
 class AgendarFragment : Fragment() {
+
+    var currentPage = 0
+    var timer: Timer? = null
+    val DELAY_MS: Long = 500//delay in milliseconds before task is to be executed
+    val PERIOD_MS: Long = 3000 // time in milliseconds between successive task executions.
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -62,6 +68,23 @@ class AgendarFragment : Fragment() {
                     val adapter = ImageFragmenPagerAdapter(childFragmentManager)
                     adapter.data = response.getJSONArray("object_list")
                     adsPager.adapter = adapter
+
+                    val handler = Handler()
+                    val Update = Runnable {
+                        if (adsPager.currentItem == (adapter.data!!.length()) - 1) {
+                            adsPager.setCurrentItem(0, true)
+                        } else {
+                            adsPager.setCurrentItem((adsPager.currentItem + 1), true)
+                        }
+                    }
+
+                    timer = Timer() // This will create a new Thread
+                    timer!!.schedule(object : TimerTask() { // task to be scheduled
+
+                        override fun run() {
+                            handler.post(Update)
+                        }
+                    }, DELAY_MS, PERIOD_MS)
                 },
                 Response.ErrorListener { _ ->
 
