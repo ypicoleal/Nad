@@ -6,6 +6,7 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
@@ -28,10 +29,10 @@ import java.util.*
  */
 class AgendarFragment : Fragment() {
 
-    var currentPage = 0
-    var timer: Timer? = null
+    private var timer: Timer? = null
     val DELAY_MS: Long = 500//delay in milliseconds before task is to be executed
     val PERIOD_MS: Long = 3000 // time in milliseconds between successive task executions.
+    private var validSnackbar: Snackbar? = null
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -70,7 +71,7 @@ class AgendarFragment : Fragment() {
                     adsPager.adapter = adapter
 
                     val handler = Handler()
-                    val Update = Runnable {
+                    val update = Runnable {
                         if (adsPager.currentItem == (adapter.data!!.length()) - 1) {
                             adsPager.setCurrentItem(0, true)
                         } else {
@@ -82,7 +83,7 @@ class AgendarFragment : Fragment() {
                     timer!!.schedule(object : TimerTask() { // task to be scheduled
 
                         override fun run() {
-                            handler.post(Update)
+                            handler.post(update)
                         }
                     }, DELAY_MS, PERIOD_MS)
                 },
@@ -111,6 +112,7 @@ class AgendarFragment : Fragment() {
 
         calendarView.setListener(object : CompactCalendarView.CompactCalendarViewListener {
             override fun onDayClick(dateClicked: Date) {
+
                 agendar(dateClicked)
             }
 
@@ -130,19 +132,27 @@ class AgendarFragment : Fragment() {
     }
 
     private fun agendar(date: Date) {
-        AlertDialog.Builder(activity)
-                .setTitle(getString(R.string.choose_entidad))
-                .setItems(R.array.entidad_array, { _, index ->
-                    val intent = Intent(context, AgendarActivity::class.java)
-                    intent.putExtra("date", date)
-                    intent.putExtra("entidad", index + 1)
-                    startActivity(intent)
-                })
-                .setNegativeButton("Cancelar", { _, _ ->
+        val today = Calendar.getInstance()
+        if (date > today.time) {
+            AlertDialog.Builder(activity)
+                    .setTitle(getString(R.string.choose_entidad))
+                    .setItems(R.array.entidad_array, { _, index ->
+                        val intent = Intent(context, AgendarActivity::class.java)
+                        intent.putExtra("date", date)
+                        intent.putExtra("entidad", index + 1)
+                        startActivity(intent)
+                    })
+                    .setNegativeButton("Cancelar", { _, _ ->
 
-                })
-                .create()
-                .show()
+                    })
+                    .create()
+                    .show()
+        } else {
+            if (validSnackbar == null) {
+                validSnackbar = Snackbar.make(view!!, "La cita solo se puede reservar para dias posteriores a la fecha de hoy", Snackbar.LENGTH_LONG)
+            }
+            validSnackbar!!.show()
+        }
     }
 
 }// Required empty public constructor
