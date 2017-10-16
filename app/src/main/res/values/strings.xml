@@ -177,6 +177,13 @@
         "<p align="justify">NAD DoctorOnline Se reserva el derecho de cambiar los términos de la presente Política de Privacidad en cualquier momento.</p>\n\n"
         ]]>
     </string>
+    <string name="connections">
+        <![CDATA[
+        "<p>El Servicio se encuentra sujeto a disponibilidad técnica del acceso a internet o servicio de conectividad que posea el Usuario. Para una correcta y eficaz utilización del Servicio, se sugiere, como mínimo los siguientes servicios:</p>"
+        "<p>Para dispositivos ANDROID (Teléfonos celulares y tablets): Versión 5.0 y posteriores (Versiones inferiores no soportadas), Cámara frontal en el dispositivo móvil no menor a 5 megapíxeles, Conexión a WiFi no menor a 5 Mb/s (La Conexión con plan de datos puede generar intermitencias o bloqueos en la llamada).</p>"
+        "<p>Para Dispositivos iOS (iPhone y iPad): Versión 9.0 y posteriores (Versiones inferiores no soportadas). Cámara frontal en el dispositivo móvil no menor a 5 megapíxeles, Conexión a WiFi no menor a 5 Mb/s.  (La Conexión con plan de datos puede generar intermitencias o bloqueos en la llamada).</p>"
+        ]]>
+    </string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="dialog_close_button">cerrar</string>
     <string name="nombre_completo">Nombres</string>

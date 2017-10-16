@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_conexion -> {
-                val fragment = TosFragment.newInstance(getString(R.string.tos_content))
+                val fragment = TosFragment.newInstance(getString(R.string.connections))
                 replaceFragment(fragment, getString(R.string.condiciones_de_conexion))
             }
 
