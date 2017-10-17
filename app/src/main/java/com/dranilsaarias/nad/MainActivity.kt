@@ -105,7 +105,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_comentarios -> {
-                replaceFragment(CommentsFragment(), getString(R.string.comentarios))
+                val fragment = CommentsFragment.newInstance(user_email.text.toString())
+                replaceFragment(fragment, getString(R.string.comentarios))
             }
 
             R.id.nav_conexion -> {
