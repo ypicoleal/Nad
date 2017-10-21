@@ -17,6 +17,10 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="1"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
@@ -27,10 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:documentView_antialias="true"
-            app:documentView_text="@string/tos_content"
             app:documentView_textAlignment="justified"
             app:documentView_textColor="@android:color/secondary_text_light"
-            app:documentView_textFormat="plain"
+            app:documentView_textFormat="formatted"
             app:documentView_textTypefacePath="font/futurabt_book.otf" />
     </android.support.v4.widget.NestedScrollView>
 

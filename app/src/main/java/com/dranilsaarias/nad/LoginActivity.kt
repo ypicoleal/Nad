@@ -2,11 +2,13 @@ package com.dranilsaarias.nad
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.CardView
+import android.text.Html
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
@@ -14,6 +16,7 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import com.bluejamesbond.text.DocumentView
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.content_login.*
 import java.util.*
@@ -58,6 +61,15 @@ class LoginActivity : AppCompatActivity() {
 
         alert.show()
         val btn = v.findViewById<CardView>(R.id.accept_tos)
+
+        val tosText = v.findViewById<DocumentView>(R.id.tos_text)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tosText.text = Html.fromHtml(getString(R.string.tos_content), Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            tosText.text = Html.fromHtml(getString(R.string.tos_content))
+        }
+
         btn.setOnClickListener {
             alert.dismiss()
             accept_tos_cb.isChecked = true
