@@ -190,6 +190,7 @@
     <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
     <string name="documento_de_identidad">Documento de identidad</string>
     <string name="n_mero_de_documento">Número de documento</string>
+    <string name="confirmarr_n_mero_de_documento">Confirmar número de documento</string>
     <string name="estado_civil">Estado civil</string>
     <string name="profesi_n">Profesión</string>
     <string name="entidad">Entidad</string>
@@ -225,7 +226,7 @@
     <string name="group_citas">CITAS</string>
     <string name="agendar_cita">Agendar cita</string>
     <string name="mis_citas">Mis Citas</string>
-    <string name="group_conocenos_mas">CONÓCENOS MAS</string>
+    <string name="group_conocenos_mas">CONÓCENOS MÁS</string>
     <string name="politicas_de_privacidad">Políticas de privacidad</string>
     <string name="ver_pagina_web">Ver página web</string>
     <string name="compartir">Compartir</string>
@@ -244,7 +245,7 @@
     <string name="email">Correo electrónico</string>
     <string name="comment">Agregar comentario</string>
     <string name="send">Enviar</string>
-    <string name="forgot_password_description">Por favor ingrese su correo electronico para recuperar contraseña.</string>
+    <string name="forgot_password_description">Por favor ingrese su correo electrónico para recuperar contraseña.</string>
 
     <string name="playstore_url">https://play.google.com/store/apps/details?id=Orion.Soft</string>
     <string name="appstore_url">https://itunes.apple.com/co/app/colm%C3%A9dica/id570286287?mt=8</string>
@@ -252,7 +253,11 @@
 
     <string name="dummie_img_url">https://lh3.ggpht.com/yC03Lwnb_msj7XgCe92AXzliDQxFgj-JKZgZfVYiT2qwerPvfGBxc7b4wOkGlpfkMxBd=h900</string>
     <string name="choose_entidad">Selecciones su entidad para el servicio</string>
-    <string name="date_description">"Día:\t\t\t%1$s\nHora:\t%2$s\nMédico:\tNilsa Arias"</string>
+    <string name="date_description">
+        " Día:      %1$s\n"
+        "Hora:    %2$s\n"
+        "Médico: Nilsa Arias"
+    </string>
     <string name="date_type_hint">Tipo de cita</string>
     <string name="atenci_n_consultorio">Atención Consultorio</string>
     <string name="atenci_n_online">Atención Online</string>
@@ -261,7 +266,7 @@
     <string name="nombre_completo_del_acudiente">Nombre completo del acudiente</string>
     <string name="cedula_del_acudiente">Cedula del acudiente</string>
     <string name="required_field">Este campo es requerido</string>
-    <string name="check_email">Hemos enviado el link de confirmacion a su correo electronico, esto haira que cambiarlo</string>
+    <string name="check_email"><b>NAD DoctorOnline</b> ha enviado un vínculo de verificación a su correo electrónico, favor validarlo para crear su cuenta.</string>
     <string name="doctor_name">Dra. Nilsa Arias Delgado</string>
     <string name="proffession">Dermatóloga</string>
     <string name="address">Calle 116 # 9–72 Consultorio 214,</string>
@@ -274,4 +279,5 @@
     <string name="pago_texto">Pago Consulta por PSE</string>
     <string name="precion">$ %1$s</string>
     <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
+    <string name="document_not_match">Los números de documento no coinciden</string>
 </resources>

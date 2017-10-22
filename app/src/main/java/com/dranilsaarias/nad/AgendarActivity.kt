@@ -188,8 +188,8 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                     adapter.setCalendarios(response.getJSONArray("object_list"))
                     swipe.isRefreshing = false
                 },
-                Response.ErrorListener { _ ->
-
+                Response.ErrorListener { error ->
+                    Log.i("error", error.toString())
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         swipe.isRefreshing = true
@@ -248,6 +248,8 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                 atencion_online.isChecked = false
                 next_btn_tv.text = getString(R.string.agendar)
                 filterType()
+            } else if (!atencion_online.isChecked) {
+                atencion_consultorio.isChecked = true
             }
         }
 
@@ -257,12 +259,15 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                 atencion_consultorio.isChecked = false
                 next_btn_tv.text = getString(R.string.next)
                 filterType()
+            } else if (!atencion_consultorio.isChecked) {
+                atencion_online.isChecked = true
             }
         }
     }
 
     private fun filterType() {
         val type = findViewById<ClickToSelectEditText<Type>>(R.id.motivo)
+        type.setText("")
         if (atencion_consultorio.isChecked) {
             type.setItems(inPersonTypes)
         } else {

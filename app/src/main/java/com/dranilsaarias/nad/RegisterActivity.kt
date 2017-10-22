@@ -1,17 +1,20 @@
 package com.dranilsaarias.nad
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.CardView
+import android.text.Html
 import android.util.Log
 import android.view.View
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import com.bluejamesbond.text.DocumentView
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.content_register.*
 import org.json.JSONObject
@@ -37,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val documentos = ArrayList<Documento>()
         documentos.add(Documento("Cédula de ciudadanía"))
-        documentos.add(Documento("Tarjeta de indetidad"))
+        documentos.add(Documento("Tarjeta de identidad"))
         documentos.add(Documento("Cédula de extranjería"))
         documentos.add(Documento("Registro Civil"))
         document.setItems(documentos)
@@ -90,6 +93,13 @@ class RegisterActivity : AppCompatActivity() {
 
         alert.show()
         val btn = v.findViewById<CardView>(R.id.accept_tos)
+        val tosText = v.findViewById<DocumentView>(R.id.tos_text)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            tosText.text = Html.fromHtml(getString(R.string.tos_content), Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            tosText.text = Html.fromHtml(getString(R.string.tos_content))
+        }
         btn.setOnClickListener {
             alert.dismiss()
             accept_tos_cbr.isChecked = true
@@ -215,6 +225,11 @@ class RegisterActivity : AppCompatActivity() {
             numero_documento_container.error = getString(R.string.required_field)
             clean = false
         }
+        if (!numero_documento_confirmar.text.toString().equals(numero_documento.text.toString())) {
+            confirmar_numero_documento_container.isErrorEnabled = true
+            confirmar_numero_documento_container.error = getString(R.string.document_not_match)
+            clean = false
+        }
         if (password.text.toString().equals("")) {
             password_container.isErrorEnabled = true
             password_container.error = getString(R.string.required_field)
@@ -284,6 +299,8 @@ class RegisterActivity : AppCompatActivity() {
         profesion_container.error = null
         numero_documento_container.error = null
         numero_documento_container.isErrorEnabled = false
+        confirmar_numero_documento_container.error = null
+        confirmar_numero_documento_container.isErrorEnabled = false
         password_container.error = null
         password_container.isErrorEnabled = false
         password_confirm_container.error = null

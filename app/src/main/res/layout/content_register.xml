@@ -44,8 +44,12 @@
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóú "
                 android:hint="@string/nombre_completo"
-                android:inputType="textAutoComplete|textCapWords" />
+                android:imeOptions="actionNext"
+                android:inputType="textAutoComplete|textCapWords"
+                android:maxLines="1"
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -62,8 +66,11 @@
                 android:id="@+id/apellidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóú "
                 android:hint="@string/apellidos"
-                android:inputType="textAutoComplete|textCapWords" />
+                android:imeOptions="actionNext"
+                android:inputType="textAutoComplete|textCapWords"
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <FrameLayout
@@ -152,6 +159,24 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/confirmar_numero_documento_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/numero_documento_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirmarr_n_mero_de_documento"
+                android:inputType="number" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/nombre_acudiente_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -236,8 +261,11 @@
                 android:id="@+id/profesion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZáéíóú "
                 android:hint="@string/profesi_n"
-                android:inputType="textAutoComplete|textCapSentences" />
+                android:imeOptions="actionNext"
+                android:inputType="textAutoComplete|textCapSentences"
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <FrameLayout
@@ -307,7 +335,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/n_mero_de_celular"
-                android:inputType="phone|number" />
+                android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
