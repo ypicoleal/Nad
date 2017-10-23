@@ -280,4 +280,5 @@
     <string name="precion">$ %1$s</string>
     <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
+    <string name="cita_descripcion">Hora: 9:00 a.m - 10:00\nMedico: Nilsa Arias\nTipo de cita: Atencion en consultorio\nMotivo: Caida del pelo</string>
 </resources>

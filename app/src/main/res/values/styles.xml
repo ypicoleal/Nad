@@ -57,7 +57,7 @@
     </style>
 
     <style name="navTheme" parent="ThemeOverlay.AppCompat.navTheme">
-        <item name="android:ellipsize">end</item>
+        <item name="android:ellipsize">marquee</item>
     </style>
 
 </resources>

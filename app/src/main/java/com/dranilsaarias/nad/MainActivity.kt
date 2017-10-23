@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
+        nav_view.setCheckedItem(R.id.nav_agendar)
+
         setHeader()
     }
 
@@ -74,6 +76,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_agendar -> {
                 replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
+            }
+
+            R.id.nav_mis_citas -> {
+                replaceFragment(CitasFragment(), getString(R.string.mis_citas))
             }
 
             R.id.nav_tos -> {
