@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -139,6 +140,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 })
                 .create()
                 .show()
+
+        v.findViewById<TextView>(R.id.text).setText(R.string.passwor_recover_text)
     }
 
 }
