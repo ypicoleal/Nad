@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#39226b</color>
     <color name="colorAccent">#783083</color>
     <color name="selectedItem">#28783083</color>
+
+    <color name="citaVigente">#009245</color>
+    <color name="citaCancelada">#c1272d</color>
+    <color name="citaExpirada">#1b1464</color>
 </resources>

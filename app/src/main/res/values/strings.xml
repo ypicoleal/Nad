@@ -290,4 +290,5 @@
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <string name="confirmar_nueva_contrase_a">Confirmar nueva contraseña</string>
     <string name="nueva_contrase_a">Nueva contraseña</string>
+    <string name="passwor_recover_text">Su contraseña a sido restaurada con exito</string>
 </resources>

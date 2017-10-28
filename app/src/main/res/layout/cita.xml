@@ -25,6 +25,7 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/date_state"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -32,20 +33,41 @@
             android:textColor="#009245" />
 
         <ImageView
+            android:id="@+id/state_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@null"
             android:src="@drawable/cita_vigente" />
     </LinearLayout>
 
-    <TextView
-        style="@style/TextAppearance.AppCompat.Body1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingStart="16dp"
-        android:text="@string/cita_descripcion" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/date_details"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/cita_descripcion" />
+
+        <ImageView
+            android:id="@+id/call_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/llamar_boton" />
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

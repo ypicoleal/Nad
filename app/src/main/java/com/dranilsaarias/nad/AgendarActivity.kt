@@ -301,7 +301,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         openProgramingAnimation()
     }
 
-    private class Type(override val label: String) : Listable {
+    class Type(override val label: String) : Listable {
 
         var id: Int = -1
         var price: Int = 0

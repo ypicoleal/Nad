@@ -1,5 +1,6 @@
 package com.dranilsaarias.nad;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.View;
 
@@ -14,6 +15,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         this.context = context;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getInfoWindow(Marker marker) {
         return context.getLayoutInflater().inflate(R.layout.custominfowindow, null);
