@@ -232,7 +232,7 @@
     <string name="compartir">Compartir</string>
     <string name="condiciones_de_conexion">Condiciones de Conexión</string>
     <string name="ubicacion_en_mapa">Ubicación en mapa</string>
-    <string name="comentarios">Comentarios y / o Sugerencias</string>
+    <string name="comentarios">Comentarios y/o Sugerencias</string>
     <string name="group_configuracion">CONFIGURACION</string>
     <string name="mi_cuenta">Mi cuenta</string>
     <string name="salir">Salir</string>
@@ -245,7 +245,7 @@
     <string name="email">Correo electrónico</string>
     <string name="comment">Agregar comentario</string>
     <string name="send">Enviar</string>
-    <string name="forgot_password_description">Por favor ingrese su correo electrónico para recuperar contraseña.</string>
+    <string name="forgot_password_description">Por favor ingrese los datos para recuperar su contraseña.</string>
 
     <string name="playstore_url">https://play.google.com/store/apps/details?id=Orion.Soft</string>
     <string name="appstore_url">https://itunes.apple.com/co/app/colm%C3%A9dica/id570286287?mt=8</string>
@@ -281,4 +281,13 @@
     <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
     <string name="cita_descripcion">Hora: 9:00 a.m - 10:00\nMedico: Nilsa Arias\nTipo de cita: Atencion en consultorio\nMotivo: Caida del pelo</string>
+
+
+    <string name="room_status">status</string>
+    <string name="error_retrieving_access_token">Error retrieving token</string>
+    <string name="log_out">Log Out</string>
+    <string name="permissions_needed">Camera and Microphone permissions needed. Please allow in App Settings for additional functionality.</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="confirmar_nueva_contrase_a">Confirmar nueva contraseña</string>
+    <string name="nueva_contrase_a">Nueva contraseña</string>
 </resources>

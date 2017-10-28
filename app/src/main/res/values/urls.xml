@@ -11,4 +11,5 @@
     <string name="agenda_form">/agenda/cita/form/</string>
     <string name="citas_list">/agenda/cita/list/</string>
     <string name="comentarios_form">/usuarios/comentario/</string>
+    <string name="forgot_password_form">/usuarios/forget/password/</string>
 </resources>

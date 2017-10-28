@@ -1,5 +1,6 @@
 package com.dranilsaarias.nad
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -81,6 +82,7 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("InflateParams")
     private fun vetTos() {
 
         val inflater = this.layoutInflater
@@ -315,8 +317,11 @@ class RegisterActivity : AppCompatActivity() {
         document_container.error = null
         civil_container.error = null
         civil_container.isErrorEnabled = false
+        email_container.error = null
+        email_container.isErrorEnabled = false
     }
 
+    @SuppressLint("InflateParams")
     private fun showSuccess() {
         val inflater = this.layoutInflater
         val v = inflater.inflate(R.layout.check_email, null)

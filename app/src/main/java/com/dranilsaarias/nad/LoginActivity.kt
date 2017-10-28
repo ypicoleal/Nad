@@ -1,5 +1,6 @@
 package com.dranilsaarias.nad
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -49,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun vetTos() {
 
         val inflater = this.layoutInflater
@@ -77,17 +79,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun forgotPassword() {
-        val inflater = this.layoutInflater
-        val v = inflater.inflate(R.layout.forgot_password, null)
-
-        AlertDialog
-                .Builder(this)
-                .setView(v)
-                .setPositiveButton("Recuperar contraseña", { dialog, _ ->
-                    dialog.dismiss()
-                })
-                .create()
-                .show()
+        startActivity(Intent(this, ForgotPasswordActivity::class.java))
     }
 
     private fun registrar() {
