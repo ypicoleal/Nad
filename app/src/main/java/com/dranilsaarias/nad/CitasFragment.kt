@@ -1,6 +1,7 @@
 package com.dranilsaarias.nad
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -19,8 +20,7 @@ import org.json.JSONObject
 /**
  * A simple [Fragment] subclass.
  */
-class CitasFragment : Fragment() {
-
+class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,6 +36,12 @@ class CitasFragment : Fragment() {
         return view
     }
 
+    override fun onClick(cita: JSONObject) {
+        val intent = Intent(context, DateDetailsActivity::class.java)
+        intent.putExtra("cita", cita.toString())
+        startActivity(intent)
+    }
+
     private fun setupCitas(citasRV: RecyclerView, swipe: SwipeRefreshLayout) {
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -43,6 +49,7 @@ class CitasFragment : Fragment() {
         citasRV.setHasFixedSize(true)
 
         val adapter = CitaListAdapter()
+        adapter.calendarClickListener = this
         citasRV.adapter = adapter
 
         val serviceUrl = getString(R.string.citas_list)

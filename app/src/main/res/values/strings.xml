@@ -294,4 +294,7 @@
     <string name="no_date">Sin fecha</string>
     <string name="date_state">Estado cita: %1$s</string>
     <string name="group_legal">LEGAL</string>
+    <string name="title_activity_date_details">Detalle de la cita</string>
+    <string name="reprogramar">Reprogramar</string>
+    <string name="cancelar_cita">Cancelar cita</string>
 </resources>

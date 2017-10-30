@@ -79,6 +79,10 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         }
 
         holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour)
+
+        holder.itemView.setOnClickListener {
+            calendarClickListener.onClick(cita)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CitasViewHolder {
