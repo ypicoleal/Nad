@@ -77,7 +77,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             AlertDialog
                     .Builder(this)
                     .setTitle("Agendar cita")
-                    .setMessage("Recuerde que solo podrá agendar citas en Atención Consultorio")
+                    .setMessage(getString(R.string.only_inplace))
                     .setPositiveButton("Aceptar", null)
                     .create()
                     .show()
@@ -131,7 +131,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         val dialog = AlertDialog
                 .Builder(this)
                 .setTitle("Agendar cita")
-                .setMessage("Su cita se reservó satisfactoriamente")
+                .setMessage("Su cita se agendó satisfactoriamente.")
                 .setPositiveButton("Aceptar", null)
                 .setOnDismissListener {
                     finish()

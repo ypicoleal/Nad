@@ -276,7 +276,7 @@
     <string name="motivo_por_el_cual_asiste">Motivo por el cual asiste</string>
     <string name="agendar">Agendar</string>
     <string name="costo_de_la_cita">Costo de la cita</string>
-    <string name="pago_texto">Pago Consulta por PSE</string>
+    <string name="pago_texto">Pago Consulta por PayU</string>
     <string name="precion">$ %1$s</string>
     <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
@@ -297,4 +297,5 @@
     <string name="title_activity_date_details">Detalle de la cita</string>
     <string name="reprogramar">Reprogramar</string>
     <string name="cancelar_cita">Cancelar cita</string>
+    <string name="only_inplace">Recuerde que solo podrá agendar citas en Atención Consultorio.</string>
 </resources>
