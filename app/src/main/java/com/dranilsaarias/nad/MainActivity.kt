@@ -25,6 +25,8 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private var direccion: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -121,7 +123,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_map -> {
-                replaceFragment(MapsFragment(), getString(R.string.ubicacion_en_mapa))
+                val fragment = MapsFragment.newInstance(direccion)
+                replaceFragment(fragment, getString(R.string.ubicacion_en_mapa))
             }
 
             R.id.nav_salir -> {
@@ -177,6 +180,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Log.i("user", response.toString())
                     user_full_name.text = (response.getString("nombre") + " " + response.getString("apellidos"))
                     user_email.text = response.getString("email")
+                    direccion = response.getString("direccion")
                 },
                 Response.ErrorListener { error ->
                     Log.e("error", error.message)

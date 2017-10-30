@@ -6,7 +6,7 @@
     <string name="is_login">/usuarios/is/login/</string>
     <string name="publicidad">/publicidad/movil/</string>
     <string name="logout">/usuarios/logout/</string>
-    <string name="calendarios">/agenda/calendario/list/?inicio__year=%1$d&amp;inicio__month=%2$d&amp;inicio__day=%3$d&amp;citamedica=True</string>
+    <string name="calendarios">/agenda/calendario/list/?inicio__year=%1$d&amp;inicio__month=%2$d&amp;inicio__day=%3$d&amp;citamedica=True&amp;almuerzo=False</string>
     <string name="procedimientos">/agenda/procedimiento/medico/list/</string>
     <string name="agenda_form">/agenda/cita/form/</string>
     <string name="citas_list">/agenda/cita/list/</string>

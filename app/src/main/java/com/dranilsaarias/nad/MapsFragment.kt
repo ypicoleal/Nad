@@ -20,6 +20,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsFragment : Fragment(), OnMapReadyCallback, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mMap: GoogleMap
+    private var mContent: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            mContent = arguments.getString(ARG_CONTENT)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -62,21 +70,13 @@ class MapsFragment : Fragment(), OnMapReadyCallback, BottomNavigationView.OnNavi
         return false
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(4.6949137, -74.0363918)
-        val adapter = CustomInfoWindowAdapter(this.activity)
+        val adapter = CustomInfoWindowAdapter(this.activity, mContent!!)
         mMap.setInfoWindowAdapter(adapter)
         mMap.addMarker(MarkerOptions()
                 .position(sydney)
@@ -84,5 +84,26 @@ class MapsFragment : Fragment(), OnMapReadyCallback, BottomNavigationView.OnNavi
                 .showInfoWindow()
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17f))
 
+    }
+
+    companion object {
+        private val ARG_CONTENT = "content"
+
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+
+         * @param content Parameter 1.
+         * *
+         * *
+         * @return A new instance of fragment MapsFragment
+         */
+        fun newInstance(content: String): MapsFragment {
+            val fragment = MapsFragment()
+            val args = Bundle()
+            args.putString(ARG_CONTENT, content)
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
