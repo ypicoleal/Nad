@@ -31,7 +31,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             holder!!.callBtn.visibility = View.VISIBLE
         }
 
-        holder.dateState.text = "Estado cita: " + cita.getString("estado_nombre")
+        holder.dateState.text = holder.dateState.context.getString(R.string.date_state, cita.getString("estado_nombre"))
         if (cita.getInt("estado") == 1) {
             holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaVigente))
             holder.stateIndicator.setImageResource(R.drawable.cita_vigente)
@@ -45,7 +45,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
 
         val d = cita.getString("fecha")
         if (d.equals(null) || d.equals("null")) {
-            holder.date.text = "Sin fecha"
+            holder.date.text = holder.date.context.getString(R.string.no_date)
         } else {
             val parser = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val monthFormatter = SimpleDateFormat("dd MMMM y", Locale.getDefault())
@@ -58,6 +58,27 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         } else {
             holder.date.visibility = View.VISIBLE
         }
+
+        val motivo = cita.getString("procedimiento__nombre")
+        var modalidad = holder.dateDetails.context.getText(R.string.atenci_n_online)
+        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
+            modalidad = holder.dateDetails.context.getText(R.string.atenci_n_consultorio)
+        }
+
+        val parser = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val hourFomatter = SimpleDateFormat("h:mm a", Locale.getDefault())
+        val s = cita.getString("inicio")
+        val e = cita.getString("fin")
+        val hour: String
+        if (s.equals(JSONObject.NULL) || s.equals(null) || s.equals("null")) {
+            hour = "Sin hora"
+        } else {
+            val start = parser.parse(s)
+            val end = parser.parse(e)
+            hour = hourFomatter.format(start) + " - " + hourFomatter.format(end)
+        }
+
+        holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CitasViewHolder {
@@ -79,6 +100,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         var callBtn: ImageView = itemView!!.findViewById(R.id.call_btn)
         var dateState: TextView = itemView!!.findViewById(R.id.date_state)
         var stateIndicator: ImageView = itemView!!.findViewById(R.id.state_indicator)
+        var dateDetails: TextView = itemView!!.findViewById(R.id.date_details)
     }
 
     interface onCitaClickListener {

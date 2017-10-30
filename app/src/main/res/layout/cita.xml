@@ -15,7 +15,6 @@
         android:paddingRight="16dp"
         android:paddingStart="16dp"
         android:paddingTop="8dp"
-        android:text="4 Octubre 2017"
         android:textColor="#fff" />
 
     <LinearLayout
@@ -29,7 +28,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Estado cita: Vigente"
             android:textColor="#009245" />
 
         <ImageView
@@ -64,6 +62,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginRight="16dp"
             android:clickable="true"
+            android:contentDescription="@null"
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             android:src="@drawable/llamar_boton" />

@@ -29,6 +29,10 @@ class CitasFragment : Fragment() {
 
         setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe))
 
+        view.findViewById<SwipeRefreshLayout>(R.id.swipe).setOnRefreshListener {
+            setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe))
+        }
+
         return view
     }
 
