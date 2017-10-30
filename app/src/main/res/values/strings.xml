@@ -228,12 +228,12 @@
     <string name="mis_citas">Mis Citas</string>
     <string name="group_conocenos_mas">CONÓCENOS MÁS</string>
     <string name="politicas_de_privacidad">Políticas de privacidad</string>
-    <string name="ver_pagina_web">Ver página web</string>
+    <string name="ver_pagina_web">Ver sitio web</string>
     <string name="compartir">Compartir</string>
     <string name="condiciones_de_conexion">Condiciones de Conexión</string>
     <string name="ubicacion_en_mapa">Ubicación en mapa</string>
     <string name="comentarios">Comentarios y/o Sugerencias</string>
-    <string name="group_configuracion">CONFIGURACION</string>
+    <string name="group_configuracion">CONFIGURACIÓN</string>
     <string name="mi_cuenta">Mi cuenta</string>
     <string name="salir">Salir</string>
     <string name="title_activity_maps">Map</string>
@@ -293,4 +293,5 @@
     <string name="passwor_recover_text">Su contraseña a sido restaurada con exito</string>
     <string name="no_date">Sin fecha</string>
     <string name="date_state">Estado cita: %1$s</string>
+    <string name="group_legal">LEGAL</string>
 </resources>

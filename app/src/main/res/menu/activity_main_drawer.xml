@@ -18,7 +18,7 @@
                     android:title="@string/mis_citas" />
             </menu>
         </item>
-        <item android:title="@string/group_conocenos_mas">
+        <item android:title="@string/group_legal">
             <menu>
                 <item
                     android:id="@+id/nav_tos"
@@ -30,6 +30,15 @@
                     android:checkable="true"
                     android:icon="@drawable/menu_politicas"
                     android:title="@string/politicas_de_privacidad" />
+                <item
+                    android:id="@+id/nav_conexion"
+                    android:checkable="true"
+                    android:icon="@drawable/menu_conexion"
+                    android:title="@string/condiciones_de_conexion" />
+            </menu>
+        </item>
+        <item android:title="@string/group_conocenos_mas">
+            <menu>
                 <item
                     android:id="@+id/nav_web"
                     android:checkable="false"
@@ -45,11 +54,6 @@
                     android:checkable="true"
                     android:icon="@drawable/menu_comentarios"
                     android:title="@string/comentarios" />
-                <item
-                    android:id="@+id/nav_conexion"
-                    android:checkable="true"
-                    android:icon="@drawable/menu_conexion"
-                    android:title="@string/condiciones_de_conexion" />
                 <item
                     android:id="@+id/nav_map"
                     android:checkable="true"
