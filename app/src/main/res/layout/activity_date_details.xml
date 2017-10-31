@@ -32,9 +32,11 @@
         <include layout="@layout/cita" />
 
         <LinearLayout
+            android:id="@+id/buttons_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
 
             <android.support.v7.widget.CardView
                 android:layout_width="0dp"
@@ -61,6 +63,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cancel_btn"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
@@ -85,4 +88,18 @@
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a1ffffff"
+        android:visibility="gone">
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

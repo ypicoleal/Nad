@@ -22,6 +22,8 @@ import org.json.JSONObject
  */
 class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
 
+    val adapter = CitaListAdapter()
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -33,13 +35,22 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
             setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe))
         }
 
+        adapter.calendarClickListener = this
+
         return view
     }
 
     override fun onClick(cita: JSONObject) {
         val intent = Intent(context, DateDetailsActivity::class.java)
         intent.putExtra("cita", cita.toString())
-        startActivity(intent)
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1) {
+            setupCitas(view!!.findViewById(R.id.citas_rv), view!!.findViewById(R.id.swipe))
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun setupCitas(citasRV: RecyclerView, swipe: SwipeRefreshLayout) {
@@ -48,8 +59,6 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
         citasRV.layoutManager = layoutManager
         citasRV.setHasFixedSize(true)
 
-        val adapter = CitaListAdapter()
-        adapter.calendarClickListener = this
         citasRV.adapter = adapter
 
         val serviceUrl = getString(R.string.citas_list)

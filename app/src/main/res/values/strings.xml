@@ -298,4 +298,7 @@
     <string name="reprogramar">Reprogramar</string>
     <string name="cancelar_cita">Cancelar cita</string>
     <string name="only_inplace">Recuerde que solo podrá agendar citas en Atención Consultorio.</string>
+    <string name="mejor_a">Mejoría</string>
+    <string name="sin_tiempo">Sin tiempo</string>
+    <string name="otro_motivo">Otro motivo</string>
 </resources>

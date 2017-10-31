@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -178,8 +179,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
                     Log.i("user", response.toString())
-                    //findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
-                    //findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
+                    findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
+                    findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
                     direccion = response.getString("direccion")
                 },
                 Response.ErrorListener { error ->

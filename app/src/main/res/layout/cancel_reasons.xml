@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="16dp">
+
+    <CheckBox
+        android:id="@+id/mejoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:fontFamily="@font/general_fontstyle"
+        android:text="@string/mejor_a" />
+
+    <CheckBox
+        android:id="@+id/sin_tiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/general_fontstyle"
+        android:text="@string/sin_tiempo" />
+
+    <CheckBox
+        android:id="@+id/otro_motivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/general_fontstyle"
+        android:text="@string/otro_motivo" />
+
+</LinearLayout>
