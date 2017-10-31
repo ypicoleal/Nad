@@ -1,10 +1,13 @@
 package com.dranilsaarias.nad
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -66,8 +69,10 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             if (selectedType != null) {
                 if (atencion_consultorio.isChecked) {
                     agendarCita()
-                } else {
+                } else if (price.visibility != View.VISIBLE) {
                     pagarCita()
+                } else {
+                    agendarCita()
                 }
             }
         }
@@ -101,14 +106,20 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         val url = getString(R.string.host, serviceUrl)
 
         val request = object : StringRequest(Request.Method.POST, url,
-                Response.Listener<String> { _ ->
+                Response.Listener<String> { response ->
+                    Log.i("response", response)
+                    val cita = JSONObject(response)
                     loading.visibility = View.GONE
-                    finalizarAgendar()
+                    if (cita.getBoolean("virtual")) {
+                        goToPayU(cita)
+                    } else {
+                        finalizarAgendar()
+                    }
                 },
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
-                    if (error.networkResponse != null && error.networkResponse.statusCode == 404) {
-                        Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
+                    if (error.networkResponse != null && error.networkResponse.statusCode == 400) {
+                        Snackbar.make(loading, "No se pueden asignar citas para d\u00edas anteriores a la fecha actual", Snackbar.LENGTH_LONG).show()
                     } else {
                         Log.e("error", String(error.networkResponse.data))
                         Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
@@ -125,6 +136,23 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         }
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
+    }
+
+    private fun goToPayU(cita: JSONObject) {
+        val tm = getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val countryCode = tm.networkCountryIso
+        Log.i("locale", countryCode)
+        val currency: String
+        if (countryCode.equals("co")) {
+            currency = getString(R.string.param_cop)
+        } else {
+            currency = getString(R.string.param_usd)
+        }
+        val serviceUrl = getString(R.string.pay_url, cita.getInt("id"), currency)
+        val url = getString(R.string.host, serviceUrl)
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
+        finish()
     }
 
     private fun finalizarAgendar() {

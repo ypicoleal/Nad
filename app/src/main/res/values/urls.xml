@@ -13,4 +13,7 @@
     <string name="comentarios_form">/usuarios/comentario/</string>
     <string name="forgot_password_form">/usuarios/forget/password/</string>
     <string name="cancelar_cita_form">/agenda/cancelar/cita/form/%1$d/</string>
+    <string name="pay_url">/agenda/pagar/%1$d/?currency=%2$s</string>
+    <string name="param_cop">COP</string>
+    <string name="param_usd">USD</string>
 </resources>
