@@ -41,8 +41,10 @@ class DateDetailsActivity : AppCompatActivity() {
             val cita = JSONObject(intent.getStringExtra("cita"))
             if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
                 call_btn.visibility = View.GONE
+                cancel_btn.visibility = View.VISIBLE
             } else {
                 call_btn.visibility = View.VISIBLE
+                cancel_btn.visibility = View.GONE
             }
 
             date_state.text = getString(R.string.date_state, cita.getString("estado_nombre"))
