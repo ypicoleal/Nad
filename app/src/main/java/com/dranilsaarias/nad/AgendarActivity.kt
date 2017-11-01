@@ -47,6 +47,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                     price_label.visibility = View.GONE
                     date_type.visibility = View.VISIBLE
                     motivo_container.visibility = View.VISIBLE
+                    tos_payu_btn.visibility = View.GONE
                 }
                 hours_container.visibility == View.GONE -> {
                     closeProgramingAnimation()
@@ -76,7 +77,10 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                 }
             }
         }
-
+        tos_payu_btn.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://legal.payulatam.com/ES/terminos_y_condiciones_compradores.html"))
+            startActivity(browserIntent)
+        }
         val entidad = intent.getIntExtra("entidad", -1)
         if (entidad > 1) {
             AlertDialog
@@ -97,6 +101,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         price_label.visibility = View.VISIBLE
         date_type.visibility = View.GONE
         motivo_container.visibility = View.GONE
+        tos_payu_btn.visibility = View.VISIBLE
     }
 
     private fun agendarCita() {
@@ -178,6 +183,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                 price_label.visibility = View.GONE
                 date_type.visibility = View.VISIBLE
                 motivo_container.visibility = View.VISIBLE
+                tos_payu_btn.visibility = View.GONE
             }
             hours_container.visibility == View.GONE -> {
                 closeProgramingAnimation()

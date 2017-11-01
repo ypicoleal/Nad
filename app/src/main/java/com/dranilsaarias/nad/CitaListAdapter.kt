@@ -78,7 +78,12 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             hour = hourFomatter.format(start) + " - " + hourFomatter.format(end)
         }
 
-        holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour)
+        var medico = "Sin asignar"
+        if (!cita.getString("medico").equals(JSONObject.NULL) && !cita.getString("medico").equals("null") && !cita.getString("medico").equals(null)) {
+            medico = cita!!.getString("medico")
+        }
+
+        holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
 
         holder.itemView.setOnClickListener {
             calendarClickListener.onClick(cita)

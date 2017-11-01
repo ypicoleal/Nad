@@ -5,6 +5,7 @@
     <string name="username">Documento de identidad</string>
     <string name="password">Contraseña</string>
     <string name="tos"><u>Acepto los Términos y condiciones</u></string>
+    <string name="tos_payu"><u>Términos y condiciones de pago</u></string>
     <string name="ipsum">
         "Material is the metaphor.\n\n"
 
@@ -280,7 +281,7 @@
     <string name="precion">$ %1$s</string>
     <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
-    <string name="cita_descripcion">Hora: %3$s\nMedico: Nilsa Arias\nTipo de cita: %2$s\nMotivo: %1$s</string>
+    <string name="cita_descripcion">Hora: %3$s\nMedico: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
 
 
     <string name="room_status">status</string>
