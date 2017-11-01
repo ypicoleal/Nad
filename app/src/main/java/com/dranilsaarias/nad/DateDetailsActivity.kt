@@ -2,6 +2,7 @@ package com.dranilsaarias.nad
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -96,6 +97,10 @@ class DateDetailsActivity : AppCompatActivity() {
 
             cancel_btn.setOnClickListener {
                 cancelar(cita.getInt("id"))
+            }
+
+            reschedule_date_btn.setOnClickListener {
+                startActivity(Intent(this@DateDetailsActivity, RescheduleDateActivity::class.java))
             }
         }
     }

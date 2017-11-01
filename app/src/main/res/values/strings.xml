@@ -301,4 +301,5 @@
     <string name="mejor_a">Mejoría</string>
     <string name="sin_tiempo">Sin tiempo</string>
     <string name="otro_motivo">Otro motivo</string>
+    <string name="title_activity_reschedule_date">Reprogramar cita</string>
 </resources>
