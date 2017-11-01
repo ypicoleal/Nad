@@ -314,7 +314,11 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         val dateFormatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val hourFomatter = SimpleDateFormat("h:mm a", Locale.getDefault())
         val name = hourFomatter.format(start) + " - " + hourFomatter.format(end)
-        date_details.text = getString(R.string.date_description, dateFormatter.format(start), name)
+        var medico = "Sin asignar"
+        if (!selectedCalendar!!.getString("nombre_medico").equals("")) {
+            medico = selectedCalendar!!.getString("nombre_medico")
+        }
+        date_details.text = getString(R.string.date_description, dateFormatter.format(start), name, medico)
     }
 
     private fun closeProgramingAnimation() {

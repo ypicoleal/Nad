@@ -256,7 +256,7 @@
     <string name="date_description">
         " Día:      %1$s\n"
         "Hora:    %2$s\n"
-        "Médico: Nilsa Arias"
+        "Médico: %3$s"
     </string>
     <string name="date_type_hint">Tipo de cita</string>
     <string name="atenci_n_consultorio">Atención Consultorio</string>
