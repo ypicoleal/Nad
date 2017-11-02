@@ -246,7 +246,7 @@
     <string name="email">Correo electrónico</string>
     <string name="comment">Agregar comentario</string>
     <string name="send">Enviar</string>
-    <string name="forgot_password_description">Por favor ingrese los datos para recuperar su contraseña.</string>
+    <string name="forgot_password_description">Su cuenta no esta activada, verifique en la bandeja de entrada de su correo.</string>
 
     <string name="playstore_url">https://play.google.com/store/apps/details?id=Orion.Soft</string>
     <string name="appstore_url">https://itunes.apple.com/co/app/colm%C3%A9dica/id570286287?mt=8</string>

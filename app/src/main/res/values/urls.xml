@@ -16,4 +16,5 @@
     <string name="pay_url">/agenda/pagar/%1$d/?currency=%2$s</string>
     <string name="param_cop">COP</string>
     <string name="param_usd">USD</string>
+    <string name="nueva_confirmacion">/usuarios/nueva/confirmacion/</string>
 </resources>

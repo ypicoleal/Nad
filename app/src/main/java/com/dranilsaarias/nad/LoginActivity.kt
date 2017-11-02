@@ -3,6 +3,7 @@ package com.dranilsaarias.nad
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -78,6 +79,24 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun resenVerification() {
+        val inflater = this.layoutInflater
+        val v = inflater.inflate(R.layout.forgot_password, null)
+
+        AlertDialog
+                .Builder(this)
+                .setView(v)
+                .setPositiveButton("Reenviar confirmacion", { dialog, _ ->
+                    val serviceUrl = getString(R.string.nueva_confirmacion)
+                    val url = getString(R.string.host, serviceUrl)
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(browserIntent)
+                    dialog.dismiss()
+                })
+                .create()
+                .show()
+    }
+
     private fun forgotPassword() {
         startActivity(Intent(this, ForgotPasswordActivity::class.java))
     }
@@ -108,9 +127,12 @@ class LoginActivity : AppCompatActivity() {
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
                     form.visibility = View.VISIBLE
-                    if (error.networkResponse != null && error.networkResponse.statusCode == 404) {
+                    if (error.networkResponse != null && error.networkResponse.statusCode == 400) {
                         Log.e("error", String(error.networkResponse.data))
                         Snackbar.make(loading, "Usuario y/o contraseña incorrecta", Snackbar.LENGTH_LONG).show()
+                    } else if (error.networkResponse != null && error.networkResponse.statusCode == 403) {
+                        Log.e("error", String(error.networkResponse.data))
+                        resenVerification()
                     } else {
                         Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
                     }
