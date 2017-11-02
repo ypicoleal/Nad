@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -27,6 +26,9 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var direccion: String = ""
+    private var tos: String = ""
+    private var privacy: String = ""
+    private var conection: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,12 +88,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_tos -> {
-                val fragment = TosFragment.newInstance(getString(R.string.tos_content))
+                val fragment = TosFragment.newInstance(tos)
                 replaceFragment(fragment, getString(R.string.tos_title))
             }
 
             R.id.nav_privacidad -> {
-                val fragment = TosFragment.newInstance(getString(R.string.privacy))
+                val fragment = TosFragment.newInstance(privacy)
                 replaceFragment(fragment, getString(R.string.politicas_de_privacidad))
             }
 
@@ -119,7 +121,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_conexion -> {
-                val fragment = TosFragment.newInstance(getString(R.string.connections))
+                val fragment = TosFragment.newInstance(conection)
                 replaceFragment(fragment, getString(R.string.condiciones_de_conexion))
             }
 
@@ -179,9 +181,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
                     Log.i("user", response.toString())
-                    findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
-                    findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
+                    //findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
+                    //findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
                     direccion = response.getString("direccion")
+                    tos = response.getString("terminos")
+                    conection = response.getString("condiciones")
+                    privacy = response.getString("politica")
                 },
                 Response.ErrorListener { error ->
                     Log.e("error", error.message)
