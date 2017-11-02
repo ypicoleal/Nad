@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var tos: String = ""
     private var privacy: String = ""
     private var conection: String = ""
+    private var isPacient: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -181,16 +183,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
                     Log.i("user", response.toString())
-                    //findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
-                    //findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
+                    findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
+                    findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
                     direccion = response.getString("direccion")
                     tos = response.getString("terminos")
                     conection = response.getString("condiciones")
                     privacy = response.getString("politica")
+                    isPacient = response.getInt("tipo") == 1
+                    setupMenu()
                 },
                 Response.ErrorListener { error ->
                     Log.e("error", error.message)
                 })
+        request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
+    }
+
+    private fun setupMenu() {
+        Log.i("paciente", isPacient.toString())
+        if (!isPacient) {
+            nav_view.menu.findItem(R.id.nav_cuenta).isVisible = false
+            nav_view.menu.findItem(R.id.nav_agendar).setTitle("Calendario")
+        }
     }
 }
