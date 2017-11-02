@@ -36,7 +36,7 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/calendar_prev"
+                android:id="@+id/prev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -55,7 +55,7 @@
                 android:textColor="@android:color/white" />
 
             <ImageView
-                android:id="@+id/calendar_next"
+                android:id="@+id/next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -65,8 +65,8 @@
                 android:src="@drawable/calendario_flecha_der" />
         </LinearLayout>
 
-        <com.github.sundeepk.compactcalendarview.CompactCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/compactcalendar_view"
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

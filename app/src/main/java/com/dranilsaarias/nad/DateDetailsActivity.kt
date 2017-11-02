@@ -91,7 +91,12 @@ class DateDetailsActivity : AppCompatActivity() {
                 hour = hourFomatter.format(start) + " - " + hourFomatter.format(end)
             }
 
-            date_details.text = getString(R.string.cita_descripcion, motivo, modalidad, hour)
+            var medico = "Sin asignar"
+            if (!cita.getString("medico").equals(JSONObject.NULL) && !cita.getString("medico").equals("null") && !cita.getString("medico").equals(null)) {
+                medico = cita.getString("medico")
+            }
+
+            date_details.text = getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
 
             border.visibility = View.GONE
 
@@ -100,9 +105,15 @@ class DateDetailsActivity : AppCompatActivity() {
             }
 
             reschedule_date_btn.setOnClickListener {
-                startActivity(Intent(this@DateDetailsActivity, RescheduleDateActivity::class.java))
+                reprogramar()
             }
         }
+    }
+
+    private fun reprogramar() {
+        val intent = Intent(this, RescheduleDateActivity::class.java)
+        intent.putExtra("cita", this.intent.getStringExtra("cita"))
+        startActivity(intent)
     }
 
     private fun cancelar(id: Int) {
