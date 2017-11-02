@@ -37,6 +37,13 @@ class DateDetailsActivity : AppCompatActivity() {
         setup()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            finish()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun setup() {
         if (intent.hasExtra("cita")) {
             val cita = JSONObject(intent.getStringExtra("cita"))
@@ -113,7 +120,7 @@ class DateDetailsActivity : AppCompatActivity() {
     private fun reprogramar() {
         val intent = Intent(this, RescheduleDateActivity::class.java)
         intent.putExtra("cita", this.intent.getStringExtra("cita"))
-        startActivity(intent)
+        startActivityForResult(intent, 1)
     }
 
     private fun cancelar(id: Int) {

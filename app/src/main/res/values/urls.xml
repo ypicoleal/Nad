@@ -17,4 +17,5 @@
     <string name="param_cop">COP</string>
     <string name="param_usd">USD</string>
     <string name="nueva_confirmacion">/usuarios/nueva/confirmacion/</string>
+    <string name="reprogramar_cita">/agenda/reprogramar/cita/form/</string>
 </resources>
