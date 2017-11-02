@@ -46,6 +46,7 @@ class DateDetailsActivity : AppCompatActivity() {
 
     private fun setup() {
         if (intent.hasExtra("cita")) {
+            Log.i("cita", intent.getStringExtra("cita"))
             val cita = JSONObject(intent.getStringExtra("cita"))
             if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
                 call_btn.visibility = View.GONE
@@ -53,6 +54,10 @@ class DateDetailsActivity : AppCompatActivity() {
             } else {
                 call_btn.visibility = View.VISIBLE
                 cancel_btn.visibility = View.GONE
+            }
+
+            if (cita.getInt("reprogramar") >= 3) {
+                reschedule_date_btn.visibility = View.GONE
             }
 
             date_state.text = getString(R.string.date_state, cita.getString("estado_nombre"))
