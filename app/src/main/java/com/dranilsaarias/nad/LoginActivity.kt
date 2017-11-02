@@ -98,7 +98,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun forgotPassword() {
-        startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        val serviceUrl = getString(R.string.password_reset)
+        val url = getString(R.string.host, serviceUrl)
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
     }
 
     private fun registrar() {
