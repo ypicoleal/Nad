@@ -55,8 +55,6 @@ class AgendarFragment : Fragment() {
         val indicator = view.findViewById<TabLayout>(R.id.img_slider_indicator)
         indicator.setupWithViewPager(imageSlider)
 
-        //todo validar no escojer un dia menor al dia de mañana
-
         setupCalendarView(
                 view.findViewById(R.id.compactcalendar_view),
                 view.findViewById(R.id.calendar_indicator),

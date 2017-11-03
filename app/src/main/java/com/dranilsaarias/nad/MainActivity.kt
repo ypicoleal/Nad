@@ -116,6 +116,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_comentarios -> {
+                //todo cambiar esto a nuevo servicio y aplicar en las vistas de login y registro
+                //todo realizar videollamada
+                //todo agregar notificaciones
+                //todo recibir llamada
                 val fragment = CommentsFragment.newInstance(user_email.text.toString())
                 replaceFragment(fragment, getString(R.string.comentarios))
             }
