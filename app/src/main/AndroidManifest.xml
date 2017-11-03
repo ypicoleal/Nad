@@ -74,6 +74,10 @@
             android:name=".RescheduleDateActivity"
             android:label="@string/title_activity_reschedule_date"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DoctorCalendarActivity"
+            android:label="@string/title_activity_doctor_calendar"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -282,8 +282,7 @@
     <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
     <string name="cita_descripcion">Hora: %3$s\nMedico: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
-
-
+    <string name="cita_descripcion_medico">Hora: %3$s\nPaciente: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
     <string name="room_status">status</string>
     <string name="error_retrieving_access_token">Error retrieving token</string>
     <string name="log_out">Log Out</string>
@@ -304,4 +303,9 @@
     <string name="otro_motivo">Otro motivo</string>
     <string name="title_activity_reschedule_date">Reprogramar cita</string>
     <string name="motivo_de_reprogramaci_n">Motivo de reprogramación</string>
+    <string name="title_activity_doctor_calendar">Calendario</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
 </resources>

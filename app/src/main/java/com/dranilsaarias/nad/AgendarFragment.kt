@@ -34,6 +34,14 @@ class AgendarFragment : Fragment() {
     val PERIOD_MS: Long = 3000 // time in milliseconds between successive task executions.
     private var validSnackbar: Snackbar? = null
 
+    private var isPaciente: Boolean = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            isPaciente = arguments.getBoolean(ARG_PACIENTE, true)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -132,26 +140,45 @@ class AgendarFragment : Fragment() {
     }
 
     private fun agendar(date: Date) {
-        val today = Calendar.getInstance()
-        if (date > today.time) {
-            AlertDialog.Builder(activity)
-                    .setTitle(getString(R.string.choose_entidad))
-                    .setItems(R.array.entidad_array, { _, index ->
-                        val intent = Intent(context, AgendarActivity::class.java)
-                        intent.putExtra("date", date)
-                        intent.putExtra("entidad", index + 1)
-                        startActivity(intent)
-                    })
-                    .setNegativeButton("Cancelar", { _, _ ->
+        if (isPaciente) {
+            val today = Calendar.getInstance()
+            if (date > today.time) {
+                AlertDialog.Builder(activity)
+                        .setTitle(getString(R.string.choose_entidad))
+                        .setItems(R.array.entidad_array, { _, index ->
+                            val intent = Intent(context, AgendarActivity::class.java)
+                            intent.putExtra("date", date)
+                            intent.putExtra("entidad", index + 1)
+                            startActivity(intent)
+                        })
+                        .setNegativeButton("Cancelar", { _, _ ->
 
-                    })
-                    .create()
-                    .show()
-        } else {
-            if (validSnackbar == null) {
-                validSnackbar = Snackbar.make(view!!, "La cita solo se puede reservar para dias posteriores a la fecha de hoy", Snackbar.LENGTH_LONG)
+                        })
+                        .create()
+                        .show()
+            } else {
+                if (validSnackbar == null) {
+                    validSnackbar = Snackbar.make(view!!, "La cita solo se puede reservar para dias posteriores a la fecha de hoy", Snackbar.LENGTH_LONG)
+                }
+                validSnackbar!!.show()
             }
-            validSnackbar!!.show()
+        } else {
+            val intent = Intent(context, DoctorCalendarActivity::class.java)
+            intent.putExtra("date", date)
+            startActivity(intent)
+        }
+    }
+
+    companion object {
+        private val ARG_PACIENTE = "paciente"
+
+
+        fun newInstance(isPaciente: Boolean): AgendarFragment {
+            val fragment = AgendarFragment()
+            val args = Bundle()
+            args.putBoolean(ARG_PACIENTE, isPaciente)
+            fragment.arguments = args
+            return fragment
         }
     }
 

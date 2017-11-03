@@ -60,4 +60,11 @@
         <item name="android:ellipsize">marquee</item>
     </style>
 
+    <style name="Base.Widget.Design.TabLayout" parent="android:Widget">
+        <item name="tabBackground">@drawable/tab_background</item>
+        <item name="tabIndicatorColor">#00ff00ff</item>
+        <item name="tabIndicatorHeight">0dp</item>
+
+    </style>
+
 </resources>

@@ -15,6 +15,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import org.json.JSONObject
+import java.util.*
 
 
 /**
@@ -23,6 +24,17 @@ import org.json.JSONObject
 class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
 
     val adapter = CitaListAdapter()
+
+    private var date: Date? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (arguments != null) {
+            date = arguments.getSerializable(ARG_DATE) as Date
+            adapter.shouldShowDate = false
+            adapter.isPacient = false
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -61,8 +73,15 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
 
         citasRV.adapter = adapter
 
-        val serviceUrl = getString(R.string.citas_list)
+        var serviceUrl = getString(R.string.citas_list)
+        if (date != null) {
+            val c = Calendar.getInstance()
+            c.time = date
+            serviceUrl = getString(R.string.citas_list_date, c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH))
+        }
         val url = getString(R.string.host, serviceUrl)
+
+        Log.i("url", url)
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
@@ -79,5 +98,9 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, context)
         swipe.isRefreshing = true
+    }
+
+    companion object {
+        val ARG_DATE = "date"
     }
 }// Required empty public constructor

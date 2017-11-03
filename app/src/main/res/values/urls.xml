@@ -10,6 +10,7 @@
     <string name="procedimientos">/agenda/procedimiento/medico/list/</string>
     <string name="agenda_form">/agenda/cita/form/</string>
     <string name="citas_list">/agenda/cita/list/</string>
+    <string name="citas_list_date">/agenda/cita/list/?calendario__inicio__year=%1$d&amp;calendario__inicio__month=%2$d&amp;calendario__inicio__day=%3$d</string>
     <string name="comentarios_form">/usuarios/comentario/</string>
     <string name="forgot_password_form">/usuarios/forget/password/</string>
     <string name="password_reset">/usuarios/password_reset/</string>

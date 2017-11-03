@@ -45,10 +45,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        setHeader()
+
         replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
         nav_view.setCheckedItem(R.id.nav_agendar)
 
-        setHeader()
+
     }
 
     override fun onBackPressed() {
@@ -82,7 +84,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_agendar -> {
-                replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
+                val fragment = AgendarFragment.newInstance(isPacient)
+                replaceFragment(fragment, getString(R.string.agendar_cita))
             }
 
             R.id.nav_mis_citas -> {
@@ -185,10 +188,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Log.i("user", response.toString())
                     findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
                     findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
-                    direccion = response.getString("direccion")
-                    tos = response.getString("terminos")
-                    conection = response.getString("condiciones")
-                    privacy = response.getString("politica")
+                    //direccion = response.getString("direccion")
+                    //tos = response.getString("terminos")
+                    //conection = response.getString("condiciones")
+                    //privacy = response.getString("politica")
                     isPacient = response.getInt("tipo") == 1
                     setupMenu()
                 },

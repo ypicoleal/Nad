@@ -16,6 +16,8 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
 
     private var citas: JSONArray? = null
     lateinit var calendarClickListener: onCitaClickListener
+    var shouldShowDate: Boolean = true
+    var isPacient: Boolean = true
 
 
     fun setCitas(calendarios: JSONArray) {
@@ -25,7 +27,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
 
     override fun onBindViewHolder(holder: CitasViewHolder?, position: Int) {
         val cita = citas!!.getJSONObject(position)
-        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
+        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient) {
             holder!!.callBtn.visibility = View.GONE
         } else {
             holder!!.callBtn.visibility = View.VISIBLE
@@ -53,7 +55,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             holder.date.text = monthFormatter.format(date).capitalize()
         }
 
-        if (position > 0 && citas!!.getJSONObject(position - 1).getString("fecha").equals(d)) {
+        if (!shouldShowDate || (position > 0 && citas!!.getJSONObject(position - 1).getString("fecha").equals(d))) {
             holder.date.visibility = View.GONE
         } else {
             holder.date.visibility = View.VISIBLE
@@ -83,7 +85,13 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             medico = cita!!.getString("medico")
         }
 
-        holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
+        val paciente = cita.getString("paciente__nombre")
+
+        if (isPacient) {
+            holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
+        } else {
+            holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion_medico, motivo, modalidad, hour, paciente)
+        }
 
         holder.itemView.setOnClickListener {
             calendarClickListener.onClick(cita)
