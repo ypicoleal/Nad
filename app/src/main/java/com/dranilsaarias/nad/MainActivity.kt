@@ -46,11 +46,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         setHeader()
-
-        replaceFragment(AgendarFragment(), getString(R.string.agendar_cita))
-        nav_view.setCheckedItem(R.id.nav_agendar)
-
-
     }
 
     override fun onBackPressed() {
@@ -194,12 +189,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     //privacy = response.getString("politica")
                     isPacient = response.getInt("tipo") == 1
                     setupMenu()
+                    loading.visibility = View.GONE
+
+                    val fragment = AgendarFragment.newInstance(isPacient)
+                    var title = getString(R.string.agendar_cita)
+                    if (!isPacient) {
+                        title = "Calendario"
+                    }
+                    replaceFragment(fragment, title)
                 },
                 Response.ErrorListener { error ->
                     Log.e("error", error.message)
                 })
         request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
+        loading.visibility = View.VISIBLE
     }
 
     private fun setupMenu() {
