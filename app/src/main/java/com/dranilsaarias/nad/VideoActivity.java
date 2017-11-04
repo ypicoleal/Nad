@@ -18,11 +18,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.dranilsaarias.nad.dialog.Dialog;
 import com.dranilsaarias.nad.util.CameraCapturerCompat;
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 import com.twilio.video.AudioTrack;
 import com.twilio.video.CameraCapturer.CameraSource;
 import com.twilio.video.ConnectOptions;
@@ -93,6 +94,11 @@ public class VideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow(); // in Activity's onCreate() for instance
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }*/
 
         primaryVideoView = findViewById(R.id.primary_video_view);
         thumbnailVideoView = findViewById(R.id.thumbnail_video_view);
@@ -254,12 +260,9 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void setAccessToken() {
-        // OPTION 1- Generate an access token from the getting started portal
-        // https://www.twilio.com/console/video/dev-tools/testing-tools
-        this.accessToken = TWILIO_ACCESS_TOKEN;
 
         // OPTION 2- Retrieve an access token from your own web app
-        // retrieveAccessTokenfromServer();
+        retrieveAccessTokenfromServer();
     }
 
     private void connectToRoom(String roomName) {
@@ -424,6 +427,8 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onConnectFailure(Room room, TwilioException e) {
                 videoStatusTextView.setText("Failed to connect");
+
+                Log.e("error", e.toString());
                 configureAudio(false);
             }
 
@@ -628,21 +633,26 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void retrieveAccessTokenfromServer() {
-        Ion.with(this)
-                .load("http://localhost:8000/token.php")
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+        String serviceUrl = getString(R.string.twilio_token);
+        String url = getString(R.string.host, serviceUrl);
+
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        if (e == null) {
-                            VideoActivity.this.accessToken = result.get("token").getAsString();
-                        } else {
-                            Toast.makeText(VideoActivity.this,
-                                    R.string.error_retrieving_access_token, Toast.LENGTH_LONG)
-                                    .show();
-                        }
+                    public void onResponse(String response) {
+                        Log.i("user", response);
+                        VideoActivity.this.accessToken = response;
                     }
-                });
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error", error.getMessage());
+                    }
+                }
+        );
+        VolleySingleton.Companion.getInstance().addToRequestQueue(request, this);
     }
 
     private void configureAudio(boolean enable) {

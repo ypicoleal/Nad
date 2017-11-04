@@ -16,6 +16,12 @@
         <item name="android:fontFamily">@font/futurabt_book</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.Transparent">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/futurabt_book</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>

@@ -96,6 +96,10 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         holder.itemView.setOnClickListener {
             calendarClickListener.onClick(cita)
         }
+
+        holder.callBtn.setOnClickListener {
+            calendarClickListener.onCallClick(cita)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): CitasViewHolder {
@@ -122,5 +126,6 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
 
     interface onCitaClickListener {
         fun onClick(cita: JSONObject)
+        fun onCallClick(cita: JSONObject)
     }
 }

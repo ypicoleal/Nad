@@ -21,4 +21,5 @@
     <string name="nueva_confirmacion">/usuarios/nueva/confirmacion/</string>
     <string name="reprogramar_cita">/agenda/reprogramar/cita/form/</string>
     <string name="tos_url">/usuarios/terminos/</string>
+    <string name="twilio_token">/agenda/twilio/token/</string>
 </resources>

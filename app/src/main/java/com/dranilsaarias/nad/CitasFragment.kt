@@ -58,6 +58,12 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
         startActivityForResult(intent, 1)
     }
 
+    override fun onCallClick(cita: JSONObject) {
+        val intent = Intent(context, VideoActivity::class.java)
+        intent.putExtra("cita", cita.toString())
+        startActivity(intent)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 1) {
             setupCitas(view!!.findViewById(R.id.citas_rv), view!!.findViewById(R.id.swipe))
