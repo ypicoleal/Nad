@@ -159,6 +159,7 @@ class LoginActivity : AppCompatActivity() {
                 return params
             }
         }
+        request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
         form.visibility = View.GONE

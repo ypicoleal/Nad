@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var tos: String = ""
     private var privacy: String = ""
     private var conection: String = ""
-    private var isPacient: Boolean = true
+    private var isPacient: Boolean = false
+    private var accountData: JSONObject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,6 +135,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 replaceFragment(fragment, getString(R.string.ubicacion_en_mapa))
             }
 
+            R.id.nav_cuenta -> {
+                replaceFragment(CuentaFragment.newInstance(accountData.toString()), getString(R.string.mi_cuenta))
+            }
+
+
             R.id.nav_salir -> {
                 logout(true)
             }
@@ -185,9 +191,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> { response ->
                     Log.i("user", response.toString())
+                    accountData = response
                     findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
                     findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
-                    direccion = response.getString("direccion")
                     isPacient = response.getInt("tipo") == 1
                     setupMenu()
                     loading.visibility = View.GONE
@@ -200,7 +206,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     replaceFragment(fragment, title)
                 },
                 Response.ErrorListener { error ->
-                    Log.e("error", error.message)
+                    if (error.message != null) {
+                        Log.e("error", error.networkResponse.toString())
+                    }
+                    loading.visibility = View.GONE
                 })
         request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
@@ -217,11 +226,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     tos = response.getString("terminos")
                     conection = response.getString("condiciones")
                     privacy = response.getString("politica")
+                    direccion = response.getString("direccion")
 
                 },
                 Response.ErrorListener { error ->
                     Log.e("error", error.message)
                 })
+        request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 

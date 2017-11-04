@@ -37,7 +37,6 @@ class RegisterActivity : AppCompatActivity() {
     private fun setSpinners() {
         val document = findViewById<ClickToSelectEditText<Documento>>(R.id.document)
         val civil = findViewById<ClickToSelectEditText<Documento>>(R.id.civil)
-        val entidad = findViewById<ClickToSelectEditText<Documento>>(R.id.entidad)
 
         val documentos = ArrayList<Documento>()
         documentos.add(Documento("Cédula de ciudadanía"))
@@ -66,17 +65,6 @@ class RegisterActivity : AppCompatActivity() {
         civil.setOnItemSelectedListener(object : ClickToSelectEditText.OnItemSelectedListener<Documento> {
             override fun onItemSelectedListener(item: Documento, selectedIndex: Int) {
                 Log.i("estado", item.label)
-            }
-        })
-
-        val entidades = ArrayList<Documento>()
-        entidades.add(Documento("Colsanitas"))
-        entidades.add(Documento("Medisanitas"))
-        entidades.add(Documento("Particular"))
-        entidad.setItems(entidades)
-        entidad.setOnItemSelectedListener(object : ClickToSelectEditText.OnItemSelectedListener<Documento> {
-            override fun onItemSelectedListener(item: Documento, selectedIndex: Int) {
-                Log.i("entidades", item.label)
             }
         })
 
