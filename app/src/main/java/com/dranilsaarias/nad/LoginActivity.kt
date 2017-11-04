@@ -17,14 +17,19 @@ import android.view.View
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.bluejamesbond.text.DocumentView
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.content_login.*
+import org.json.JSONObject
 import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
+    private var tos: String = ""
+    private var privacy: String = ""
+    private var conection: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +54,8 @@ class LoginActivity : AppCompatActivity() {
         forgot_password.setOnClickListener {
             forgotPassword()
         }
+
+        setTos()
     }
 
     @SuppressLint("InflateParams")
@@ -68,9 +75,9 @@ class LoginActivity : AppCompatActivity() {
         val tosText = v.findViewById<DocumentView>(R.id.tos_text)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tosText.text = Html.fromHtml(getString(R.string.tos_content), Html.FROM_HTML_MODE_LEGACY)
+            tosText.text = Html.fromHtml(tos, Html.FROM_HTML_MODE_LEGACY)
         } else {
-            tosText.text = Html.fromHtml(getString(R.string.tos_content))
+            tosText.text = Html.fromHtml(tos)
         }
 
         btn.setOnClickListener {
@@ -79,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     private fun resenVerification() {
         val inflater = this.layoutInflater
         val v = inflater.inflate(R.layout.forgot_password, null)
@@ -105,7 +113,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun registrar() {
-        startActivity(Intent(this, RegisterActivity::class.java))
+        val intent = Intent(this, RegisterActivity::class.java)
+        intent.putExtra("tos", tos)
+        startActivity(intent)
     }
 
     private fun login() {
@@ -181,5 +191,23 @@ class LoginActivity : AppCompatActivity() {
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
         form.visibility = View.GONE
+    }
+
+    private fun setTos() {
+        val serviceUrl = getString(R.string.tos_url)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener<JSONObject> { response ->
+                    Log.i("user", response.toString())
+                    tos = response.getString("terminos")
+                    conection = response.getString("condiciones")
+                    privacy = response.getString("politica")
+
+                },
+                Response.ErrorListener { error ->
+                    Log.e("error", error.message)
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 }

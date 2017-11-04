@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
+        setTos()
         setHeader()
     }
 
@@ -116,7 +117,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_comentarios -> {
-                //todo cambiar esto a nuevo servicio y aplicar en las vistas de login y registro
                 //todo realizar videollamada
                 //todo agregar notificaciones
                 //todo recibir llamada
@@ -187,10 +187,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     Log.i("user", response.toString())
                     findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
                     findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
-                    //direccion = response.getString("direccion")
-                    //tos = response.getString("terminos")
-                    //conection = response.getString("condiciones")
-                    //privacy = response.getString("politica")
+                    direccion = response.getString("direccion")
                     isPacient = response.getInt("tipo") == 1
                     setupMenu()
                     loading.visibility = View.GONE
@@ -208,6 +205,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
+    }
+
+    private fun setTos() {
+        val serviceUrl = getString(R.string.tos_url)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener<JSONObject> { response ->
+                    Log.i("user", response.toString())
+                    tos = response.getString("terminos")
+                    conection = response.getString("condiciones")
+                    privacy = response.getString("politica")
+
+                },
+                Response.ErrorListener { error ->
+                    Log.e("error", error.message)
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 
     private fun setupMenu() {

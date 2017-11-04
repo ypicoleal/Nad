@@ -98,9 +98,9 @@ class RegisterActivity : AppCompatActivity() {
         val tosText = v.findViewById<DocumentView>(R.id.tos_text)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            tosText.text = Html.fromHtml(getString(R.string.tos_content), Html.FROM_HTML_MODE_LEGACY)
+            tosText.text = Html.fromHtml(intent.getStringExtra("tos"), Html.FROM_HTML_MODE_LEGACY)
         } else {
-            tosText.text = Html.fromHtml(getString(R.string.tos_content))
+            tosText.text = Html.fromHtml(intent.getStringExtra("tos"))
         }
         btn.setOnClickListener {
             alert.dismiss()
