@@ -27,6 +27,8 @@ import java.util.*
 
 class DateDetailsActivity : AppCompatActivity() {
 
+    private var isPacient: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_date_details)
@@ -45,10 +47,13 @@ class DateDetailsActivity : AppCompatActivity() {
     }
 
     private fun setup() {
+
+        isPacient = intent.getBooleanExtra("isPacient", true)
+
         if (intent.hasExtra("cita")) {
             Log.i("cita", intent.getStringExtra("cita"))
             val cita = JSONObject(intent.getStringExtra("cita"))
-            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
+            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago")) {
                 call_btn.visibility = View.GONE
                 cancel_btn.visibility = View.VISIBLE
             } else {

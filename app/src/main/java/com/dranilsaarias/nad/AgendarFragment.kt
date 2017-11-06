@@ -31,7 +31,7 @@ class AgendarFragment : Fragment() {
 
     private var timer: Timer? = null
     val DELAY_MS: Long = 500//delay in milliseconds before task is to be executed
-    val PERIOD_MS: Long = 3000 // time in milliseconds between successive task executions.
+    val PERIOD_MS: Long = 8000 // time in milliseconds between successive task executions.
     private var validSnackbar: Snackbar? = null
 
     private var isPaciente: Boolean = true

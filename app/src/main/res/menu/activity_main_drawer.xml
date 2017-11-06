@@ -18,7 +18,9 @@
                     android:title="@string/mis_citas" />
             </menu>
         </item>
-        <item android:title="@string/group_legal">
+        <item
+            android:id="@+id/legal_group"
+            android:title="@string/group_legal">
             <menu>
                 <item
                     android:id="@+id/nav_tos"

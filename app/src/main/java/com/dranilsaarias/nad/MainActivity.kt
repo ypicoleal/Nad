@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var tos: String = ""
     private var privacy: String = ""
     private var conection: String = ""
-    private var isPacient: Boolean = false
+    private var isPacient: Boolean = true
     private var accountData: JSONObject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,8 +80,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_agendar -> {
+                var title = getString(R.string.agendar_cita)
+                if (!isPacient) {
+                    title = "Calendario"
+                }
                 val fragment = AgendarFragment.newInstance(isPacient)
-                replaceFragment(fragment, getString(R.string.agendar_cita))
+                replaceFragment(fragment, title)
             }
 
             R.id.nav_mis_citas -> {
@@ -108,7 +112,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val i = Intent(Intent.ACTION_SEND)
                     i.type = "text/plain"
                     i.putExtra(Intent.EXTRA_SUBJECT, "Doctor Online")
-                    val sAux = "Descarga la App NAD DoctorOnline en tu smartphone. Descargalo hoy desde http://dranilsaarias.com/"
+                    val sAux = "Descarga la App de Agendamiento Médico NAD DoctorOnline desde tu dispositivo móvil. (AQUI VA LA URL QUE GENEREN LAS TIENDAS)"
                     i.putExtra(Intent.EXTRA_TEXT, sAux)
                     startActivity(Intent.createChooser(i, "Escoja"))
                 } catch (e: Exception) {
@@ -203,6 +207,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         title = "Calendario"
                     }
                     replaceFragment(fragment, title)
+                    nav_view.setCheckedItem(R.id.nav_agendar)
                 },
                 Response.ErrorListener { error ->
                     if (error.message != null) {
@@ -239,6 +244,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Log.i("paciente", isPacient.toString())
         if (!isPacient) {
             nav_view.menu.findItem(R.id.nav_cuenta).isVisible = false
+            nav_view.menu.findItem(R.id.legal_group).isVisible = false
+            nav_view.menu.findItem(R.id.nav_comentarios).isVisible = false
             nav_view.menu.findItem(R.id.nav_agendar).setTitle("Calendario")
         }
     }

@@ -27,7 +27,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
 
     override fun onBindViewHolder(holder: CitasViewHolder?, position: Int) {
         val cita = citas!!.getJSONObject(position)
-        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient) {
+        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago")) {
             holder!!.callBtn.visibility = View.GONE
         } else {
             holder!!.callBtn.visibility = View.VISIBLE
