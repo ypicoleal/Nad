@@ -20,7 +20,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import org.json.JSONObject
 
 
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 //todo realizar videollamada
                 //todo agregar notificaciones
                 //todo recibir llamada
-                val fragment = CommentsFragment.newInstance(user_email.text.toString())
+                val fragment = CommentsFragment.newInstance(accountData!!.getString("email"))
                 replaceFragment(fragment, getString(R.string.comentarios))
             }
 
