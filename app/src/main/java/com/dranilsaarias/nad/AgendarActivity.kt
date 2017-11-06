@@ -81,16 +81,6 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://legal.payulatam.com/ES/terminos_y_condiciones_compradores.html"))
             startActivity(browserIntent)
         }
-        val entidad = intent.getIntExtra("entidad", -1)
-        if (entidad > 1) {
-            AlertDialog
-                    .Builder(this)
-                    .setTitle("Agendar cita")
-                    .setMessage(getString(R.string.only_inplace))
-                    .setPositiveButton("Aceptar", null)
-                    .create()
-                    .show()
-        }
     }
 
     private fun pagarCita() {

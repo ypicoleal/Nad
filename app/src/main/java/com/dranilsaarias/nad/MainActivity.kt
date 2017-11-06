@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
@@ -53,7 +54,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            AlertDialog
+                    .Builder(this)
+                    .setMessage("¿Desea Salir?")
+                    .setPositiveButton("Si", { _, _ ->
+                        finish()
+                    })
+                    .setNegativeButton("No", { _, _ ->
+
+                    })
+                    .create()
+                    .show()
         }
     }
 
@@ -89,7 +100,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_mis_citas -> {
-                replaceFragment(CitasFragment(), getString(R.string.mis_citas))
+                val fragment = CitasFragment()
+                val args = Bundle()
+                args.putBoolean(CitasFragment.ARG_PACIENT, isPacient)
+                fragment.arguments = args
+                replaceFragment(fragment, getString(R.string.mis_citas))
             }
 
             R.id.nav_tos -> {
@@ -139,9 +154,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_cuenta -> {
-                replaceFragment(CuentaFragment.newInstance(accountData.toString()), getString(R.string.mi_cuenta))
-            }
+                if (isPacient) {
+                    replaceFragment(CuentaFragment.newInstance(accountData.toString()), getString(R.string.mi_cuenta))
+                } else {
+                    AlertDialog
+                            .Builder(this)
+                            .setMessage("Para modificar sus datos por favor dirigirse al aplicativo web")
+                            .setPositiveButton("Ok", { _, _ ->
 
+                            })
+                            .create()
+                            .show()
+                }
+            }
 
             R.id.nav_salir -> {
                 logout(true)
@@ -234,7 +259,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
                 },
                 Response.ErrorListener { error ->
-                    Log.e("error", error.message)
+                    if (error.networkResponse != null) {
+                        Log.e("error", error.networkResponse.toString())
+                    }
                 })
         request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
@@ -243,7 +270,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun setupMenu() {
         Log.i("paciente", isPacient.toString())
         if (!isPacient) {
-            nav_view.menu.findItem(R.id.nav_cuenta).isVisible = false
             nav_view.menu.findItem(R.id.legal_group).isVisible = false
             nav_view.menu.findItem(R.id.nav_comentarios).isVisible = false
             nav_view.menu.findItem(R.id.nav_agendar).setTitle("Calendario")

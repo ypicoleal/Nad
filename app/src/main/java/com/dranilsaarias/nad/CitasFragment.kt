@@ -30,9 +30,12 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            date = arguments.getSerializable(ARG_DATE) as Date
-            adapter.shouldShowDate = false
-            adapter.isPacient = false
+            if (arguments.getSerializable(ARG_DATE) != null) {
+                date = arguments.getSerializable(ARG_DATE) as Date
+                adapter.shouldShowDate = false
+                adapter.isPacient = false
+            }
+            adapter.isPacient = arguments.getBoolean(ARG_PACIENT, true)
         }
     }
 
@@ -55,6 +58,7 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     override fun onClick(cita: JSONObject) {
         val intent = Intent(context, DateDetailsActivity::class.java)
         intent.putExtra("cita", cita.toString())
+        intent.putExtra("isPacient", adapter.isPacient)
         startActivityForResult(intent, 1)
     }
 
@@ -108,5 +112,6 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
 
     companion object {
         val ARG_DATE = "date"
+        val ARG_PACIENT = "pacient"
     }
 }// Required empty public constructor

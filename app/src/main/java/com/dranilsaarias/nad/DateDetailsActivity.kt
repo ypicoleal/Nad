@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -27,7 +29,7 @@ import java.util.*
 
 class DateDetailsActivity : AppCompatActivity() {
 
-    private var isPacient: Boolean = false
+    private var isPacient: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +95,14 @@ class DateDetailsActivity : AppCompatActivity() {
             var modalidad = getText(R.string.atenci_n_online)
             if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
                 modalidad = getText(R.string.atenci_n_consultorio)
+            } else if (isPacient && !cita.getBoolean("pago")) {
+                AlertDialog.Builder(this)
+                        .setMessage("Para acceder a la cita Online, por favor cancelar el valor de la consulta presionando el botón pagar")
+                        .setNegativeButton("Pagar", { _, _ ->
+                            goToPayU(cita)
+                        })
+                        .create()
+                        .show()
             }
 
             val parser = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
@@ -125,6 +135,23 @@ class DateDetailsActivity : AppCompatActivity() {
                 reprogramar()
             }
         }
+    }
+
+    private fun goToPayU(cita: JSONObject) {
+        val tm = getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        val countryCode = tm.networkCountryIso
+        Log.i("locale", countryCode)
+        val currency: String
+        if (countryCode.equals("co")) {
+            currency = getString(R.string.param_cop)
+        } else {
+            currency = getString(R.string.param_usd)
+        }
+        val serviceUrl = getString(R.string.pay_url, cita.getInt("id"), currency)
+        val url = getString(R.string.host, serviceUrl)
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
+        finish()
     }
 
     private fun reprogramar() {

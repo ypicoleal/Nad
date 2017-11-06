@@ -188,6 +188,7 @@ class LoginActivity : AppCompatActivity() {
                                 })
                                 .show()
                     }
+                    Log.e("error", error.networkResponse.toString())
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         loading.visibility = View.VISIBLE
