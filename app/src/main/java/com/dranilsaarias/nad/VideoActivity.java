@@ -260,8 +260,6 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void setAccessToken() {
-
-        // OPTION 2- Retrieve an access token from your own web app
         retrieveAccessTokenfromServer();
     }
 
