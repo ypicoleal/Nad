@@ -222,4 +222,5 @@
 
     <string name="set_password">Cambiar contraseña</string>
     <string name="guardar">Guardar</string>
+    <string name="password_set_success">Su contraseña a sido cambiada con exito. Por favor vuelva a iniciar sesión con su nueva contraseña.</string>
 </resources>

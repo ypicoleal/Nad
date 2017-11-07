@@ -23,4 +23,5 @@
     <string name="tos_url">/usuarios/terminos/</string>
     <string name="twilio_token">/agenda/twilio/token/</string>
     <string name="cuenta_form">/usuarios/paciente/form/%1$d/</string>
+    <string name="change_password_form">/usuarios/change/password/</string>
 </resources>

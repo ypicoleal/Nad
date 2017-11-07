@@ -5,15 +5,20 @@
     android:layout_height="match_parent"
     tools:context="com.dranilsaarias.nad.TosFragment">
 
-    <com.bluejamesbond.text.DocumentView
-        android:id="@+id/tos_text"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:documentView_antialias="true"
-        app:documentView_textAlignment="justified"
-        app:documentView_textColor="@android:color/secondary_text_light"
-        app:documentView_textFormat="formatted"
-        app:documentView_textTypefacePath="font/futurabt_book.otf" />
+        android:layout_height="wrap_content">
+
+        <com.bluejamesbond.text.DocumentView
+            android:id="@+id/tos_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:documentView_antialias="true"
+            app:documentView_textAlignment="justified"
+            app:documentView_textColor="@android:color/secondary_text_light"
+            app:documentView_textFormat="formatted"
+            app:documentView_textTypefacePath="font/futurabt_book.otf" />
+    </FrameLayout>
 
 </android.support.v4.widget.NestedScrollView>

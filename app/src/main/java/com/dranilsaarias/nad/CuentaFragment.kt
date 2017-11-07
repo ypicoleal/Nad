@@ -2,11 +2,13 @@ package com.dranilsaarias.nad
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.CardView
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +16,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import org.json.JSONArray
 import org.json.JSONObject
 
 
@@ -40,6 +45,7 @@ class CuentaFragment : Fragment() {
     lateinit var email: TextInputEditText
     lateinit var saveBtn: CardView
     lateinit var loading: FrameLayout
+    lateinit var setPassword: TextView
 
     lateinit var fecha_nacimiento_container: TextInputLayout
     lateinit var civil_container: TextInputLayout
@@ -50,6 +56,16 @@ class CuentaFragment : Fragment() {
     lateinit var email_container: TextInputLayout
     lateinit var profesion_container: TextInputLayout
     lateinit var celular_container: TextInputLayout
+    lateinit var direccion_container: TextInputLayout
+
+    private var password: TextInputEditText? = null
+    private var newPassword1: TextInputEditText? = null
+    private var newPassword2: TextInputEditText? = null
+    private var description: TextView? = null
+    private var password_loading: ProgressBar? = null
+    private var new_passsoword1_container: TextInputLayout? = null
+    private var new_passsoword2_container: TextInputLayout? = null
+    private var password_container: TextInputLayout? = null
 
     private var accountData: JSONObject? = null
 
@@ -80,6 +96,7 @@ class CuentaFragment : Fragment() {
         saveBtn = v.findViewById(R.id.save_btn)
         nombre_acudiente = v.findViewById(R.id.nombre_acudiente)
         cedula_acudiente = v.findViewById(R.id.cedula_acudiente)
+        setPassword = v.findViewById(R.id.set_password)
 
         fecha_nacimiento_container = v.findViewById(R.id.fecha_nacimiento_container)
         civil_container = v.findViewById(R.id.civil_container)
@@ -90,6 +107,7 @@ class CuentaFragment : Fragment() {
         email_container = v.findViewById(R.id.email_container)
         profesion_container = v.findViewById(R.id.profesion_container)
         celular_container = v.findViewById(R.id.celular_container)
+        direccion_container = v.findViewById(R.id.direccion_container)
         loading = v.findViewById(R.id.loading)
 
         nombre.setText(accountData!!.getString("nombre"))
@@ -110,6 +128,117 @@ class CuentaFragment : Fragment() {
         }
         saveBtn.setOnClickListener {
             register()
+        }
+
+        setPassword.setOnClickListener {
+            openSetPassword()
+        }
+    }
+
+    @SuppressLint("InflateParams")
+    private fun openSetPassword() {
+        val inflater = this.layoutInflater
+        val v = inflater.inflate(R.layout.set_password, null)
+        val dialog = AlertDialog.Builder(context)
+                .setView(v)
+                .setCancelable(false)
+                .setPositiveButton("Cambiar contraseña", { _, _ ->
+                })
+                .setNegativeButton("Cerrar", { _, _ ->
+                })
+                .create()
+        password = v.findViewById(R.id.password)
+        newPassword1 = v.findViewById(R.id.new_passsoword1)
+        newPassword2 = v.findViewById(R.id.new_passsoword2)
+        description = v.findViewById(R.id.description)
+        password_loading = v.findViewById(R.id.password_loading)
+        password_container = v.findViewById(R.id.password_container)
+        new_passsoword1_container = v.findViewById(R.id.new_passsoword1_container)
+        new_passsoword2_container = v.findViewById(R.id.new_passsoword2_container)
+        dialog.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            changePassword(dialog)
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).visibility = View.INVISIBLE
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).visibility = View.INVISIBLE
+        }
+    }
+
+    private fun changePassword(dialog: AlertDialog) {
+        val serviceUrl = getString(R.string.change_password_form)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = object : StringRequest(Request.Method.POST, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                    dialog.dismiss()
+                    showPasswordSuccess()
+                },
+                Response.ErrorListener { error ->
+                    password_loading!!.visibility = View.GONE
+                    password_container!!.visibility = View.VISIBLE
+                    new_passsoword1_container!!.visibility = View.VISIBLE
+                    new_passsoword2_container!!.visibility = View.VISIBLE
+                    description!!.visibility = View.VISIBLE
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).visibility = View.VISIBLE
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).visibility = View.VISIBLE
+                    if (error.networkResponse != null && error.networkResponse.statusCode == 400) {
+                        showPasswordErrors(String(error.networkResponse.data))
+                    } else {
+                        Snackbar.make(view!!, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()
+                    }
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("old_password", password!!.text.toString())
+                params.put("new_password1", newPassword1!!.text.toString())
+                params.put("new_password2", newPassword2!!.text.toString())
+                return params
+            }
+        }
+        VolleySingleton.getInstance().addToRequestQueue(request, context)
+        password_loading!!.visibility = View.VISIBLE
+        password_container!!.visibility = View.GONE
+        password_container!!.error = null
+        password_container!!.isErrorEnabled = false
+        new_passsoword1_container!!.visibility = View.GONE
+        new_passsoword1_container!!.error = null
+        new_passsoword1_container!!.isErrorEnabled = false
+        new_passsoword2_container!!.visibility = View.GONE
+        new_passsoword2_container!!.error = null
+        new_passsoword2_container!!.isErrorEnabled = false
+        description!!.visibility = View.GONE
+
+    }
+
+    private fun showPasswordSuccess() {
+        AlertDialog.Builder(context)
+                .setMessage(getString(R.string.password_set_success))
+                .setPositiveButton("Cerrar", { _, _ ->
+                    activity.finish()
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                })
+    }
+
+    private fun showPasswordErrors(serverResponse: String) {
+        Log.e("errors", serverResponse)
+        val errors = JSONArray(serverResponse)
+
+        for (i in 0 until errors.length()) {
+            val error = errors.getJSONArray(i)
+            val errorStr = error.getJSONArray(1).getString(0)
+            val errorField = error.getString(0)
+            var container: TextInputLayout? = null
+
+            when {
+                errorField == "old_password" -> container = password_container
+                errorField == "new_password1" -> container = new_passsoword1_container
+                errorField == "new_password2" -> container = new_passsoword2_container
+            }
+            container!!.isErrorEnabled = true
+            container.error = errorStr
         }
     }
 
@@ -209,7 +338,7 @@ class CuentaFragment : Fragment() {
     }
 
     private fun clearErrors() {
-        /*nombre_container.isErrorEnabled = false
+        nombre_container.isErrorEnabled = false
         nombre_container.error = null
         celular_container.isErrorEnabled = false
         celular_container.error = null
@@ -217,26 +346,14 @@ class CuentaFragment : Fragment() {
         apellidos_container.error = null
         profesion_container.isErrorEnabled = false
         profesion_container.error = null
-        numero_documento_container.error = null
-        numero_documento_container.isErrorEnabled = false
-        confirmar_numero_documento_container.error = null
-        confirmar_numero_documento_container.isErrorEnabled = false
-        password_container.error = null
-        password_container.isErrorEnabled = false
-        password_confirm_container.error = null
-        password_confirm_container.isErrorEnabled = false
-        document_container.error = null
-        document_container.isErrorEnabled = false
         fecha_nacimiento_container.error = null
         fecha_nacimiento_container.isErrorEnabled = false
-        numero_documento_container.error = null
-        numero_documento_container.isErrorEnabled = false
-        document_container.isErrorEnabled = false
-        document_container.error = null
         civil_container.error = null
         civil_container.isErrorEnabled = false
         email_container.error = null
-        email_container.isErrorEnabled = false*/
+        email_container.isErrorEnabled = false
+        direccion_container.error = null
+        direccion_container.isErrorEnabled = false
     }
 
     private fun showErrors(serverResponse: String) {
@@ -256,7 +373,6 @@ class CuentaFragment : Fragment() {
         }
     }
 
-    @SuppressLint("InflateParams")
     private fun showSuccess() {
         Snackbar.make(view!!, "Datos actualizados con exito", Snackbar.LENGTH_LONG).show()
     }
