@@ -2,7 +2,6 @@ package com.dranilsaarias.nad
 
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
@@ -216,10 +215,9 @@ class CuentaFragment : Fragment() {
         AlertDialog.Builder(context)
                 .setMessage(getString(R.string.password_set_success))
                 .setPositiveButton("Cerrar", { _, _ ->
-                    activity.finish()
-                    val intent = Intent(activity, LoginActivity::class.java)
-                    startActivity(intent)
                 })
+                .create()
+                .show()
     }
 
     private fun showPasswordErrors(serverResponse: String) {
