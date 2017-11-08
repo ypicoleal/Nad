@@ -38,10 +38,11 @@ class TwilioService : Service(), Room.Listener {
 
     override fun onParticipantConnected(p0: Room?, p1: Participant?) {
         Log.i("room", "entro participante")
+        startActivity(Intent(this, CallActivity::class.java))
     }
 
-    override fun onConnected(p0: Room?) {
-        Log.i("room", "conectado")
+    override fun onConnected(room: Room?) {
+        Log.i("room", "conectado a " + room!!.sid + " state " + room.state.toString())
     }
 
     override fun onDisconnected(room: Room?, exception: TwilioException?) {
@@ -58,8 +59,6 @@ class TwilioService : Service(), Room.Listener {
         Log.i("room", "conectando al room " + roomName)
         val connectOptionsBuilder = ConnectOptions.Builder(accessToken)
                 .roomName(roomName)
-                .audioTracks(ArrayList())
-                .videoTracks(ArrayList())
         room = Video.connect(this, connectOptionsBuilder.build(), this)
     }
 
@@ -78,7 +77,12 @@ class TwilioService : Service(), Room.Listener {
                         stopSelf()
                     }
                 },
-                Response.ErrorListener { error -> Log.e("error", error.message) }
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", error.networkResponse.toString())
+                    }
+                    stopSelf()
+                }
         )
         request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)

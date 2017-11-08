@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.dranilsaarias.nad.dialog.Dialog;
 import com.dranilsaarias.nad.util.CameraCapturerCompat;
 import com.twilio.video.AudioTrack;
@@ -38,6 +38,9 @@ import com.twilio.video.Video;
 import com.twilio.video.VideoRenderer;
 import com.twilio.video.VideoTrack;
 import com.twilio.video.VideoView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Collections;
 
@@ -413,7 +416,7 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onConnected(Room room) {
                 localParticipant = room.getLocalParticipant();
-                videoStatusTextView.setText("Connected to " + room.getName());
+                videoStatusTextView.setText("Connected to " + room.getSid());
                 setTitle(room.getName());
 
                 for (Participant participant : room.getParticipants()) {
@@ -631,16 +634,20 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void retrieveAccessTokenfromServer() {
-        String serviceUrl = getString(R.string.twilio_token);
+        String serviceUrl = getString(R.string.is_login);
         String url = getString(R.string.host, serviceUrl);
 
-        StringRequest request = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(String response) {
-                        Log.i("user", response);
-                        VideoActivity.this.accessToken = response;
+                    public void onResponse(JSONObject response) {
+                        Log.i("user", response.toString());
+                        try {
+                            VideoActivity.this.accessToken = response.getString("token");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -650,6 +657,7 @@ public class VideoActivity extends AppCompatActivity {
                     }
                 }
         );
+        request.setShouldCache(false);
         VolleySingleton.Companion.getInstance().addToRequestQueue(request, this);
     }
 
