@@ -8,4 +8,6 @@
     <color name="citaVigente">#009245</color>
     <color name="citaCancelada">#c1272d</color>
     <color name="citaExpirada">#1b1464</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

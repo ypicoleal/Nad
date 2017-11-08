@@ -38,7 +38,11 @@ class TwilioService : Service(), Room.Listener {
 
     override fun onParticipantConnected(p0: Room?, p1: Participant?) {
         Log.i("room", "entro participante")
-        startActivity(Intent(this, CallActivity::class.java))
+        val intent = Intent(this, CallActivity::class.java)
+        intent.putExtra("token", accessToken)
+        startActivity(intent)
+        room!!.disconnect()
+        stopSelf()
     }
 
     override fun onConnected(room: Room?) {
