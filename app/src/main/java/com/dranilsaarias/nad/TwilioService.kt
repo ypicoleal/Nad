@@ -41,6 +41,7 @@ class TwilioService : Service(), Room.Listener {
         val intent = Intent(this, CallActivity::class.java)
         intent.putExtra("token", accessToken)
         intent.putExtra("room", room!!.name)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         room.disconnect()
         stopSelf()

@@ -14,13 +14,13 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import org.json.JSONObject
 
 
@@ -104,7 +104,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val args = Bundle()
                 args.putBoolean(CitasFragment.ARG_PACIENT, isPacient)
                 fragment.arguments = args
-                replaceFragment(fragment, getString(R.string.mis_citas))
+                if (isPacient) {
+                    replaceFragment(fragment, getString(R.string.mis_citas))
+                } else {
+                    replaceFragment(DoctorCalendarFragment(), getString(R.string.mis_citas))
+                }
+
             }
 
             R.id.nav_tos -> {
@@ -136,9 +141,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_comentarios -> {
-                //todo realizar videollamada
-                //todo agregar notificaciones
-                //todo recibir llamada
                 val fragment = CommentsFragment.newInstance(accountData!!.getString("email"))
                 replaceFragment(fragment, getString(R.string.comentarios))
             }
@@ -220,8 +222,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Response.Listener<JSONObject> { response ->
                     Log.i("user", response.toString())
                     accountData = response
-                    findViewById<TextView>(R.id.user_full_name).setText(response.getString("nombre") + " " + response.getString("apellidos"))
-                    findViewById<TextView>(R.id.user_email).setText(response.getString("email"))
+                    user_full_name.text = response.getString("nombre") + " " + response.getString("apellidos")
+                    user_email.text = response.getString("email")
                     isPacient = response.getInt("tipo") == 1
                     setupMenu()
                     loading.visibility = View.GONE
@@ -272,7 +274,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (!isPacient) {
             nav_view.menu.findItem(R.id.legal_group).isVisible = false
             nav_view.menu.findItem(R.id.nav_comentarios).isVisible = false
-            nav_view.menu.findItem(R.id.nav_agendar).setTitle("Calendario")
+            nav_view.menu.findItem(R.id.nav_agendar).title = "Calendario"
+            nav_view.menu.findItem(R.id.nav_map).isVisible = false
         }
     }
 }

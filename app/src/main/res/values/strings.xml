@@ -146,7 +146,7 @@
     <string name="ubicacion_en_mapa">Ubicación en mapa</string>
     <string name="comentarios">Comentarios y/o Sugerencias</string>
     <string name="group_configuracion">CONFIGURACIÓN</string>
-    <string name="mi_cuenta">Mi cuenta</string>
+    <string name="mi_cuenta">Modificar Info. Personal</string>
     <string name="salir">Salir</string>
     <string name="title_activity_maps">Map</string>
 
@@ -226,4 +226,5 @@
     <string name="title_activity_call">CallActivity</string>
 
     <string name="llamada_entrante">Llamada entrante…</string>
+    <string name="pagar">Pagar</string>
 </resources>

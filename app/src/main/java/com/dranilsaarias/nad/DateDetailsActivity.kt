@@ -55,11 +55,26 @@ class DateDetailsActivity : AppCompatActivity() {
         if (intent.hasExtra("cita")) {
             Log.i("cita", intent.getStringExtra("cita"))
             val cita = JSONObject(intent.getStringExtra("cita"))
+
+            cancel_btn.setOnClickListener {
+                cancelar(cita.getInt("id"))
+            }
+
+            reschedule_date_btn.setOnClickListener {
+                reprogramar()
+            }
+
             if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago")) {
                 call_btn.visibility = View.GONE
-                cancel_btn.visibility = View.VISIBLE
+
             } else {
                 call_btn.visibility = View.VISIBLE
+                cancel_btn.visibility = View.GONE
+            }
+
+            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
+                cancel_btn.visibility = View.VISIBLE
+            } else {
                 cancel_btn.visibility = View.GONE
             }
 
@@ -103,22 +118,23 @@ class DateDetailsActivity : AppCompatActivity() {
                         })
                         .create()
                         .show()
+                cancel_btn.setOnClickListener {
+                    goToPayU(cita)
+                }
+                cancel_btn.visibility = View.VISIBLE
+                cancel_text.text = getString(R.string.pagar)
             }
 
-            val parser = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-            val hourFomatter = SimpleDateFormat("h:mm a", Locale.getDefault())
             val s = cita.getString("inicio")
             val e = cita.getString("fin")
             val hour: String
             if (s.equals(JSONObject.NULL) || s.equals(null) || s.equals("null")) {
                 hour = "Sin hora"
             } else {
-                val start = parser.parse(s)
-                val end = parser.parse(e)
-                hour = hourFomatter.format(start) + " - " + hourFomatter.format(end)
+                hour = s + " - " + e
             }
 
-            var medico = "Sin asignar"
+            var medico = getString(R.string.doctor_name)
             if (!cita.getString("medico").equals(JSONObject.NULL) && !cita.getString("medico").equals("null") && !cita.getString("medico").equals(null)) {
                 medico = cita.getString("medico")
             }
@@ -127,13 +143,6 @@ class DateDetailsActivity : AppCompatActivity() {
 
             border.visibility = View.GONE
 
-            cancel_btn.setOnClickListener {
-                cancelar(cita.getInt("id"))
-            }
-
-            reschedule_date_btn.setOnClickListener {
-                reprogramar()
-            }
         }
     }
 
@@ -176,7 +185,7 @@ class DateDetailsActivity : AppCompatActivity() {
         val textView = alert.findViewById<TextView>(android.R.id.message)
         val face = Typeface.createFromAsset(assets, "font/futurabt_book.otf")
 
-        textView!!.setTypeface(face)
+        textView!!.typeface = face
         textView.gravity = Gravity.CENTER
     }
 
@@ -201,7 +210,7 @@ class DateDetailsActivity : AppCompatActivity() {
         val textView = alert.findViewById<TextView>(R.id.alertTitle)
         val face = Typeface.createFromAsset(assets, "font/futurabt_book.otf")
 
-        textView!!.setTypeface(face)
+        textView!!.typeface = face
         textView.gravity = Gravity.CENTER
 
         val mejoria = v.findViewById<CheckBox>(R.id.mejoria)
@@ -281,6 +290,6 @@ class DateDetailsActivity : AppCompatActivity() {
         dialog.show()
         dialog.findViewById<TextView>(android.R.id.message)!!.gravity = Gravity.CENTER
         val face = Typeface.createFromAsset(assets, "font/futurabt_book.otf")
-        dialog.findViewById<TextView>(android.R.id.message)!!.setTypeface(face)
+        dialog.findViewById<TextView>(android.R.id.message)!!.typeface = face
     }
 }

@@ -67,20 +67,16 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             modalidad = holder.dateDetails.context.getText(R.string.atenci_n_consultorio)
         }
 
-        val parser = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-        val hourFomatter = SimpleDateFormat("h:mm a", Locale.getDefault())
         val s = cita.getString("inicio")
         val e = cita.getString("fin")
         val hour: String
         if (s.equals(JSONObject.NULL) || s.equals(null) || s.equals("null")) {
             hour = "Sin hora"
         } else {
-            val start = parser.parse(s)
-            val end = parser.parse(e)
-            hour = hourFomatter.format(start) + " - " + hourFomatter.format(end)
+            hour = s + " - " + e
         }
 
-        var medico = "Sin asignar"
+        var medico = holder.dateDetails.context.getString(R.string.doctor_name)
         if (!cita.getString("medico").equals(JSONObject.NULL) && !cita.getString("medico").equals("null") && !cita.getString("medico").equals(null)) {
             medico = cita!!.getString("medico")
         }
