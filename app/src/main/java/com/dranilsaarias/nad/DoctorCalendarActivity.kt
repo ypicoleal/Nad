@@ -1,7 +1,6 @@
 package com.dranilsaarias.nad
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -9,6 +8,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
+import kotlinx.android.synthetic.main.activity_doctor_calendar.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,9 +51,8 @@ class DoctorCalendarActivity : AppCompatActivity() {
         mViewPager = findViewById(R.id.container)
         mViewPager!!.adapter = mSectionsPagerAdapter
 
-        val tabLayout = findViewById<View>(R.id.tabs) as TabLayout
-
-        tabLayout.setupWithViewPager(mViewPager)
+        val monthFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+        date_title.text = monthFormatter.format(date)
     }
 
     /**
@@ -92,7 +91,7 @@ class DoctorCalendarActivity : AppCompatActivity() {
 
         override fun getCount(): Int {
             // Show 3 total pages.
-            return 2
+            return 1
         }
     }
 }
