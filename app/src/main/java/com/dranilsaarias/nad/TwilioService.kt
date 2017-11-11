@@ -65,6 +65,8 @@ class TwilioService : Service(), Room.Listener {
         Log.i("room", "conectando al room " + roomName)
         val connectOptionsBuilder = ConnectOptions.Builder(accessToken)
                 .roomName(roomName)
+                .videoTracks(ArrayList())
+                .audioTracks(ArrayList())
         room = Video.connect(this, connectOptionsBuilder.build(), this)
     }
 

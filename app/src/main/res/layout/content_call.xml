@@ -122,6 +122,7 @@
                 app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
             <TextView
+                android:id="@+id/remain_minutes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|top"
@@ -136,16 +137,6 @@
                 android:textColor="#fff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="Inicio: 19:30   Fin: 20:00"
-                android:textColor="#fff" />
         </FrameLayout>
     </FrameLayout>
 </FrameLayout>

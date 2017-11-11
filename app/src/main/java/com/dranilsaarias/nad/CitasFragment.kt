@@ -30,12 +30,13 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
+            adapter.isPacient = arguments.getBoolean(ARG_PACIENT, true)
+
             if (arguments.getSerializable(ARG_DATE) != null) {
                 date = arguments.getSerializable(ARG_DATE) as Date
                 adapter.shouldShowDate = false
                 adapter.isPacient = false
             }
-            adapter.isPacient = arguments.getBoolean(ARG_PACIENT, true)
         }
     }
 
@@ -63,8 +64,9 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     }
 
     override fun onCallClick(cita: JSONObject) {
-        val intent = Intent(context, VideoActivity::class.java)
-        intent.putExtra("cita", cita.toString())
+        val intent = Intent(context, CallActivity::class.java)
+        intent.putExtra("room", cita.getInt("paciente").toString())
+        intent.putExtra("isDoctor", true)
         startActivity(intent)
     }
 

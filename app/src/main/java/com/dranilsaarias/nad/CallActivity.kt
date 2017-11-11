@@ -16,6 +16,9 @@ import android.view.View
 import android.view.WindowManager.LayoutParams
 import android.widget.ImageView
 import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.dranilsaarias.nad.util.CameraCapturerCompat
 import com.twilio.video.*
 import kotlinx.android.synthetic.main.content_call.*
@@ -46,6 +49,8 @@ class CallActivity : AppCompatActivity() {
 
     private var accessToken: String? = null
 
+    private var isDoctor: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_call)
@@ -54,6 +59,7 @@ class CallActivity : AppCompatActivity() {
         window.addFlags(LayoutParams.FLAG_DISMISS_KEYGUARD)
         window.addFlags(LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         window.addFlags(LayoutParams.FLAG_TURN_SCREEN_ON)
+        window.addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.setFlags(LayoutParams.FLAG_FULLSCREEN, LayoutParams.FLAG_FULLSCREEN)
 
         primaryVideoView = findViewById(R.id.primary_video_view)
@@ -70,28 +76,62 @@ class CallActivity : AppCompatActivity() {
         r = RingtoneManager.getRingtone(applicationContext, notification)
         r.play()
 
-        answer.setOnClickListener {
+        if (intent.hasExtra("isDoctor")) {
+            isDoctor = true
             incoming_view.visibility = View.GONE
             call_view.visibility = View.VISIBLE
-            r.stop()
+            retrieveAccessTokenfromServer(intent.getStringExtra("room"))
+            remain_minutes.text = getString(R.string.llamando)
             if (!checkPermissionForCameraAndMicrophone()) {
                 requestPermissionForCameraAndMicrophone()
             } else {
                 createAudioAndVideoTracks()
-                //setAccessToken()
             }
+        } else {
+            answer.setOnClickListener {
+                incoming_view.visibility = View.GONE
+                call_view.visibility = View.VISIBLE
+                r.stop()
+                if (!checkPermissionForCameraAndMicrophone()) {
+                    requestPermissionForCameraAndMicrophone()
+                } else {
+                    createAudioAndVideoTracks()
+                }
 
-            if (intent.hasExtra("token")) {
-                accessToken = intent.getStringExtra("token")
-                val room = intent.getStringExtra("room")
-                connectToRoom(room)
+                if (intent.hasExtra("token")) {
+                    accessToken = intent.getStringExtra("token")
+                    val room = intent.getStringExtra("room")
+                    connectToRoom(room)
+                }
             }
         }
+
+
 
         decline.setOnClickListener {
             r.stop()
             finish()
         }
+    }
+
+    private fun retrieveAccessTokenfromServer(roomName: String) {
+        val serviceUrl = getString(R.string.is_login)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener { response ->
+                    Log.i("room", response.toString())
+                    accessToken = response.getString("token")
+                    connectToRoom(roomName)
+                },
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", error.networkResponse.toString())
+                    }
+                }
+        )
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 
     private fun intializeUI() {
@@ -213,6 +253,7 @@ class CallActivity : AppCompatActivity() {
      * Set primary view as renderer for participant video track
      */
     private fun addParticipantVideo(videoTrack: VideoTrack) {
+        remain_minutes.text = "20:00"
         moveLocalVideoToThumbnailView()
         primaryVideoView!!.mirror = false
         videoTrack.addRenderer(primaryVideoView)
@@ -293,7 +334,9 @@ class CallActivity : AppCompatActivity() {
 
             override fun onParticipantDisconnected(room: Room, participant: Participant) {
                 removeParticipant(participant)
-                finish()
+                if (!isDoctor) {
+                    finish()
+                }
             }
 
             override fun onRecordingStarted(room: Room) {
