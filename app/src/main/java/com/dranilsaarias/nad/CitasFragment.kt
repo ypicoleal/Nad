@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -45,10 +46,10 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_citas, container, false)
 
-        setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe))
+        setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe), view.findViewById(R.id.empty_list))
 
         view.findViewById<SwipeRefreshLayout>(R.id.swipe).setOnRefreshListener {
-            setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe))
+            setupCitas(view.findViewById(R.id.citas_rv), view.findViewById(R.id.swipe), view.findViewById(R.id.empty_list))
         }
 
         adapter.calendarClickListener = this
@@ -72,12 +73,12 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 1) {
-            setupCitas(view!!.findViewById(R.id.citas_rv), view!!.findViewById(R.id.swipe))
+            setupCitas(view!!.findViewById(R.id.citas_rv), view!!.findViewById(R.id.swipe), view!!.findViewById(R.id.empty_list))
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun setupCitas(citasRV: RecyclerView, swipe: SwipeRefreshLayout) {
+    private fun setupCitas(citasRV: RecyclerView, swipe: SwipeRefreshLayout, empty_list: TextView) {
         val layoutManager = LinearLayoutManager(context)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         citasRV.layoutManager = layoutManager
@@ -99,7 +100,7 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
                 Response.Listener<JSONObject> { response ->
                     Log.i("response", response.toString())
                     if (response.getJSONArray("object_list").length() == 0) {
-                        //empty_list.visibility = View.VISIBLE
+                        empty_list.visibility = View.VISIBLE
                         swipe.visibility = View.GONE
                     }
                     adapter.setCitas(response.getJSONArray("object_list"))

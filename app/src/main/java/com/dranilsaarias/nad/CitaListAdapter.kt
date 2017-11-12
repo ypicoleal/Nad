@@ -26,7 +26,13 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: CitasViewHolder?, position: Int) {
-        val cita = citas!!.getJSONObject(position)
+        val cita =
+                if (isPacient) {
+                    citas!!.getJSONObject(position)
+                } else {
+                    citas!!.getJSONObject(citas!!.length() - position - 1)
+                }
+
         if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago")) {
             holder!!.callBtn.visibility = View.GONE
         } else {
@@ -89,6 +95,12 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion_medico, motivo, modalidad, hour, paciente)
         }
 
+        if (cita.getInt("procedimiento__modalidad") != AgendarActivity.Type.IN_PERSON && isPacient && !cita.getBoolean("pago")) {
+            holder.noPago.visibility = View.VISIBLE
+        } else {
+            holder.noPago.visibility = View.GONE
+        }
+
         holder.itemView.setOnClickListener {
             calendarClickListener.onClick(cita)
         }
@@ -118,6 +130,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         var dateState: TextView = itemView!!.findViewById(R.id.date_state)
         var stateIndicator: ImageView = itemView!!.findViewById(R.id.state_indicator)
         var dateDetails: TextView = itemView!!.findViewById(R.id.date_details)
+        var noPago: TextView = itemView!!.findViewById(R.id.no_pago)
     }
 
     interface onCitaClickListener {

@@ -60,7 +60,6 @@ class CuentaFragment : Fragment() {
     private var password: TextInputEditText? = null
     private var newPassword1: TextInputEditText? = null
     private var newPassword2: TextInputEditText? = null
-    private var description: TextView? = null
     private var password_loading: ProgressBar? = null
     private var new_passsoword1_container: TextInputLayout? = null
     private var new_passsoword2_container: TextInputLayout? = null
@@ -149,7 +148,6 @@ class CuentaFragment : Fragment() {
         password = v.findViewById(R.id.password)
         newPassword1 = v.findViewById(R.id.new_passsoword1)
         newPassword2 = v.findViewById(R.id.new_passsoword2)
-        description = v.findViewById(R.id.description)
         password_loading = v.findViewById(R.id.password_loading)
         password_container = v.findViewById(R.id.password_container)
         new_passsoword1_container = v.findViewById(R.id.new_passsoword1_container)
@@ -178,7 +176,6 @@ class CuentaFragment : Fragment() {
                     password_container!!.visibility = View.VISIBLE
                     new_passsoword1_container!!.visibility = View.VISIBLE
                     new_passsoword2_container!!.visibility = View.VISIBLE
-                    description!!.visibility = View.VISIBLE
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).visibility = View.VISIBLE
                     dialog.getButton(AlertDialog.BUTTON_NEGATIVE).visibility = View.VISIBLE
                     if (error.networkResponse != null && error.networkResponse.statusCode == 400) {
@@ -207,7 +204,6 @@ class CuentaFragment : Fragment() {
         new_passsoword2_container!!.visibility = View.GONE
         new_passsoword2_container!!.error = null
         new_passsoword2_container!!.isErrorEnabled = false
-        description!!.visibility = View.GONE
 
     }
 

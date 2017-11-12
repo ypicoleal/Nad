@@ -109,7 +109,7 @@
     <string name="direcci_n">Dirección</string>
     <string name="n_mero_de_celular">Número de celular</string>
     <string name="n_mero_fijo">Número fijo</string>
-    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="correo_electr_nico">Email</string>
     <string name="contrase_a">Contraseña</string>
     <string name="confirmar_contrase_a">Confirmar contraseña</string>
     <string name="tos_title">Términos y condiciones</string>
@@ -136,7 +136,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="group_citas">CITAS</string>
-    <string name="agendar_cita">Agendar cita</string>
+    <string name="agendar_cita">Reservar cita</string>
     <string name="mis_citas">Mis Citas</string>
     <string name="group_conocenos_mas">CONÓCENOS MÁS</string>
     <string name="politicas_de_privacidad">Políticas de privacidad</string>
@@ -154,10 +154,10 @@
     <string name="llamar">Llamar</string>
     <string name="web">Web</string>
 
-    <string name="email">Correo electrónico</string>
+    <string name="email">Email</string>
     <string name="comment">Agregar comentario</string>
     <string name="send">Enviar</string>
-    <string name="forgot_password_description">Su cuenta no esta activada, verifique en la bandeja de entrada de su correo.</string>
+    <string name="forgot_password_description">Su cuenta no esta activada, verifique en la bandeja de entrada de su email.</string>
 
     <string name="playstore_url">https://play.google.com/store/apps/details?id=Orion.Soft</string>
     <string name="appstore_url">https://itunes.apple.com/co/app/colm%C3%A9dica/id570286287?mt=8</string>
@@ -178,7 +178,7 @@
     <string name="nombre_completo_del_acudiente">Nombre completo del acudiente</string>
     <string name="cedula_del_acudiente">Cedula del acudiente</string>
     <string name="required_field">Este campo es requerido</string>
-    <string name="check_email"><b>NAD DoctorOnline</b> ha enviado un vínculo de verificación a su correo electrónico, favor validarlo para crear su cuenta.</string>
+    <string name="check_email"><b>NAD DoctorOnline</b> ha enviado un vínculo de verificación a su email, favor validarlo para crear su cuenta.</string>
     <string name="doctor_name">Dra. Nilsa Arias Delgado</string>
     <string name="proffession">Dermatóloga</string>
     <string name="address">Calle 116 # 9–72 Consultorio 214,</string>
@@ -186,11 +186,11 @@
     <string name="phone">3144933205</string>
     <string name="doctor_email">info@dranilsaarias.com</string>
     <string name="motivo_por_el_cual_asiste">Motivo por el cual asiste</string>
-    <string name="agendar">Agendar</string>
+    <string name="agendar">Reservar</string>
     <string name="costo_de_la_cita">Costo de la cita</string>
     <string name="pago_texto">Pago Consulta por PayU</string>
     <string name="precion">$ %1$s</string>
-    <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendamiento.</string>
+    <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para reservar.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
     <string name="cita_descripcion">Hora: %3$s\nMedico: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
     <string name="cita_descripcion_medico">Hora: %3$s\nPaciente: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
@@ -200,7 +200,7 @@
     <string name="permissions_needed">Camera and Microphone permissions needed. Please allow in App Settings for additional functionality.</string>
     <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
     <string name="confirmar_nueva_contrase_a">Confirmar nueva contraseña</string>
-    <string name="nueva_contrase_a">Nueva contraseña</string>
+    <string name="nueva_contrase_a">Escriba su nueva contraseña</string>
     <string name="passwor_recover_text">Su contraseña a sido restaurada con exito</string>
     <string name="no_date">Sin fecha – Cancelado</string>
     <string name="date_state">Estado cita: %1$s</string>
@@ -208,7 +208,7 @@
     <string name="title_activity_date_details">Detalle de la cita</string>
     <string name="reprogramar">Reprogramar</string>
     <string name="cancelar_cita">Cancelar cita</string>
-    <string name="only_inplace">Recuerde que solo podrá agendar citas en Atención Consultorio.</string>
+    <string name="only_inplace">Recuerde que solo podrá reservar citas en Atención Consultorio.</string>
     <string name="mejor_a">Mejoría</string>
     <string name="sin_tiempo">Sin tiempo</string>
     <string name="otro_motivo">Otro motivo</string>
@@ -221,11 +221,13 @@
     <string name="tab_text_3">Tab 3</string>
 
     <string name="set_password">Cambiar contraseña</string>
-    <string name="guardar">Guardar</string>
+    <string name="guardar">Actualizar</string>
     <string name="password_set_success">Su contraseña a sido cambiada con exito.</string>
     <string name="title_activity_call">CallActivity</string>
 
     <string name="llamada_entrante">Llamada entrante…</string>
     <string name="pagar">Pagar</string>
     <string name="llamando">Llamando…</string>
+    <string name="no_dates">No hay agenda disponible para esta fecha</string>
+    <string name="cita_no_paga">cita no paga, ingrese a la cita para pagar</string>
 </resources>
