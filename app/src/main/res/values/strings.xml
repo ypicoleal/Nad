@@ -230,4 +230,5 @@
     <string name="llamando">Llamando…</string>
     <string name="no_dates">No hay agenda disponible para esta fecha</string>
     <string name="cita_no_paga">cita no paga, ingrese a la cita para pagar</string>
+    <string name="conectando">Conectando…</string>
 </resources>

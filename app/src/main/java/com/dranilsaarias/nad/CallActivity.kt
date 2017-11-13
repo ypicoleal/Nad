@@ -7,6 +7,7 @@ import android.media.AudioManager
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -16,12 +17,15 @@ import android.view.View
 import android.view.WindowManager.LayoutParams
 import android.widget.ImageView
 import android.widget.Toast
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import com.dranilsaarias.nad.util.CameraCapturerCompat
 import com.twilio.video.*
 import kotlinx.android.synthetic.main.content_call.*
+import org.json.JSONObject
 
 
 class CallActivity : AppCompatActivity() {
@@ -51,6 +55,10 @@ class CallActivity : AppCompatActivity() {
 
     private var isDoctor: Boolean = false
 
+    private var citaID: String = ""
+    private var remainMinutes: Int = -1
+    private var timer: CountDownTimer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_call)
@@ -75,6 +83,10 @@ class CallActivity : AppCompatActivity() {
         val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
         r = RingtoneManager.getRingtone(applicationContext, notification)
         r.play()
+
+        if (intent.hasExtra("decline")) {
+            finish()
+        }
 
         if (intent.hasExtra("isDoctor")) {
             isDoctor = true
@@ -102,16 +114,140 @@ class CallActivity : AppCompatActivity() {
                     accessToken = intent.getStringExtra("token")
                     val room = intent.getStringExtra("room")
                     connectToRoom(room)
+                } else {
+                    retrieveAccessTokenfromServer(intent.getStringExtra("room"))
                 }
             }
+            remain_minutes.text = getString(R.string.conectando)
         }
-
-
 
         decline.setOnClickListener {
             r.stop()
             finish()
+            sendDeclineNotification(intent.getStringExtra("doctorToken"))
         }
+
+        activity = this
+    }
+
+    private fun sendDeclineNotification(token: String) {
+
+        val url = "https://fcm.googleapis.com/fcm/send"
+
+        val request = object : StringRequest(Request.Method.POST, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                },
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", String(error.networkResponse.data))
+                    }
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params = java.util.HashMap<String, String>()
+                params.put("Content-Type", "application/json; charset=UTF-8")
+                params.put("Authorization", "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb")
+                return params
+            }
+
+            @Throws(AuthFailureError::class)
+            override fun getBody(): ByteArray {
+                val body = JSONObject()
+                val data = JSONObject()
+                data.put("decline", true)
+                body.put("to", token)
+                body.put("data", data)
+                return body.toString().toByteArray()
+            }
+        }
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
+    }
+
+    private fun getRemainMinutes() {
+        val serviceUrl = getString(R.string.remain_minutes, citaID)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener { response ->
+                    remain_minutes.text = response.getInt("minutos").toString()
+
+                    timer = object : CountDownTimer((response.getInt("minutos") * 1000 * 60).toLong(), 1000) {
+
+                        override fun onTick(millisUntilFinished: Long) {
+                            val remainedSecs = millisUntilFinished / 1000
+                            remainMinutes = (remainedSecs / 60).toInt()
+                            val s = remainedSecs % 60
+                            val m = remainedSecs / 60
+                            val mins = if (s > 10) {
+                                m.toString()
+
+                            } else {
+                                "0" + m.toString()
+                            }
+
+                            val secs = if (s > 10) {
+                                s.toString()
+
+                            } else {
+                                "0" + s.toString()
+                            }
+
+
+                            remain_minutes.text = ("" + mins + ":" + secs)
+                        }
+
+                        override fun onFinish() {
+                            Log.i("time", "finnish")
+                        }
+
+                    }
+                    timer!!.start()
+                    remain_minutes.visibility = View.VISIBLE
+                },
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", error.networkResponse.toString())
+                    }
+                }
+        )
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
+        remain_minutes.visibility = View.GONE
+    }
+
+    private fun saveRemainMinutes() {
+        val serviceUrl = getString(R.string.remain_minutes_form)
+        val url = getString(R.string.host, serviceUrl)
+
+        if (timer != null) {
+            timer!!.cancel()
+        }
+
+        if (remainMinutes < 0) {
+            return
+        }
+
+        val request = object : StringRequest(Request.Method.POST, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                },
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", String(error.networkResponse.data))
+                    }
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("cita", citaID)
+                params.put("duracion_r", remainMinutes.toString())
+                return params
+            }
+        }
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 
     private fun retrieveAccessTokenfromServer(roomName: String) {
@@ -253,7 +389,12 @@ class CallActivity : AppCompatActivity() {
      * Set primary view as renderer for participant video track
      */
     private fun addParticipantVideo(videoTrack: VideoTrack) {
-        remain_minutes.text = "20:00"
+        if (intent.hasExtra("cita")) {
+            citaID = intent.getStringExtra("cita")
+            getRemainMinutes()
+        } else {
+            Log.e("cita", "sin Cita")
+        }
         moveLocalVideoToThumbnailView()
         primaryVideoView!!.mirror = false
         videoTrack.addRenderer(primaryVideoView)
@@ -325,6 +466,7 @@ class CallActivity : AppCompatActivity() {
                     //intializeUI()
                     //moveLocalVideoToPrimaryView()
                 }
+                saveRemainMinutes()
             }
 
             override fun onParticipantConnected(room: Room, participant: Participant) {
@@ -337,6 +479,7 @@ class CallActivity : AppCompatActivity() {
                 if (!isDoctor) {
                     finish()
                 }
+                saveRemainMinutes()
             }
 
             override fun onRecordingStarted(room: Room) {
@@ -462,7 +605,6 @@ class CallActivity : AppCompatActivity() {
         if (r.isPlaying) {
             r.stop()
         }
-        TwilioService.startService(this)
     }
 
     override fun onResume() {
@@ -507,5 +649,7 @@ class CallActivity : AppCompatActivity() {
     companion object {
         val CAMERA_MIC_PERMISSION_REQUEST_CODE = 1
         val TAG = "CallActivity"
+
+        var activity: CallActivity? = null
     }
 }

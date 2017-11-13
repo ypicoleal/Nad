@@ -17,6 +17,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
+import com.google.firebase.iid.FirebaseInstanceId
 import org.json.JSONObject
 import java.util.*
 
@@ -72,10 +73,14 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
         intent.putExtra("cita", cita.getInt("id").toString())
         intent.putExtra("isDoctor", true)
         startActivity(intent)
-        sendCallNotification(cita)
+        val devices = cita.getJSONArray("devices")
+        (0 until devices.length())
+                .map { devices.getJSONObject(it) }
+                .forEach { sendCallNotification(cita, it.getString("registration_id")) }
+
     }
 
-    private fun sendCallNotification(cita: JSONObject) {
+    private fun sendCallNotification(cita: JSONObject, token: String) {
 
         val url = "https://fcm.googleapis.com/fcm/send"
 
@@ -100,7 +105,8 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
             override fun getBody(): ByteArray {
                 val body = JSONObject()
                 cita.put("isCalling", true)
-                body.put("to", "eNLMn7tg-44:APA91bE5lUg6qz-3qRaC7sAnCBsORw-Zp3Hjb0OyHjbD4Zfddn_rEA2t5z5OUulqx259kJYZ844--BjaisGwXeLTRN4Nk3PNNtDPm7A3ucZOTDcPCuNFWar35pIRWO2GnaZzAbE2WRCE")
+                cita.put("doctorToken", FirebaseInstanceId.getInstance().token)
+                body.put("to", token)
                 body.put("data", cita)
                 return body.toString().toByteArray()
             }

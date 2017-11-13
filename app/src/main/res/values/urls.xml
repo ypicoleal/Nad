@@ -25,4 +25,6 @@
     <string name="cuenta_form">/usuarios/paciente/form/%1$d/</string>
     <string name="change_password_form">/usuarios/change/password/</string>
     <string name="token_registration">/agenda/device/form/</string>
+    <string name="remain_minutes">/agenda/minutos/restante/cita/%1$s/</string>
+    <string name="remain_minutes_form">/agenda/minutos/restante/form/</string>
 </resources>
