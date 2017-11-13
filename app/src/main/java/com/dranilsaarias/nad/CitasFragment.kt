@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
 import org.json.JSONObject
 import java.util.*
 
@@ -67,8 +69,44 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     override fun onCallClick(cita: JSONObject) {
         val intent = Intent(context, CallActivity::class.java)
         intent.putExtra("room", cita.getInt("paciente").toString())
+        intent.putExtra("cita", cita.getInt("id").toString())
         intent.putExtra("isDoctor", true)
         startActivity(intent)
+        sendCallNotification(cita)
+    }
+
+    private fun sendCallNotification(cita: JSONObject) {
+
+        val url = "https://fcm.googleapis.com/fcm/send"
+
+        val request = object : StringRequest(Request.Method.POST, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                },
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", String(error.networkResponse.data))
+                    }
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("Content-Type", "application/json; charset=UTF-8")
+                params.put("Authorization", "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb")
+                return params
+            }
+
+            @Throws(AuthFailureError::class)
+            override fun getBody(): ByteArray {
+                val body = JSONObject()
+                cita.put("isCalling", true)
+                body.put("to", "eNLMn7tg-44:APA91bE5lUg6qz-3qRaC7sAnCBsORw-Zp3Hjb0OyHjbD4Zfddn_rEA2t5z5OUulqx259kJYZ844--BjaisGwXeLTRN4Nk3PNNtDPm7A3ucZOTDcPCuNFWar35pIRWO2GnaZzAbE2WRCE")
+                body.put("data", cita)
+                return body.toString().toByteArray()
+            }
+        }
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, context)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

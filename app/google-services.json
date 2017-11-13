@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "285436403805",
+    "firebase_url": "https://nad-doctoronline-181603.firebaseio.com",
+    "project_id": "nad-doctoronline-181603",
+    "storage_bucket": "nad-doctoronline-181603.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285436403805:android:2237aa87bb368c37",
+        "android_client_info": {
+          "package_name": "com.dranilsaarias.nad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285436403805-piqpdt03583h0jo5um4jsac721gvsf59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ6iK2g-DvAF-vWninMmvmdvycvM2gkGQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
