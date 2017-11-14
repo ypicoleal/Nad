@@ -3,6 +3,7 @@ package com.dranilsaarias.nad
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -14,10 +15,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.*
@@ -48,6 +51,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         setTos()
         setHeader()
+
+        val refreshedToken = FirebaseInstanceId.getInstance().token
+        val deviceId = Settings.Secure.getString(this.contentResolver,
+                Settings.Secure.ANDROID_ID)
+
+        Log.i("token", refreshedToken)
+        Log.i("device_id", deviceId)
+
+        sendRegistrationToServer(refreshedToken, deviceId)
     }
 
     override fun onBackPressed() {
@@ -277,5 +289,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             nav_view.menu.findItem(R.id.nav_agendar).title = "Calendario"
             nav_view.menu.findItem(R.id.nav_map).isVisible = false
         }
+    }
+
+    private fun sendRegistrationToServer(refreshedToken: String?, deviceId: String) {
+        val serviceUrl = getString(R.string.token_registration)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = object : StringRequest(Request.Method.POST, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                },
+                Response.ErrorListener { error ->
+
+                    if (error.networkResponse != null) {
+                        Log.e("error", String(error.networkResponse.data))
+                    }
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("registration_id", refreshedToken!!)
+                params.put("device_id", deviceId)
+                params.put("type", "android")
+                return params
+            }
+        }
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 }
