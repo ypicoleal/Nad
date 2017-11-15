@@ -20,6 +20,7 @@ import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_date_details.*
 import kotlinx.android.synthetic.main.cita.*
 import org.json.JSONObject
@@ -143,7 +144,54 @@ class DateDetailsActivity : AppCompatActivity() {
 
             border.visibility = View.GONE
 
+            call_btn.setOnClickListener {
+                val intent = Intent(this, CallActivity::class.java)
+                intent.putExtra("room", cita.getInt("paciente").toString())
+                intent.putExtra("cita", cita.getInt("id").toString())
+                intent.putExtra("isDoctor", true)
+                startActivity(intent)
+                val devices = cita.getJSONArray("devices")
+                (0 until devices.length())
+                        .map { devices.getJSONObject(it) }
+                        .forEach { sendCallNotification(cita, it.getString("registration_id")) }
+            }
+
         }
+    }
+
+    private fun sendCallNotification(cita: JSONObject, token: String) {
+
+        val url = "https://fcm.googleapis.com/fcm/send"
+
+        val request = object : StringRequest(Request.Method.POST, url,
+                Response.Listener<String> { response ->
+                    Log.e("tales", response)
+                },
+                Response.ErrorListener { error ->
+                    if (error.networkResponse != null) {
+                        Log.e("error", String(error.networkResponse.data))
+                    }
+                }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params.put("Content-Type", "application/json; charset=UTF-8")
+                params.put("Authorization", "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb")
+                return params
+            }
+
+            @Throws(AuthFailureError::class)
+            override fun getBody(): ByteArray {
+                val body = JSONObject()
+                cita.put("isCalling", true)
+                cita.put("doctorToken", FirebaseInstanceId.getInstance().token)
+                body.put("to", token)
+                body.put("data", cita)
+                return body.toString().toByteArray()
+            }
+        }
+        request.setShouldCache(false)
+        VolleySingleton.getInstance().addToRequestQueue(request, this)
     }
 
     private fun goToPayU(cita: JSONObject) {

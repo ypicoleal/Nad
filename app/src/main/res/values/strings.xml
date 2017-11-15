@@ -136,7 +136,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="group_citas">CITAS</string>
-    <string name="agendar_cita">Reservar cita</string>
+    <string name="agendar_cita">Agendar cita</string>
     <string name="mis_citas">Mis Citas</string>
     <string name="group_conocenos_mas">CONÓCENOS MÁS</string>
     <string name="politicas_de_privacidad">Políticas de privacidad</string>
@@ -186,11 +186,11 @@
     <string name="phone">3144933205</string>
     <string name="doctor_email">info@dranilsaarias.com</string>
     <string name="motivo_por_el_cual_asiste">Motivo por el cual asiste</string>
-    <string name="agendar">Reservar</string>
+    <string name="agendar">Agendar</string>
     <string name="costo_de_la_cita">Costo de la cita</string>
     <string name="pago_texto">Pago Consulta por PayU</string>
     <string name="precion">$ %1$s</string>
-    <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para reservar.</string>
+    <string name="fecha_no_disponible_para_agendamiento">Fecha no disponible para agendar.</string>
     <string name="document_not_match">Los números de documento no coinciden</string>
     <string name="cita_descripcion">Hora: %3$s\nMedico: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
     <string name="cita_descripcion_medico">Hora: %3$s\nPaciente: %4$s\nTipo de cita: %2$s\nMotivo: %1$s</string>
@@ -208,7 +208,7 @@
     <string name="title_activity_date_details">Detalle de la cita</string>
     <string name="reprogramar">Reprogramar</string>
     <string name="cancelar_cita">Cancelar cita</string>
-    <string name="only_inplace">Recuerde que solo podrá reservar citas en Atención Consultorio.</string>
+    <string name="only_inplace">Recuerde que solo podrá agendar citas en Atención Consultorio.</string>
     <string name="mejor_a">Mejoría</string>
     <string name="sin_tiempo">Sin tiempo</string>
     <string name="otro_motivo">Otro motivo</string>
@@ -229,6 +229,7 @@
     <string name="pagar">Pagar</string>
     <string name="llamando">Llamando…</string>
     <string name="no_dates">No hay agenda disponible para esta fecha</string>
-    <string name="cita_no_paga">cita no paga, ingrese a la cita para pagar</string>
+    <string name="cita_no_paga">Cita pendiente de pago. Ingrese aquí para pagar.</string>
     <string name="conectando">Conectando…</string>
+    <string name="contrasena_actual">Contraseña actual</string>
 </resources>

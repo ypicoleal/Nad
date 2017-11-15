@@ -74,7 +74,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/fecha_no_disponible_para_agendamiento"
+            android:text="@string/no_dates"
             android:visibility="gone" />
     </LinearLayout>
 

@@ -156,7 +156,7 @@ class AgendarFragment : Fragment() {
                         .show()
             } else {
                 if (validSnackbar == null) {
-                    validSnackbar = Snackbar.make(view!!, "La cita solo se puede reservar para dias posteriores a la fecha de hoy", Snackbar.LENGTH_LONG)
+                    validSnackbar = Snackbar.make(view!!, "La cita solo se puede agendar para dias posteriores a la fecha de hoy", Snackbar.LENGTH_LONG)
                 }
                 validSnackbar!!.show()
             }

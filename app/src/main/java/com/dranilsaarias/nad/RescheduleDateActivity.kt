@@ -194,7 +194,7 @@ class RescheduleDateActivity : AppCompatActivity(), CalendarioListAdapter.onCale
     private fun finalizarAgendar() {
         val dialog = AlertDialog
                 .Builder(this)
-                .setTitle("Agendar cita")
+                .setTitle("Agedar cita")
                 .setMessage("Su cita se agendó satisfactoriamente.")
                 .setPositiveButton("Aceptar", null)
                 .setOnDismissListener {

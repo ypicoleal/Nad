@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_agendar -> {
                 var title = getString(R.string.agendar_cita)
                 if (!isPacient) {
-                    title = "Calendario"
+                    title = "Agenda de Citas"
                 }
                 val fragment = AgendarFragment.newInstance(isPacient)
                 replaceFragment(fragment, title)
@@ -243,7 +243,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val fragment = AgendarFragment.newInstance(isPacient)
                     var title = getString(R.string.agendar_cita)
                     if (!isPacient) {
-                        title = "Calendario"
+                        title = "Agenda de Citas"
                     }
                     replaceFragment(fragment, title)
                     nav_view.setCheckedItem(R.id.nav_agendar)
@@ -286,7 +286,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (!isPacient) {
             nav_view.menu.findItem(R.id.legal_group).isVisible = false
             nav_view.menu.findItem(R.id.nav_comentarios).isVisible = false
-            nav_view.menu.findItem(R.id.nav_agendar).title = "Calendario"
+            nav_view.menu.findItem(R.id.nav_agendar).title = "Agenda de Citas"
             nav_view.menu.findItem(R.id.nav_map).isVisible = false
         }
     }
