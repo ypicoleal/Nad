@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
@@ -71,6 +73,9 @@ class NotificationService : FirebaseMessagingService() {
 
             val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             mNotificationManager.notify(0, builder.build())
+            val h = Handler(Looper.getMainLooper())
+            val delayInMilliseconds: Long = 3000
+            h.postDelayed(Runnable { mNotificationManager.cancel(0) }, delayInMilliseconds)
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
