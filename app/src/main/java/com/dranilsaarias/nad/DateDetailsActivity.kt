@@ -221,10 +221,10 @@ class DateDetailsActivity : AppCompatActivity() {
         val alert = AlertDialog
                 .Builder(this)
                 .setMessage("¿Esta seguro de que desea cancelar la cita?")
-                .setPositiveButton("No", { _, _ ->
+                .setPositiveButton("Cancelar", { _, _ ->
 
                 })
-                .setNegativeButton("Si", { _, _ ->
+                .setNegativeButton("Aceptar", { _, _ ->
                     confirmCancelar(id)
                 })
                 .create()
