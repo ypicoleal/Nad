@@ -172,7 +172,9 @@ class RescheduleDateActivity : AppCompatActivity(), CalendarioListAdapter.onCale
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
                     if (error.networkResponse != null && error.networkResponse.statusCode == 400) {
-                        Snackbar.make(loading, "No se pueden asignar citas para d\u00edas anteriores a la fecha actual", Snackbar.LENGTH_LONG).show()
+                        val err = JSONObject(String(error.networkResponse.data))
+                        for (key in err.keys())
+                            Snackbar.make(loading, err.getJSONArray(key).getString(0), Snackbar.LENGTH_LONG).show()
                     } else {
                         Log.e("error", String(error.networkResponse.data))
                         Snackbar.make(loading, "Al parecer hubo un error en la peticion intentelo nuevamente mas tarde", Snackbar.LENGTH_LONG).show()

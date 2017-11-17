@@ -70,17 +70,18 @@ class DateDetailsActivity : AppCompatActivity() {
 
             } else {
                 call_btn.visibility = View.VISIBLE
-                cancel_btn.visibility = View.GONE
             }
 
-            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
+            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON && cita.getInt("estado") <= 2) {
                 cancel_btn.visibility = View.VISIBLE
             } else {
                 cancel_btn.visibility = View.GONE
             }
 
-            if (cita.getInt("reprogramar") >= 3) {
+            if (cita.getInt("reprogramar") >= 3 && cita.getInt("estado") > 2) {
                 reschedule_date_btn.visibility = View.GONE
+            } else {
+                reschedule_date_btn.visibility = View.VISIBLE
             }
 
             date_state.text = getString(R.string.date_state, cita.getString("estado_nombre"))
@@ -111,12 +112,10 @@ class DateDetailsActivity : AppCompatActivity() {
             var modalidad = getText(R.string.atenci_n_online)
             if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON) {
                 modalidad = getText(R.string.atenci_n_consultorio)
-            } else if (isPacient && !cita.getBoolean("pago")) {
+            } else if (isPacient && !cita.getBoolean("pago") && cita.getInt("estado") == 1) {
                 AlertDialog.Builder(this)
                         .setMessage("Para acceder a la cita Online, por favor cancelar el valor de la consulta presionando el botón pagar")
-                        .setNegativeButton("Pagar", { _, _ ->
-                            goToPayU(cita)
-                        })
+                        .setNegativeButton("Aceptar", { _, _ -> })
                         .create()
                         .show()
                 cancel_btn.setOnClickListener {
