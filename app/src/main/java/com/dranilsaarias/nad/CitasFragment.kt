@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -68,17 +69,26 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     }
 
     override fun onCallClick(cita: JSONObject) {
-        val devices = cita.getJSONArray("devices")
-        val intent = Intent(context, CallActivity::class.java)
-        intent.putExtra("room", cita.getInt("paciente").toString())
-        intent.putExtra("cita", cita.getInt("id").toString())
-        intent.putExtra("isDoctor", true)
-        intent.putExtra("devices", devices.toString())
-        startActivity(intent)
-        (0 until devices.length())
-                .map { devices.getJSONObject(it) }
-                .forEach { sendCallNotification(cita, it.getString("registration_id"), it.getString("type")) }
-
+        if (cita.getInt("minutos") > 0) {
+            val devices = cita.getJSONArray("devices")
+            val intent = Intent(context, CallActivity::class.java)
+            intent.putExtra("room", cita.getInt("paciente").toString())
+            intent.putExtra("cita", cita.getInt("id").toString())
+            intent.putExtra("isDoctor", true)
+            intent.putExtra("devices", devices.toString())
+            startActivity(intent)
+            (0 until devices.length())
+                    .map { devices.getJSONObject(it) }
+                    .forEach { sendCallNotification(cita, it.getString("registration_id"), it.getString("type")) }
+        } else {
+            AlertDialog
+                    .Builder(context)
+                    .setTitle(R.string.app_name)
+                    .setMessage("Tiempo de cita terminado para esta consulta.")
+                    .setPositiveButton("Aceptar", null)
+                    .create()
+                    .show()
+        }
     }
 
     private fun sendCallNotification(cita: JSONObject, token: String, type: String) {

@@ -71,7 +71,7 @@ class DateDetailsActivity : AppCompatActivity() {
                 call_btn.visibility = View.VISIBLE
             }
 
-            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON && cita.getInt("estado") != 1) {
+            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON && cita.getInt("estado") == 1) {
                 cancel_btn.visibility = View.VISIBLE
             } else {
                 cancel_btn.visibility = View.GONE
@@ -145,14 +145,24 @@ class DateDetailsActivity : AppCompatActivity() {
             call_btn.setOnClickListener {
                 val devices = cita.getJSONArray("devices")
                 val intent = Intent(this, CallActivity::class.java)
-                intent.putExtra("room", cita.getInt("paciente").toString())
-                intent.putExtra("cita", cita.getInt("id").toString())
-                intent.putExtra("isDoctor", true)
-                intent.putExtra("devices", devices.toString())
-                startActivity(intent)
-                (0 until devices.length())
-                        .map { devices.getJSONObject(it) }
-                        .forEach { sendCallNotification(cita, it.getString("registration_id"), it.getString("type")) }
+                if (cita.getInt("minutos") > 0) {
+                    intent.putExtra("room", cita.getInt("paciente").toString())
+                    intent.putExtra("cita", cita.getInt("id").toString())
+                    intent.putExtra("isDoctor", true)
+                    intent.putExtra("devices", devices.toString())
+                    startActivity(intent)
+                    (0 until devices.length())
+                            .map { devices.getJSONObject(it) }
+                            .forEach { sendCallNotification(cita, it.getString("registration_id"), it.getString("type")) }
+                } else {
+                    AlertDialog
+                            .Builder(this)
+                            .setTitle(R.string.app_name)
+                            .setMessage("Tiempo de cita terminado para esta consulta.")
+                            .setPositiveButton("Aceptar", null)
+                            .create()
+                            .show()
+                }
             }
 
         }

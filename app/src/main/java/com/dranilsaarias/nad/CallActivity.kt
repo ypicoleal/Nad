@@ -11,6 +11,7 @@ import android.os.CountDownTimer
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -59,6 +60,7 @@ class CallActivity : AppCompatActivity() {
     private var citaID: String = ""
     private var remainMinutes: Int = -1
     private var timer: CountDownTimer? = null
+    private var alertFlag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -181,6 +183,11 @@ class CallActivity : AppCompatActivity() {
                             remainMinutes = (remainedSecs / 60).toInt()
                             val s = remainedSecs % 60
                             val m = remainedSecs / 60
+
+                            if (m <= 5 && !alertFlag) {
+                                showAlertMins()
+                            }
+
                             val mins = if (s > 10) {
                                 m.toString()
 
@@ -201,6 +208,10 @@ class CallActivity : AppCompatActivity() {
 
                         override fun onFinish() {
                             Log.i("time", "finnish")
+                            if (room != null) {
+                                room!!.disconnect()
+                            }
+                            showFinishAlert()
                         }
 
                     }
@@ -216,6 +227,29 @@ class CallActivity : AppCompatActivity() {
         request.setShouldCache(false)
         VolleySingleton.getInstance().addToRequestQueue(request, this)
         remain_minutes.visibility = View.GONE
+    }
+
+    private fun showAlertMins() {
+        alertFlag = true
+        AlertDialog
+                .Builder(this)
+                .setTitle(R.string.app_name)
+                .setMessage("Faltan 5 minutos para que esta consulta finalice.")
+                .setPositiveButton("Aceptar", null)
+                .create()
+                .show()
+    }
+
+    private fun showFinishAlert() {
+        AlertDialog
+                .Builder(this)
+                .setTitle(R.string.app_name)
+                .setMessage("Tiempo de cita terminado para esta consulta.")
+                .setPositiveButton("Aceptar", { _, _ ->
+                    finish()
+                })
+                .create()
+                .show()
     }
 
     private fun saveRemainMinutes() {
