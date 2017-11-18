@@ -33,7 +33,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
                     citas!!.getJSONObject(citas!!.length() - position - 1)
                 }
 
-        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago") || cita.getInt("estado") == 1 || cita.getInt("estado") == 2) {
+        if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago") || cita.getInt("estado") != 1) {
             holder!!.callBtn.visibility = View.GONE
         } else {
             holder!!.callBtn.visibility = View.VISIBLE

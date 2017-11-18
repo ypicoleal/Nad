@@ -164,7 +164,7 @@
     <string name="web_url">http://dranilsaarias.com</string>
 
     <string name="dummie_img_url">https://lh3.ggpht.com/yC03Lwnb_msj7XgCe92AXzliDQxFgj-JKZgZfVYiT2qwerPvfGBxc7b4wOkGlpfkMxBd=h900</string>
-    <string name="choose_entidad">Selecciones su entidad para el servicio</string>
+    <string name="choose_entidad">Seleccione su entidad para agendar la Cita</string>
     <string name="date_description">
         " Día:      %1$s\n"
         "Hora:    %2$s\n"

@@ -25,6 +25,7 @@ import com.android.volley.toolbox.StringRequest
 import com.dranilsaarias.nad.util.CameraCapturerCompat
 import com.twilio.video.*
 import kotlinx.android.synthetic.main.content_call.*
+import org.json.JSONArray
 import org.json.JSONObject
 
 
@@ -293,6 +294,10 @@ class CallActivity : AppCompatActivity() {
         return View.OnClickListener {
             if (room != null) {
                 room!!.disconnect()
+                val devices = JSONArray(intent.getStringExtra("devices"))
+                (0 until devices.length())
+                        .map { devices.getJSONObject(it) }
+                        .forEach { sendDeclineNotification(it.getString("registration_id")) }
             }
             finish()
         }

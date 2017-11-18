@@ -65,20 +65,19 @@ class DateDetailsActivity : AppCompatActivity() {
                 reprogramar()
             }
 
-            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago")) {
+            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON || isPacient || !cita.getBoolean("pago") || cita.getInt("estado") != 1) {
                 call_btn.visibility = View.GONE
-
             } else {
                 call_btn.visibility = View.VISIBLE
             }
 
-            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON && cita.getInt("estado") <= 2) {
+            if (cita.getInt("procedimiento__modalidad") == AgendarActivity.Type.IN_PERSON && cita.getInt("estado") != 1) {
                 cancel_btn.visibility = View.VISIBLE
             } else {
                 cancel_btn.visibility = View.GONE
             }
 
-            if (cita.getInt("reprogramar") >= 3 && cita.getInt("estado") > 2) {
+            if (cita.getInt("reprogramar") >= 3 && cita.getInt("estado") != 1) {
                 reschedule_date_btn.visibility = View.GONE
             } else {
                 reschedule_date_btn.visibility = View.VISIBLE
@@ -144,21 +143,22 @@ class DateDetailsActivity : AppCompatActivity() {
             border.visibility = View.GONE
 
             call_btn.setOnClickListener {
+                val devices = cita.getJSONArray("devices")
                 val intent = Intent(this, CallActivity::class.java)
                 intent.putExtra("room", cita.getInt("paciente").toString())
                 intent.putExtra("cita", cita.getInt("id").toString())
                 intent.putExtra("isDoctor", true)
+                intent.putExtra("devices", devices.toString())
                 startActivity(intent)
-                val devices = cita.getJSONArray("devices")
                 (0 until devices.length())
                         .map { devices.getJSONObject(it) }
-                        .forEach { sendCallNotification(cita, it.getString("registration_id")) }
+                        .forEach { sendCallNotification(cita, it.getString("registration_id"), it.getString("type")) }
             }
 
         }
     }
 
-    private fun sendCallNotification(cita: JSONObject, token: String) {
+    private fun sendCallNotification(cita: JSONObject, token: String, type: String) {
 
         val url = "https://fcm.googleapis.com/fcm/send"
 
@@ -182,6 +182,14 @@ class DateDetailsActivity : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getBody(): ByteArray {
                 val body = JSONObject()
+                if (type.equals("ios")) {
+                    val n = JSONObject("{\n" +
+                            "      \"body\" : \"Llamada entrante\",\n" +
+                            "      \"title\" : \"CitaOnline\"\n" +
+                            "      \n" +
+                            "    }")
+                    body.put("notification", n)
+                }
                 cita.put("isCalling", true)
                 cita.put("doctorToken", FirebaseInstanceId.getInstance().token)
                 body.put("to", token)
@@ -220,10 +228,10 @@ class DateDetailsActivity : AppCompatActivity() {
         val alert = AlertDialog
                 .Builder(this)
                 .setMessage("¿Esta seguro de que desea cancelar la cita?")
-                .setPositiveButton("Cancelar", { _, _ ->
+                .setNegativeButton("Cancelar", { _, _ ->
 
                 })
-                .setNegativeButton("Aceptar", { _, _ ->
+                .setPositiveButton("Aceptar", { _, _ ->
                     confirmCancelar(id)
                 })
                 .create()
@@ -247,9 +255,10 @@ class DateDetailsActivity : AppCompatActivity() {
                 .Builder(this)
                 .setView(v)
                 .setTitle("¿Cuál es el motivo de cancelación?")
-                .setPositiveButton("Cancelar", { _, _ ->
+                .setPositiveButton("Aceptar", { _, _ ->
                     cancelar(id, reasonSelected)
                 })
+                .setNegativeButton("Cancelar", { _, _ -> })
                 .create()
 
         alert.show()

@@ -68,19 +68,20 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     }
 
     override fun onCallClick(cita: JSONObject) {
+        val devices = cita.getJSONArray("devices")
         val intent = Intent(context, CallActivity::class.java)
         intent.putExtra("room", cita.getInt("paciente").toString())
         intent.putExtra("cita", cita.getInt("id").toString())
         intent.putExtra("isDoctor", true)
+        intent.putExtra("devices", devices.toString())
         startActivity(intent)
-        val devices = cita.getJSONArray("devices")
         (0 until devices.length())
                 .map { devices.getJSONObject(it) }
-                .forEach { sendCallNotification(cita, it.getString("registration_id")) }
+                .forEach { sendCallNotification(cita, it.getString("registration_id"), it.getString("type")) }
 
     }
 
-    private fun sendCallNotification(cita: JSONObject, token: String) {
+    private fun sendCallNotification(cita: JSONObject, token: String, type: String) {
 
         val url = "https://fcm.googleapis.com/fcm/send"
 
@@ -104,6 +105,15 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
             @Throws(AuthFailureError::class)
             override fun getBody(): ByteArray {
                 val body = JSONObject()
+                if (type.equals("ios")) {
+                    val n = JSONObject("{\n" +
+                            "      \"body\" : \"Llamada entrante\",\n" +
+                            "      \"title\" : \"CitaOnline\"\n" +
+                            "      \n" +
+                            "    }")
+                    body.put("notification", n)
+                }
+
                 cita.put("isCalling", true)
                 cita.put("doctorToken", FirebaseInstanceId.getInstance().token)
                 body.put("to", token)

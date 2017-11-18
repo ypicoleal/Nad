@@ -56,9 +56,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val deviceId = Settings.Secure.getString(this.contentResolver,
                 Settings.Secure.ANDROID_ID)
 
-        Log.i("token", refreshedToken)
-        Log.i("device_id", deviceId)
-
         sendRegistrationToServer(refreshedToken, deviceId)
     }
 
