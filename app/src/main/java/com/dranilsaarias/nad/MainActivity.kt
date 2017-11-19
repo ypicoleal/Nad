@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val i = Intent(Intent.ACTION_SEND)
                     i.type = "text/plain"
                     i.putExtra(Intent.EXTRA_SUBJECT, "Doctor Online")
-                    val sAux = "Descarga la App de Agendamiento Médico NAD DoctorOnline desde tu dispositivo móvil. (AQUI VA LA URL QUE GENEREN LAS TIENDAS)"
+                    val sAux = "Descarga la App de Agendamiento Médico NAD DoctorOnline desde tu dispositivo móvil. https://play.google.com/store/apps/details?id=com.dranilsaarias.nad&hl=es"
                     i.putExtra(Intent.EXTRA_TEXT, sAux)
                     startActivity(Intent.createChooser(i, "Escoja"))
                 } catch (e: Exception) {

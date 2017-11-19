@@ -229,7 +229,7 @@
     <string name="pagar">Pagar</string>
     <string name="llamando">Llamando…</string>
     <string name="no_dates">No hay agenda disponible para esta fecha</string>
-    <string name="cita_no_paga">Para acceder a la cita Online, por favor cancelar el valor de la consulta.</string>
+    <string name="cita_no_paga">Cita pendiente de pago. Ingrese aquí para pagar.</string>
     <string name="conectando">Conectando…</string>
     <string name="contrasena_actual">Contraseña actual</string>
 </resources>

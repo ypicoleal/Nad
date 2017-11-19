@@ -328,10 +328,12 @@ class CallActivity : AppCompatActivity() {
         return View.OnClickListener {
             if (room != null) {
                 room!!.disconnect()
-                val devices = JSONArray(intent.getStringExtra("devices"))
-                (0 until devices.length())
-                        .map { devices.getJSONObject(it) }
-                        .forEach { sendDeclineNotification(it.getString("registration_id")) }
+                if (intent.hasExtra("devices")) {
+                    val devices = JSONArray(intent.getStringExtra("devices"))
+                    (0 until devices.length())
+                            .map { devices.getJSONObject(it) }
+                            .forEach { sendDeclineNotification(it.getString("registration_id")) }
+                }
             }
             finish()
         }

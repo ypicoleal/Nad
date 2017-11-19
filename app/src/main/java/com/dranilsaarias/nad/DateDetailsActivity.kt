@@ -113,7 +113,7 @@ class DateDetailsActivity : AppCompatActivity() {
                 modalidad = getText(R.string.atenci_n_consultorio)
             } else if (isPacient && !cita.getBoolean("pago") && cita.getInt("estado") == 1) {
                 AlertDialog.Builder(this)
-                        .setMessage("Para acceder a la cita Online, por favor cancelar el valor de la consulta presionando el botón pagar")
+                        .setMessage("Para acceder a la cita Online, por favor cancelar el valor de la consulta.")
                         .setNegativeButton("Aceptar", { _, _ -> })
                         .create()
                         .show()
