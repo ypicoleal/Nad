@@ -35,7 +35,7 @@ class CuentaFragment : Fragment() {
     lateinit var nombre: TextInputEditText
     lateinit var apellidos: TextInputEditText
     lateinit var nacimiento: EditText
-    lateinit var civil: EditText
+    lateinit var civil: ClickToSelectEditText<Documento>
     lateinit var profesion: TextInputEditText
     lateinit var direccion: TextInputEditText
     lateinit var celular: TextInputEditText
@@ -86,7 +86,7 @@ class CuentaFragment : Fragment() {
         nombre = v.findViewById(R.id.nombre)
         apellidos = v.findViewById(R.id.apellidos)
         nacimiento = v.findViewById(R.id.fecha_nacimiento)
-        civil = v.findViewById(R.id.civil)
+        civil = v.findViewById<ClickToSelectEditText<Documento>>(R.id.civil)
         profesion = v.findViewById(R.id.profesion)
         direccion = v.findViewById(R.id.direccion)
         celular = v.findViewById(R.id.celular)
@@ -131,6 +131,16 @@ class CuentaFragment : Fragment() {
         setPassword.setOnClickListener {
             openSetPassword()
         }
+
+        val estados = ArrayList<Documento>()
+        estados.add(Documento("Casado/a"))
+        estados.add(Documento("Soltero/a"))
+        civil.setItems(estados)
+        civil.setOnItemSelectedListener(object : ClickToSelectEditText.OnItemSelectedListener<Documento> {
+            override fun onItemSelectedListener(item: Documento, selectedIndex: Int) {
+                Log.i("estado", item.label)
+            }
+        })
     }
 
     @SuppressLint("InflateParams")
@@ -365,6 +375,12 @@ class CuentaFragment : Fragment() {
             civil_container.isErrorEnabled = true
             civil_container.error = error
         }
+
+        if (errors.has("email")) {
+            val error = errors.getJSONArray("email").getString(0)
+            email_container.isErrorEnabled = true
+            email_container.error = error
+        }
     }
 
     private fun showSuccess() {
@@ -390,5 +406,7 @@ class CuentaFragment : Fragment() {
             return fragment
         }
     }
+
+    inner class Documento internal constructor(override val label: String) : Listable
 
 }// Required empty public constructor

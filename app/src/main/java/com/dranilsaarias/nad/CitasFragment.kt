@@ -166,6 +166,9 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
                     if (response.getJSONArray("object_list").length() == 0) {
                         empty_list.visibility = View.VISIBLE
                         swipe.visibility = View.GONE
+                        if (!adapter.isPacient) {
+                            empty_list.text = "No hay pacientes agendados para esta fecha"
+                        }
                     }
                     adapter.setCitas(response.getJSONArray("object_list"))
                     swipe.isRefreshing = false

@@ -196,6 +196,12 @@ class RegisterActivity : AppCompatActivity() {
             civil_container.isErrorEnabled = true
             civil_container.error = error
         }
+
+        if (errors.has("email")) {
+            val error = errors.getJSONArray("email").getString(0)
+            email_container.isErrorEnabled = true
+            email_container.error = error
+        }
     }
 
     private fun validateForm(): Boolean {

@@ -59,7 +59,7 @@ class CommentsFragment : Fragment() {
                     Log.e("tales", response)
                     loading.visibility = View.GONE
                     comentario.setText("")
-                    Snackbar.make(loading, "Mensaje enviado con exito", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(loading, "Su comentario ha sido enviado correctamente", Snackbar.LENGTH_LONG).show()
                 },
                 Response.ErrorListener { error ->
                     loading.visibility = View.GONE
