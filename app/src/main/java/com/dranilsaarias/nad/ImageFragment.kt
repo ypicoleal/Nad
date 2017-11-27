@@ -35,7 +35,7 @@ class ImageFragment : Fragment() {
         Picasso
                 .with(context)
                 .load(url)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.loading)
                 .noFade()
                 .into(view)
 

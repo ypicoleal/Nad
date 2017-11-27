@@ -168,6 +168,8 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
                         swipe.visibility = View.GONE
                         if (!adapter.isPacient) {
                             empty_list.text = "No hay pacientes agendados para esta fecha"
+                        }else {
+                            empty_list.text = "No tiene citas agendadas"
                         }
                     }
                     adapter.setCitas(response.getJSONArray("object_list"))

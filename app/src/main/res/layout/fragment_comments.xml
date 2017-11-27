@@ -30,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:focusable="false"
+                    android:textIsSelectable="false"
                     android:hint="@string/email"
                     android:inputType="none" />
             </android.support.design.widget.TextInputLayout>
