@@ -96,9 +96,9 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         }
 
         if (cita.getInt("procedimiento__modalidad") != AgendarActivity.Type.IN_PERSON && isPacient && !cita.getBoolean("pago") && cita.getInt("estado") == 1) {
-            holder.noPago.visibility = View.VISIBLE
+            holder.noPago.setText(R.string.cita_no_paga)
         } else {
-            holder.noPago.visibility = View.GONE
+            holder.noPago.setText(R.string.cita_paga)
         }
 
         holder.itemView.setOnClickListener {

@@ -230,6 +230,7 @@
     <string name="llamando">Llamando…</string>
     <string name="no_dates">No hay agenda disponible para esta fecha</string>
     <string name="cita_no_paga">Cita pendiente de pago. Ingrese aquí para pagar.</string>
+    <string name="cita_paga">La cita ha sido pagada.</string>
     <string name="conectando">Conectando…</string>
     <string name="contrasena_actual">Contraseña actual</string>
 </resources>
