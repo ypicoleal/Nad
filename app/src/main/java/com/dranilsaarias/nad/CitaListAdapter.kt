@@ -95,10 +95,15 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion_medico, motivo, modalidad, hour, paciente)
         }
 
-        if (cita.getInt("procedimiento__modalidad") != AgendarActivity.Type.IN_PERSON && isPacient && !cita.getBoolean("pago") && cita.getInt("estado") == 1) {
-            holder.noPago.setText(R.string.cita_no_paga)
-        } else {
-            holder.noPago.setText(R.string.cita_paga)
+        if (cita.getInt("procedimiento__modalidad") != AgendarActivity.Type.IN_PERSON && isPacient) {
+            holder.noPago.visibility = View.VISIBLE
+            if (!cita.getBoolean("pago") && cita.getInt("estado") == 1){
+                holder.noPago.setText(R.string.cita_no_paga)
+            } else {
+                holder.noPago.setText(R.string.cita_paga)
+            }
+        } else{
+            holder.noPago.visibility = View.GONE
         }
 
         holder.itemView.setOnClickListener {
