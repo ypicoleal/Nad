@@ -30,10 +30,7 @@ import java.util.*
 class AgendarFragment : Fragment() {
 
     private var timer: Timer? = null
-    val DELAY_MS: Long = 500//delay in milliseconds before task is to be executed
-    val PERIOD_MS: Long = 8000 // time in milliseconds between successive task executions.
     private var validSnackbar: Snackbar? = null
-
     private var isPaciente: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,7 +121,7 @@ class AgendarFragment : Fragment() {
 
             override fun onMonthScroll(firstDayOfNewMonth: Date) {
                 calendarIndicator.text = monthFormatter.format(firstDayOfNewMonth).capitalize()
-                Log.d(TAG, "Month was scrolled to: " + firstDayOfNewMonth)
+                Log.d(TAG, "Month was scrolled to: $firstDayOfNewMonth")
             }
         })
 
@@ -168,7 +165,9 @@ class AgendarFragment : Fragment() {
     }
 
     companion object {
-        private val ARG_PACIENTE = "paciente"
+        private const val ARG_PACIENTE = "paciente"
+        private const val DELAY_MS: Long = 500//delay in milliseconds before task is to be executed
+        private const val PERIOD_MS: Long = 8000 // time in milliseconds between successive task executions.
 
 
         fun newInstance(isPaciente: Boolean): AgendarFragment {
