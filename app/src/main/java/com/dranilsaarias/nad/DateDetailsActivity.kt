@@ -84,21 +84,25 @@ class DateDetailsActivity : AppCompatActivity() {
             }
 
             date_state.text = getString(R.string.date_state, cita.getString("estado_nombre"))
-            if (cita.getInt("estado") == 1) {
-                date_state.setTextColor(ContextCompat.getColor(this, R.color.citaVigente))
-                state_indicator.setImageResource(R.drawable.cita_vigente)
+            when {
+                cita.getInt("estado") == 1 -> {
+                    date_state.setTextColor(ContextCompat.getColor(this, R.color.citaVigente))
+                    state_indicator.setImageResource(R.drawable.cita_vigente)
 
-                buttons_container.visibility = View.VISIBLE
-            } else if (cita.getInt("estado") == 2) {
-                date_state.setTextColor(ContextCompat.getColor(this, R.color.citaCancelada))
-                state_indicator.setImageResource(R.drawable.cita_cancelada)
-            } else {
-                date_state.setTextColor(ContextCompat.getColor(this, R.color.citaExpirada))
-                state_indicator.setImageResource(R.drawable.cita_expirada)
+                    buttons_container.visibility = View.VISIBLE
+                }
+                cita.getInt("estado") == 2 -> {
+                    date_state.setTextColor(ContextCompat.getColor(this, R.color.citaCancelada))
+                    state_indicator.setImageResource(R.drawable.cita_cancelada)
+                }
+                else -> {
+                    date_state.setTextColor(ContextCompat.getColor(this, R.color.citaExpirada))
+                    state_indicator.setImageResource(R.drawable.cita_expirada)
+                }
             }
 
             val d = cita.getString("fecha")
-            if (d.equals(null) || d.equals("null")) {
+            if (d == null || d == "null") {
                 date.text = getString(R.string.no_date)
             } else {
                 val parser = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -126,15 +130,14 @@ class DateDetailsActivity : AppCompatActivity() {
 
             val s = cita.getString("inicio")
             val e = cita.getString("fin")
-            val hour: String
-            if (s.equals(JSONObject.NULL) || s.equals(null) || s.equals("null")) {
-                hour = "Sin hora"
+            val hour = if (s == JSONObject.NULL || s == null || s == "null") {
+                "Sin hora"
             } else {
-                hour = s + " - " + e
+                s + " - " + e
             }
 
             var medico = getString(R.string.doctor_name)
-            if (!cita.getString("medico").equals(JSONObject.NULL) && !cita.getString("medico").equals("null") && !cita.getString("medico").equals(null)) {
+            if (cita.getString("medico") != JSONObject.NULL && cita.getString("medico") != "null" && cita.getString("medico") != null) {
                 medico = cita.getString("medico")
             }
 
@@ -184,15 +187,15 @@ class DateDetailsActivity : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("Content-Type", "application/json; charset=UTF-8")
-                params.put("Authorization", "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb")
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb"
                 return params
             }
 
             @Throws(AuthFailureError::class)
             override fun getBody(): ByteArray {
                 val body = JSONObject()
-                if (type.equals("ios")) {
+                if (type == "ios") {
                     val n = JSONObject("{\n" +
                             "      \"body\" : \"Llamada entrante\",\n" +
                             "      \"title\" : \"CitaOnline\"\n" +
@@ -216,10 +219,10 @@ class DateDetailsActivity : AppCompatActivity() {
         val countryCode = tm.networkCountryIso
         Log.i("locale", countryCode)
         val currency: String
-        if (countryCode.equals("co")) {
-            currency = getString(R.string.param_cop)
+        currency = if (countryCode == "co") {
+            getString(R.string.param_cop)
         } else {
-            currency = getString(R.string.param_usd)
+            getString(R.string.param_usd)
         }
         val serviceUrl = getString(R.string.pay_url, cita.getInt("id"), currency)
         val url = getString(R.string.host, serviceUrl)
@@ -280,36 +283,36 @@ class DateDetailsActivity : AppCompatActivity() {
         textView.gravity = Gravity.CENTER
 
         val mejoria = v.findViewById<CheckBox>(R.id.mejoria)
-        val sin_tiempo = v.findViewById<CheckBox>(R.id.sin_tiempo)
-        val otro_motivo = v.findViewById<CheckBox>(R.id.otro_motivo)
+        val sinTiempo = v.findViewById<CheckBox>(R.id.sin_tiempo)
+        val otroMotivo = v.findViewById<CheckBox>(R.id.otro_motivo)
 
         mejoria.setOnCheckedChangeListener { _, checked ->
             if (checked) {
                 reasonSelected = 1
-                sin_tiempo.isChecked = false
-                otro_motivo.isChecked = false
-            } else if (!sin_tiempo.isChecked && !otro_motivo.isChecked) {
+                sinTiempo.isChecked = false
+                otroMotivo.isChecked = false
+            } else if (!sinTiempo.isChecked && !otroMotivo.isChecked) {
                 mejoria.isChecked = true
             }
         }
 
-        sin_tiempo.setOnCheckedChangeListener { _, checked ->
+        sinTiempo.setOnCheckedChangeListener { _, checked ->
             if (checked) {
                 reasonSelected = 2
                 mejoria.isChecked = false
-                otro_motivo.isChecked = false
-            } else if (!otro_motivo.isChecked && !mejoria.isChecked) {
-                sin_tiempo.isChecked = true
+                otroMotivo.isChecked = false
+            } else if (!otroMotivo.isChecked && !mejoria.isChecked) {
+                sinTiempo.isChecked = true
             }
         }
 
-        otro_motivo.setOnCheckedChangeListener { _, checked ->
+        otroMotivo.setOnCheckedChangeListener { _, checked ->
             if (checked) {
                 reasonSelected = 3
-                sin_tiempo.isChecked = false
+                sinTiempo.isChecked = false
                 mejoria.isChecked = false
-            } else if (!sin_tiempo.isChecked && !mejoria.isChecked) {
-                otro_motivo.isChecked = true
+            } else if (!sinTiempo.isChecked && !mejoria.isChecked) {
+                otroMotivo.isChecked = true
             }
         }
     }
@@ -332,8 +335,8 @@ class DateDetailsActivity : AppCompatActivity() {
                 }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params.put("username", reason.toString())
+                val params = hashMapOf<String, String>()
+                params["username"] = reason.toString()
 
                 return params
             }
