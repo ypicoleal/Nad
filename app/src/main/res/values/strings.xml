@@ -125,12 +125,6 @@
         <item>Pasaporte</item>
         <item>Tarjeta de identidad</item>
     </string-array>
-
-    <string-array name="entidad_array">
-        <item>PARTICULAR</item>
-        <item>MEDISANITAS</item>
-        <item>COLSANITAS</item>
-    </string-array>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
