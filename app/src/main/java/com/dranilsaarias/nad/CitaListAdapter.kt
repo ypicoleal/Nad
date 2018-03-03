@@ -15,7 +15,7 @@ import java.util.*
 class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() {
 
     private var citas: JSONArray? = null
-    lateinit var calendarClickListener: onCitaClickListener
+    lateinit var calendarClickListener: OnCitaClickListener
     var shouldShowDate: Boolean = true
     var isPacient: Boolean = true
 
@@ -40,19 +40,23 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         }
 
         holder.dateState.text = holder.dateState.context.getString(R.string.date_state, cita.getString("estado_nombre"))
-        if (cita.getInt("estado") == 1) {
-            holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaVigente))
-            holder.stateIndicator.setImageResource(R.drawable.cita_vigente)
-        } else if (cita.getInt("estado") == 2) {
-            holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaCancelada))
-            holder.stateIndicator.setImageResource(R.drawable.cita_cancelada)
-        } else {
-            holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaExpirada))
-            holder.stateIndicator.setImageResource(R.drawable.cita_expirada)
+        when {
+            cita.getInt("estado") == 1 -> {
+                holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaVigente))
+                holder.stateIndicator.setImageResource(R.drawable.cita_vigente)
+            }
+            cita.getInt("estado") == 2 -> {
+                holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaCancelada))
+                holder.stateIndicator.setImageResource(R.drawable.cita_cancelada)
+            }
+            else -> {
+                holder.dateState.setTextColor(ContextCompat.getColor(holder.dateState.context, R.color.citaExpirada))
+                holder.stateIndicator.setImageResource(R.drawable.cita_expirada)
+            }
         }
 
         val d = cita.getString("fecha")
-        if (d.equals(null) || d.equals("null")) {
+        if (d == JSONObject.NULL || d == null || d == "null") {
             holder.date.text = holder.date.context.getString(R.string.no_date)
         } else {
             val parser = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -61,7 +65,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
             holder.date.text = monthFormatter.format(date).capitalize()
         }
 
-        if (!shouldShowDate || (position > 0 && citas!!.getJSONObject(position - 1).getString("fecha").equals(d))) {
+        if (!shouldShowDate || (position > 0 && citas!!.getJSONObject(position - 1).getString("fecha") == d)) {
             holder.date.visibility = View.GONE
         } else {
             holder.date.visibility = View.VISIBLE
@@ -75,15 +79,14 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
 
         val s = cita.getString("inicio")
         val e = cita.getString("fin")
-        val hour: String
-        if (s.equals(JSONObject.NULL) || s.equals(null) || s.equals("null")) {
-            hour = "Sin hora"
+        val hour = if (s == JSONObject.NULL || s == null || s == "null") {
+            "Sin hora"
         } else {
-            hour = s + " - " + e
+            s + " - " + e
         }
 
         var medico = holder.dateDetails.context.getString(R.string.doctor_name)
-        if (!cita.getString("medico").equals(JSONObject.NULL) && !cita.getString("medico").equals("null") && !cita.getString("medico").equals(null)) {
+        if (cita.getString("medico") != JSONObject.NULL && cita.getString("medico") != "null" && cita.getString("medico") != null) {
             medico = cita!!.getString("medico")
         }
 
@@ -138,7 +141,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         var noPago: TextView = itemView!!.findViewById(R.id.no_pago)
     }
 
-    interface onCitaClickListener {
+    interface OnCitaClickListener {
         fun onClick(cita: JSONObject)
         fun onCallClick(cita: JSONObject)
     }

@@ -26,9 +26,9 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
+class CitasFragment : Fragment(), CitaListAdapter.OnCitaClickListener {
 
-    val adapter = CitaListAdapter()
+    private val adapter = CitaListAdapter()
 
     private var date: Date? = null
 
@@ -107,15 +107,15 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("Content-Type", "application/json; charset=UTF-8")
-                params.put("Authorization", "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb")
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "key=AAAAQnVV4F0:APA91bFWJ-vz8oUSc3l_qDkiKdng1vodSlDkWVEX6paYl_dBRRslvcuOjjRzWwvpnd_fB-ayki5aCNesTxVxgksYb_bz_gifJ0TLNNHHmit_yDCXrmpjPQ6ZJ3595V7KNurzFX9B5CNb"
                 return params
             }
 
             @Throws(AuthFailureError::class)
             override fun getBody(): ByteArray {
                 val body = JSONObject()
-                if (type.equals("ios")) {
+                if (type == "ios") {
                     val n = JSONObject("{\n" +
                             "      \"body\" : \"Llamada entrante\",\n" +
                             "      \"title\" : \"CitaOnline\"\n" +
@@ -183,7 +183,7 @@ class CitasFragment : Fragment(), CitaListAdapter.onCitaClickListener {
     }
 
     companion object {
-        val ARG_DATE = "date"
-        val ARG_PACIENT = "pacient"
+        const val ARG_DATE = "date"
+        const val ARG_PACIENT = "pacient"
     }
 }// Required empty public constructor
