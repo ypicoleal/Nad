@@ -27,4 +27,5 @@
     <string name="token_registration">/agenda/device/form/</string>
     <string name="remain_minutes">/agenda/minutos/restante/cita/%1$s/</string>
     <string name="remain_minutes_form">/agenda/minutos/restante/form/</string>
+    <string name="entidades">/agenda/entidades/medicas/list/</string>
 </resources>

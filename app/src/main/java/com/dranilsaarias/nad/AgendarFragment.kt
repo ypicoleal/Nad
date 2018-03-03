@@ -2,6 +2,7 @@ package com.dranilsaarias.nad
 
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -138,19 +140,8 @@ class AgendarFragment : Fragment() {
         if (isPaciente) {
             val today = Calendar.getInstance()
             if (date > today.time) {
-                AlertDialog.Builder(activity)
-                        .setTitle(getString(R.string.choose_entidad))
-                        .setItems(R.array.entidad_array, { _, index ->
-                            val intent = Intent(context, AgendarActivity::class.java)
-                            intent.putExtra("date", date)
-                            intent.putExtra("entidad", index + 1)
-                            startActivity(intent)
-                        })
-                        .setNegativeButton("Cancelar", { _, _ ->
-
-                        })
-                        .create()
-                        .show()
+                val dialog = ProgressDialog.show(activity, "", "Cargando...")
+                getEntidades(dialog, date)
             } else {
                 if (validSnackbar == null) {
                     validSnackbar = Snackbar.make(view!!, "La cita médica solo se puede agendar para días posteriores la fecha de hoy.", Snackbar.LENGTH_LONG)
@@ -162,6 +153,40 @@ class AgendarFragment : Fragment() {
             intent.putExtra("date", date)
             startActivity(intent)
         }
+    }
+
+    private fun getEntidades(dialog: AlertDialog, date: Date) {
+        val serviceUrl = getString(R.string.entidades)
+        val url = getString(R.string.host, serviceUrl)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener<JSONObject> {
+                    dialog.dismiss()
+                    val entidades = it["object_list"] as JSONArray
+                    Log.e("tales", entidades.toString())
+                    val eList = arrayOfNulls<String>(entidades.length())
+                    for (i in 0 until entidades.length()) {
+                        eList[i] = entidades.getJSONObject(i).getString("nombre")
+                    }
+                    AlertDialog.Builder(activity)
+                            .setTitle(getString(R.string.choose_entidad))
+                            .setItems(eList, { _, index ->
+                                val id = entidades.getJSONObject(index).getInt("id")
+                                val intent = Intent(context, AgendarActivity::class.java)
+                                intent.putExtra("date", date)
+                                intent.putExtra("entidad", id)
+                                startActivity(intent)
+                            })
+                            .setNegativeButton("Cancelar", { _, _ ->
+
+                            })
+                            .create()
+                            .show()
+                },
+                Response.ErrorListener { _ ->
+
+                })
+        VolleySingleton.getInstance().addToRequestQueue(request, context)
     }
 
     companion object {
