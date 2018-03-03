@@ -1,5 +1,6 @@
 package com.dranilsaarias.nad
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var isPacient: Boolean = true
     private var accountData: JSONObject? = null
 
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -304,10 +306,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params.put("registration_id", refreshedToken!!)
-                params.put("device_id", deviceId)
-                params.put("type", "android")
+                val params = hashMapOf<String, String>()
+                params["registration_id"] = refreshedToken!!
+                params["device_id"] = deviceId
+                params["type"] = "android"
                 return params
             }
         }
