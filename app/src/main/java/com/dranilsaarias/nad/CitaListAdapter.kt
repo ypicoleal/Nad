@@ -82,7 +82,7 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         val hour = if (s == JSONObject.NULL || s == null || s == "null") {
             "Sin hora"
         } else {
-            s + " - " + e
+            "$s - $e"
         }
 
         var medico = holder.dateDetails.context.getString(R.string.doctor_name)
@@ -91,11 +91,12 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         }
 
         val paciente = cita.getString("paciente__nombre")
+        val entidad = cita.getString("entidad_nombre")
 
         if (isPacient) {
             holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
         } else {
-            holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion_medico, motivo, modalidad, hour, paciente)
+            holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion_medico, motivo, modalidad, hour, paciente, entidad)
         }
 
         if (cita.getInt("procedimiento__modalidad") != AgendarActivity.Type.IN_PERSON && isPacient) {

@@ -141,7 +141,14 @@ class DateDetailsActivity : AppCompatActivity() {
                 medico = cita.getString("medico")
             }
 
-            date_details.text = getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
+            val paciente = cita.getString("paciente__nombre")
+            val entidad = cita.getString("entidad_nombre")
+
+            if (isPacient) {
+                date_details.text = getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
+            } else {
+                date_details.text = getString(R.string.cita_descripcion_medico, motivo, modalidad, hour, paciente, entidad)
+            }
 
             border.visibility = View.GONE
 
