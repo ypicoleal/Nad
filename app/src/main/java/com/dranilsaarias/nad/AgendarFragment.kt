@@ -166,8 +166,12 @@ class AgendarFragment : Fragment() {
                     val entidades = it["object_list"] as JSONArray
                     Log.e("tales", entidades.toString())
                     val eList = arrayOfNulls<String>(entidades.length())
+                    val eArray = mutableListOf<JSONObject>()
                     for (i in 0 until entidades.length()) {
-                        eList[i] = entidades.getJSONObject(i).getString("nombre")
+                        if (!entidades.getJSONObject(i).getBoolean("desabilitado")) {
+                            eList[i] = entidades.getJSONObject(i).getString("nombre")
+                            eArray.add(entidades.getJSONObject(i))
+                        }
                     }
                     val dialog = AlertDialog.Builder(activity)
                             .setTitle(getString(R.string.choose_entidad))
@@ -179,9 +183,9 @@ class AgendarFragment : Fragment() {
                             .create()
                     dialog.show()
                     val listener = AdapterView.OnItemClickListener { _, view, index, _ ->
-                        val untilDate = entidades.getJSONObject(index).getString("proxima_disponibilidad")
+                        val untilDate = eArray[index].getString("proxima_disponibilidad")
                         if (checkDisponibilidad(untilDate, date)) {
-                            val id = entidades.getJSONObject(index).getInt("id")
+                            val id = eArray[index].getInt("id")
                             val intent = Intent(context, AgendarActivity::class.java)
                             intent.putExtra("date", date)
                             intent.putExtra("entidad", id)
