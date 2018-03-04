@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
@@ -155,38 +156,55 @@ class AgendarFragment : Fragment() {
         }
     }
 
-    private fun getEntidades(dialog: AlertDialog, date: Date) {
+    private fun getEntidades(loadingDialog: AlertDialog, date: Date) {
         val serviceUrl = getString(R.string.entidades)
         val url = getString(R.string.host, serviceUrl)
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
                 Response.Listener<JSONObject> {
-                    dialog.dismiss()
+                    loadingDialog.dismiss()
                     val entidades = it["object_list"] as JSONArray
                     Log.e("tales", entidades.toString())
                     val eList = arrayOfNulls<String>(entidades.length())
                     for (i in 0 until entidades.length()) {
                         eList[i] = entidades.getJSONObject(i).getString("nombre")
                     }
-                    AlertDialog.Builder(activity)
+                    val dialog = AlertDialog.Builder(activity)
                             .setTitle(getString(R.string.choose_entidad))
-                            .setItems(eList, { _, index ->
-                                val id = entidades.getJSONObject(index).getInt("id")
-                                val intent = Intent(context, AgendarActivity::class.java)
-                                intent.putExtra("date", date)
-                                intent.putExtra("entidad", id)
-                                startActivity(intent)
-                            })
+                            .setCancelable(false)
+                            .setItems(eList, null)
                             .setNegativeButton("Cancelar", { _, _ ->
 
                             })
                             .create()
-                            .show()
+                    dialog.show()
+                    val listener = AdapterView.OnItemClickListener { _, view, index, _ ->
+                        val untilDate = entidades.getJSONObject(index).getString("proxima_disponibilidad")
+                        if (checkDisponibilidad(untilDate, date)) {
+                            val id = entidades.getJSONObject(index).getInt("id")
+                            val intent = Intent(context, AgendarActivity::class.java)
+                            intent.putExtra("date", date)
+                            intent.putExtra("entidad", id)
+                            startActivity(intent)
+                            dialog.dismiss()
+                        } else {
+                            Snackbar.make(view, "Esta entidad tienes citas disponibles a partir de $untilDate", Snackbar.LENGTH_LONG).show()
+                        }
+                    }
+                    dialog.listView.onItemClickListener = listener
                 },
                 Response.ErrorListener { _ ->
 
                 })
         VolleySingleton.getInstance().addToRequestQueue(request, context)
+    }
+
+    private fun checkDisponibilidad(date: String, selectedDate: Date): Boolean {
+        val parser = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        if (date.isBlank() || date == "null") {
+            return true
+        }
+        return parser.parse(date) <= selectedDate
     }
 
     companion object {
@@ -204,4 +222,4 @@ class AgendarFragment : Fragment() {
         }
     }
 
-}// Required empty public constructor
+}
