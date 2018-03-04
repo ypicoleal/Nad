@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_agendar.*
 import kotlinx.android.synthetic.main.content_agendar.*
+import org.json.JSONArray
 import org.json.JSONObject
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -56,8 +57,6 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                 else -> finish()
             }
         }
-
-        setupTypes()
         setupCheckBoxes()
         setupCalendarios()
 
@@ -219,7 +218,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         swipe.isRefreshing = true
     }
 
-    private fun setupTypes() {
+    private fun setupTypes(list: JSONArray) {
         virtualTypes = ArrayList()
         inPersonTypes = ArrayList()
 
@@ -230,32 +229,18 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             }
         })
 
-        val serviceUrl = getString(R.string.procedimientos)
-        val url = getString(R.string.host, serviceUrl)
-
-        val request = JsonObjectRequest(Request.Method.GET, url, null,
-                Response.Listener<JSONObject> { response ->
-                    Log.e("tales", response.toString())
-                    val list = response.getJSONArray("object_list")
-                    for (i in 0 until list.length()) {
-                        val item = list.getJSONObject(i)
-                        val t = Type(item.getString("nombre"))
-                        t.id = item.getInt("id")
-                        t.price = item.getInt("precio")
-                        if (item.getInt("modalidad") == Type.IN_PERSON) {
-                            inPersonTypes.add(t)
-                        } else {
-                            virtualTypes.add(t)
-                        }
-                    }
-                    filterType()
-                },
-                Response.ErrorListener { _ ->
-                    swipe.isRefreshing = false
-                })
-        VolleySingleton.getInstance().addToRequestQueue(request, this)
-        swipe.isRefreshing = true
-
+        for (i in 0 until list.length()) {
+            val item = list.getJSONObject(i)
+            val t = Type(item.getString("nombre"))
+            t.id = item.getInt("id")
+            t.price = item.getInt("precio")
+            if (item.getInt("modalidad") == Type.IN_PERSON) {
+                inPersonTypes.add(t)
+            } else {
+                virtualTypes.add(t)
+            }
+        }
+        filterType()
     }
 
     private fun setupCheckBoxes() {
@@ -320,12 +305,12 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
     private fun closeProgramingAnimation() {
         hours_container.visibility = View.VISIBLE
         date_programming_container.visibility = View.GONE
-
     }
 
     override fun onClick(calendario: JSONObject) {
         Log.e("calendar", calendario.toString())
         selectedCalendar = calendario
+        setupTypes(calendario.getJSONArray("procedimientos"))
         openProgramingAnimation()
     }
 
