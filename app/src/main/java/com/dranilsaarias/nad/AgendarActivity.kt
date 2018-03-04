@@ -68,12 +68,10 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
 
         next_btn.setOnClickListener {
             if (selectedType != null) {
-                if (atencion_consultorio.isChecked) {
-                    agendarCita()
-                } else if (price.visibility != View.VISIBLE) {
-                    pagarCita()
-                } else {
-                    agendarCita()
+                when {
+                    atencion_consultorio.isChecked -> agendarCita()
+                    price.visibility != View.VISIBLE -> pagarCita()
+                    else -> agendarCita()
                 }
             }
         }
@@ -125,9 +123,9 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("procedimiento", selectedType!!.id.toString())
-                params.put("entidad", entidad)
-                params.put("calendario", selectedCalendar!!.getInt("id").toString())
+                params["procedimiento"] = selectedType!!.id.toString()
+                params["entidad"] = entidad
+                params["calendario"] = selectedCalendar!!.getInt("id").toString()
                 return params
             }
         }
@@ -140,10 +138,10 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         val countryCode = tm.networkCountryIso
         Log.i("locale", countryCode)
         val currency: String
-        if (countryCode.equals("co")) {
-            currency = getString(R.string.param_cop)
+        currency = if (countryCode == "co") {
+            getString(R.string.param_cop)
         } else {
-            currency = getString(R.string.param_usd)
+            getString(R.string.param_usd)
         }
         val serviceUrl = getString(R.string.pay_url, cita.getInt("id"), currency)
         val url = getString(R.string.host, serviceUrl)
@@ -313,7 +311,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         val hourFomatter = SimpleDateFormat("h:mm a", Locale.getDefault())
         val name = hourFomatter.format(start) + " - " + hourFomatter.format(end)
         var medico = getString(R.string.doctor_name)
-        if (!selectedCalendar!!.getString("nombre_medico").equals("")) {
+        if (selectedCalendar!!.getString("nombre_medico") != "") {
             medico = selectedCalendar!!.getString("nombre_medico")
         }
         date_details.text = getString(R.string.date_description, dateFormatter.format(start), name, medico)
@@ -337,7 +335,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         var price: Int = 0
 
         companion object {
-            val IN_PERSON: Int = 1
+            const val IN_PERSON: Int = 1
         }
     }
 }
