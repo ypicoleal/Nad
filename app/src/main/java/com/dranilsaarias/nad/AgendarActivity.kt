@@ -123,7 +123,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
                 params["procedimiento"] = selectedType!!.id.toString()
-                params["entidad"] = entidad
+                params["entidadMedica"] = entidad
                 params["calendario"] = selectedCalendar!!.getInt("id").toString()
                 return params
             }
