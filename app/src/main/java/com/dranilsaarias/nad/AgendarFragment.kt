@@ -157,6 +157,7 @@ class AgendarFragment : Fragment() {
     }
 
     private fun getEntidades(loadingDialog: AlertDialog, date: Date) {
+
         val serviceUrl = getString(R.string.entidades)
         val url = getString(R.string.host, serviceUrl)
 
@@ -169,7 +170,13 @@ class AgendarFragment : Fragment() {
                     val eArray = mutableListOf<JSONObject>()
                     for (i in 0 until entidades.length()) {
                         if (!entidades.getJSONObject(i).getBoolean("desabilitado")) {
-                            eList[i] = entidades.getJSONObject(i).getString("nombre")
+                            val untilDate = entidades.getJSONObject(i).getString("proxima_disponibilidad")
+                            val dis = if (!checkDisponibilidad(untilDate,date)) {
+                                " (Disponible:$untilDate)"
+                            } else {
+                                ""
+                            }
+                            eList[i] = entidades.getJSONObject(i).getString("nombre") + dis
                             eArray.add(entidades.getJSONObject(i))
                         }
                     }
