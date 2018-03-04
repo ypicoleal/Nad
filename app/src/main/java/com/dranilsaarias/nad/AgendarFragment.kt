@@ -191,11 +191,13 @@ class AgendarFragment : Fragment() {
                     dialog.show()
                     val listener = AdapterView.OnItemClickListener { _, view, index, _ ->
                         val untilDate = eArray[index].getString("proxima_disponibilidad")
+                        val name = eArray[index].getString("nombre")
                         if (checkDisponibilidad(untilDate, date)) {
                             val id = eArray[index].getInt("id")
                             val intent = Intent(context, AgendarActivity::class.java)
                             intent.putExtra("date", date)
                             intent.putExtra("entidad", id)
+                            intent.putExtra("entidadName", name)
                             startActivity(intent)
                             dialog.dismiss()
                         } else {

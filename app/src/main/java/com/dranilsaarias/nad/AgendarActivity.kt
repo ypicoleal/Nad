@@ -244,7 +244,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
     }
 
     private fun setupCheckBoxes() {
-        if (intent.getIntExtra("entidad", -1) > 1) {
+        if (intent.getStringExtra("entidadName") != PARTICULAR) {
             atencion_online.isChecked = false
             atencion_consultorio.isChecked = true
             atencion_consultorio.isEnabled = false
@@ -314,13 +314,17 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
         openProgramingAnimation()
     }
 
+    companion object {
+        const val PARTICULAR = "Particular"
+    }
+
     class Type(override val label: String) : Listable {
 
         var id: Int = -1
         var price: Int = 0
 
         companion object {
-            const val IN_PERSON: Int = 1
+            const val IN_PERSON = 1
         }
     }
 }
