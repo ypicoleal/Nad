@@ -172,7 +172,7 @@ class AgendarFragment : Fragment() {
                         if (!entidades.getJSONObject(i).getBoolean("desabilitado")) {
                             val untilDate = entidades.getJSONObject(i).getString("proxima_disponibilidad")
                             val dis = if (!checkDisponibilidad(untilDate,date)) {
-                                " (Disponible:$untilDate)"
+                                " Disponible desde: $untilDate"
                             } else {
                                 ""
                             }
