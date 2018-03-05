@@ -133,7 +133,7 @@ class DateDetailsActivity : AppCompatActivity() {
             val hour = if (s == JSONObject.NULL || s == null || s == "null") {
                 "Sin hora"
             } else {
-                s + " - " + e
+                "$s - $e"
             }
 
             var medico = getString(R.string.doctor_name)
@@ -142,7 +142,7 @@ class DateDetailsActivity : AppCompatActivity() {
             }
 
             val paciente = cita.getString("paciente__nombre")
-            val entidad = cita.getString("entidad_nombre")
+            val entidad = cita.getJSONObject("entidad_medica").getString("nombre")
 
             if (isPacient) {
                 date_details.text = getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
