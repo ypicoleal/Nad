@@ -27,7 +27,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarClickListener {
+class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.OnCalendarClickListener {
 
     private lateinit var virtualTypes: ArrayList<Type>
     private lateinit var inPersonTypes: ArrayList<Type>
@@ -184,6 +184,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
 
     private fun setupCalendarios() {
         val date = intent.getSerializableExtra("date") as Date
+        val restriccion = intent.getStringExtra("restriccion")
         val monthFormatter = SimpleDateFormat("MMMM dd / y", Locale.getDefault())
         calendar_indicator.text = monthFormatter.format(date).capitalize()
 
@@ -208,7 +209,13 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarCli
                         empty_list.visibility = View.VISIBLE
                         swipe.visibility = View.GONE
                     }
-                    adapter.setCalendarios(response.getJSONArray("object_list"))
+
+                    val res = if (restriccion == null) {
+                        null
+                    } else {
+                        JSONArray(restriccion)
+                    }
+                    adapter.setCalendarios(response.getJSONArray("object_list"), res)
                     swipe.isRefreshing = false
                 },
                 Response.ErrorListener { error ->

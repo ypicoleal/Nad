@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class RescheduleDateActivity : AppCompatActivity(), CalendarioListAdapter.onCalendarClickListener {
+class RescheduleDateActivity : AppCompatActivity(), CalendarioListAdapter.OnCalendarClickListener {
 
     private var validSnackbar: Snackbar? = null
     private var selectedCalendar: JSONObject? = null

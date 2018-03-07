@@ -194,10 +194,16 @@ class AgendarFragment : Fragment() {
                         val name = eArray[index].getString("nombre")
                         if (checkDisponibilidad(untilDate, date)) {
                             val id = eArray[index].getInt("id")
+                            val restriccion = if (eArray[index].get("restriccionesList") == JSONObject.NULL) {
+                                ""
+                            } else {
+                                eArray[index].getJSONArray("restriccionesList").toString()
+                            }
                             val intent = Intent(context, AgendarActivity::class.java)
                             intent.putExtra("date", date)
                             intent.putExtra("entidad", id)
                             intent.putExtra("entidadName", name)
+                            intent.putExtra("restriccion", restriccion)
                             startActivity(intent)
                             dialog.dismiss()
                         } else {
