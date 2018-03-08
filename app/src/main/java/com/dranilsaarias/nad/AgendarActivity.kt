@@ -210,7 +210,7 @@ class AgendarActivity : AppCompatActivity(), CalendarioListAdapter.OnCalendarCli
                         swipe.visibility = View.GONE
                     }
 
-                    val res = if (restriccion == null) {
+                    val res = if (restriccion.isNullOrBlank()) {
                         null
                     } else {
                         JSONArray(restriccion)

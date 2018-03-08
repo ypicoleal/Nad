@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="host">http://app.dranilsaarias.com%1$s</string>
+    <string name="host">http://test.dranilsaarias.com%1$s</string>
     <string name="register_form">/usuarios/paciente/form/</string>
     <string name="login">/usuarios/login/</string>
     <string name="is_login">/usuarios/is/login/</string>
