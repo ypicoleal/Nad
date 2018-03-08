@@ -57,7 +57,7 @@ class CalendarioListAdapter : RecyclerView.Adapter<CalendarioListAdapter.Calenda
             val start = parser.parse(calendario.getString("start"))
             val end = parser.parse(calendario.getString("end"))
             val hourFomatter = SimpleDateFormat("h:mm a", Locale.getDefault())
-            val name = hourFomatter.format(start) + " - " + hourFomatter.format(end)
+            val name =   "${hourFomatter.format(start)} - ${hourFomatter.format(end)} \nMédico: ${calendario.getString("nombre_medico")}"
 
             holder?.title?.text = name
             holder?.itemView!!.setOnClickListener {
