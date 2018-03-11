@@ -91,7 +91,11 @@ class CitaListAdapter : RecyclerView.Adapter<CitaListAdapter.CitasViewHolder>() 
         }
 
         val paciente = cita.getString("paciente__nombre")
-        val entidad = cita.getJSONObject("entidad_medica").getString("nombre")
+        val entidad = if (cita.has("entidad_medica") && cita.get("entidad_medica") != JSONObject.NULL) {
+            cita.getJSONObject("entidad_medica").getString("nombre")
+        } else {
+            cita.getString("entidad_nombre")
+        }
 
         if (isPacient) {
             holder.dateDetails.text = holder.dateDetails.context.getString(R.string.cita_descripcion, motivo, modalidad, hour, medico)
