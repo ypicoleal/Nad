@@ -140,7 +140,12 @@ class AgendarFragment : Fragment() {
     private fun agendar(date: Date) {
         if (isPaciente) {
             val today = Calendar.getInstance()
-            if (date > today.time) {
+            today.set(Calendar.HOUR_OF_DAY, 0)
+            today.set(Calendar.MINUTE, 0)
+            today.set(Calendar.SECOND, 0)
+            today.set(Calendar.MILLISECOND, 0)
+
+            if (date >= today.time) {
                 val dialog = ProgressDialog.show(activity, "", "Cargando...")
                 getEntidades(dialog, date)
             } else {
